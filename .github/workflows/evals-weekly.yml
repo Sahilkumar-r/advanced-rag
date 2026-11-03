@@ -1,0 +1,13 @@
+name: evals-weekly
+# Skeleton, enabled in phase 7. Secrets come from repository secrets, never inline.
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "0 3 * * 0"
+jobs:
+  full:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Placeholder
+        run: echo "Will run the full golden set across all layers (phase 7)."

@@ -1,0 +1,11 @@
+[project]
+name = "ragx"
+version = "0.0.1"
+description = "Advanced multimodal RAG over FastAPI and Pydantic docs, with evals"
+requires-python = ">=3.12,<3.13"
+# Dependencies are pinned when each phase is built (see docs/06-IMPLEMENTATION-PLAN.md).
+dependencies = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

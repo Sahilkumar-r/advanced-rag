@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+data/raw/
+data/index/
+data/*.db
+data/*.sqlite
+eval/results/
+traces/
+node_modules/
+.claude/settings.local.json
