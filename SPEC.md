@@ -14,7 +14,7 @@ Teams ship RAG without measuring retrieval, generation or cost, so quality, regr
 5. Voice (speech in via Whisper, speech out via browser) and image (error screenshot or diagram) input.
 6. Semantic and exact cache. Six memory types. Demo auth with RBAC.
 7. Guardrails on input, retrieval and output.
-8. Evals at four layers (retrieval, generation, pipeline, system) run on demand, nightly on a sample, and weekly in full.
+8. Evals for seven parts (retrieval, generation, RAG pipeline, full system, guardrails, voice and image, online) run on demand, in CI, nightly on a sample, and weekly in full. See docs/EVALS.md.
 9. Mobile first UI. Deployed on a Hugging Face Space. Code on GitHub.
 
 ## Non-goals

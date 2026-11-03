@@ -89,7 +89,7 @@ argon2 password hashes, JWT access (15 min) and refresh (7 days), roles, permiss
 POST /api/auth/login, /api/auth/refresh, /api/auth/logout. POST /api/ask, /api/ask-voice, /api/ask-image. GET /api/sources/:id. GET and DELETE /api/memories. GET /api/history. POST /api/feedback. GET /api/health. Admin: GET /api/admin/metrics, POST /api/admin/evals/run, GET /api/admin/evals/runs, GET and POST /api/admin/users.
 
 ## 12. Evals
-Defined in docs/EVALS.md: retrieval, generation, pipeline, system and safety layers. Scheduled runs write to eval_runs and eval_results and surface in the admin dashboard.
+Defined in docs/EVALS.md: retrieval, generation, RAG pipeline, full system, guardrails and safety, voice and image, and online (live traffic) evals. Scheduled runs write to eval_runs and eval_results and surface in the admin dashboard.
 
 ## 13. Observability and cost
 Per request: trace id, user role, model per step, tokens in and out, latency per stage, cache status, fallback count, estimated cost (0 on free tiers, priced from the provider rate card for OpenAI). Aggregates feed the system eval.

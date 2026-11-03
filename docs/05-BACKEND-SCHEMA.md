@@ -40,7 +40,7 @@ erDiagram
 | traces | id, message_id, started_at, role, cache_status, steps json (stage, model, latency_ms, tokens_in, tokens_out), total_latency_ms, total_tokens, est_cost_usd, fallback_count, refused bool, guardrail_flags json | feeds system evals |
 | provider_usage | id, trace_id, provider, model, tier, tokens_in, tokens_out, latency_ms, status (ok, 429, 5xx, timeout), est_cost_usd, ts | quota counters read from here |
 | eval_cases | id, dataset (golden, safety, synthetic), question, type, expected_pages json, reference_answer, answerable bool, source (hand, synthetic), reviewed bool | |
-| eval_runs | id, kind (retrieval, generation, pipeline, system, safety, full), trigger (manual, nightly, weekly, ci), sample_size, config json, git_sha, started_at, finished_at, status | |
+| eval_runs | id, kind (retrieval, generation, pipeline, system, safety, multimodal, online, full), trigger (manual, nightly, weekly, ci), sample_size, config json, git_sha, started_at, finished_at, status | |
 | eval_results | id, run_id, case_id nullable, metric, value, detail json | one row per metric per case or aggregate |
 | audit_log | id, user_id, action, target, allowed bool, ip_hash, ts | admin actions and denials |
 
