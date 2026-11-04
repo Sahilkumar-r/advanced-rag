@@ -20,18 +20,29 @@ Not recorded yet: reformulation rate, source click and copy rates, abandoned ans
 from EVALS.md. Those need client events and a store that do not exist.
 
 ## Start it
-1. Start the app with `METRICS_TOKEN` set in `.env` (any long random string). Without it `/metrics` answers 404.
-2. Put the same value in the file `ops/monitoring/secrets/metrics_token` (gitignored).
-3. Set `GRAFANA_ADMIN_PASSWORD` in your shell (compose refuses to start without it).
-4. Start Docker Desktop, then `docker compose -f ops/monitoring/docker-compose.yml up -d`.
-5. Prometheus: http://127.0.0.1:9090 (Status, Targets should show `ragx` as UP). Grafana: http://127.0.0.1:3000, dashboard "ragx online evals".
+The short way, with Docker Desktop running:
+```
+python scripts/init_env.py          # adds any missing secrets to .env (JWT_SECRET, METRICS_TOKEN, GRAFANA_ADMIN_PASSWORD, demo passwords); prints names only
+python scripts/seed_users.py        # demo users
+python scripts/serve.py             # the app on 127.0.0.1:8000, with /metrics protected by METRICS_TOKEN
+python scripts/monitoring.py up     # writes the gitignored token file and runs docker compose up -d
+python scripts/monitoring.py status # checks the Prometheus target, rules, Grafana, the dashboard and the data source
+```
+The same steps by hand: set `METRICS_TOKEN` in `.env` (without it `/metrics` answers 404), put the same value in `ops/monitoring/secrets/metrics_token`
+(gitignored), set `GRAFANA_ADMIN_PASSWORD` (compose refuses to start without it; the generated one is in your `.env`), and run
+`docker compose -f ops/monitoring/docker-compose.yml up -d`.
+Prometheus: http://127.0.0.1:9090 (Status, Targets shows `ragx` as UP). Grafana: http://127.0.0.1:3000, user `admin`, dashboard "ragx online evals".
 
-The app listens on 127.0.0.1:8000; the Prometheus container reaches it as `host.docker.internal:8000`.
+The app listens on 127.0.0.1:8000; the Prometheus container reaches it as `host.docker.internal:8000`. Stop the stack with `python scripts/monitoring.py down`.
 
 ## Status
-The configs are validated by `tests/test_ops_configs.py` (YAML parses, images pinned, ports local only, no secret in any file, every metric a query
-uses exists in the app). The `/metrics` endpoint was checked live against the running app. **The Docker stack itself has not been started yet**
-(Docker Desktop was not running when this was built), so scraping by Prometheus and the Grafana panels are untested.
+Run and checked on 2026-11-05 on Windows with Docker Desktop (Prometheus v2.53.0, Grafana 11.1.0): the Prometheus target for the app is UP and scrapes
+with the bearer token, all 7 alert rules load, Grafana is healthy with the dashboard provisioned and the data source testing OK, and **all 13 dashboard
+panels returned data** when each panel's query was run through Grafana's own API after live traffic (answers, a cache hit, a refusal, a blocked injection,
+thumbs, and sampled judge scores). The configs are also validated by `tests/test_ops_configs.py`.
+Two things to know: counters only show change that happens while Prometheus is scraping, so a panel is empty or flat until there is traffic after the
+stack starts; and the online faithfulness panel was checked with the judge sampling every answer (4 samples), which is not the default 5 percent.
+Not checked: alert firing (no threshold was crossed), long running retention, and the stack on a deployed server.
 
 ## Alerts
 `rules.yml` defines flags for fallback rate, provider errors, refusal rate, injection spikes, low online faithfulness and high thumbs down.

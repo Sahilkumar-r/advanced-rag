@@ -39,6 +39,7 @@ class _Conn:
 class Store:
     def __init__(self, path: Path | str, ip_salt: str = ""):
         self.path, self.salt = str(path), ip_salt
+        Path(self.path).parent.mkdir(parents=True, exist_ok=True)  # a first run has no data/state yet
         with self._c() as c:
             c.executescript(SCHEMA)
 
