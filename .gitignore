@@ -16,3 +16,4 @@ data/cache/
 data/state/
 traces/
 ops/monitoring/secrets/
+data/*.log
