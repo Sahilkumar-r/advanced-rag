@@ -6,16 +6,20 @@ ask_fn(question, memory_text, history) -> dict with text, refused, citations, so
 from __future__ import annotations
 
 import hmac
+import random
 import time
 import uuid
+from pathlib import Path
 from typing import Callable
 
 import jwt
-from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Request, UploadFile
-from fastapi.responses import JSONResponse
+from fastapi import BackgroundTasks, Depends, FastAPI, File, Form, Header, HTTPException, Request, UploadFile
+from fastapi.responses import JSONResponse, Response
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from ragx.generate.providers import ProviderError
+from ragx.observability.metrics import Observer
 from ragx.vision import image as vimg
 from ragx.voice import stt
 
@@ -25,6 +29,21 @@ from ragx.guardrails.checks import check_input, check_output
 from ragx.memory.memory import KINDS, Memory, format_memory
 
 REFUSE_TEXT = "I can't help with that request."
+SECURITY_HEADERS = {
+    "Content-Security-Policy": "default-src 'self'; img-src 'self' data: blob:; media-src 'self' blob:; style-src 'self'; script-src 'self'; connect-src 'self'; "
+                               "frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
+    "X-Content-Type-Options": "nosniff", "Referrer-Policy": "no-referrer", "Permissions-Policy": "microphone=(self), camera=(), geolocation=()",
+}
+
+
+class Feedback(BaseModel):
+    trace_id: str | None = Field(default=None, max_length=32)
+    value: int
+
+
+class UserPatch(BaseModel):
+    role: str | None = Field(default=None, max_length=20)
+    is_active: bool | None = None
 
 
 class Login(BaseModel):
@@ -59,11 +78,24 @@ class Consent(BaseModel):
 def create_app(store: Store, ask_fn: Callable[[str, str, list], dict], memory: Memory, key: str | None = None,
                metrics_fn: Callable[[], dict] | None = None, propose_fn: Callable[[str, str], list] | None = None,
                limiter: sec.RateLimiter | None = None, transcribe_fn: Callable[[bytes, str], str] | None = None,
-               vision_fn: Callable[[bytes, str, str], dict] | None = None) -> FastAPI:
+               vision_fn: Callable[[bytes, str, str], dict] | None = None, observer: Observer | None = None,
+               judge_fn: Callable[[str, list, str], float | None] | None = None, judge_rate: float = 0.0, web_dir: Path | None = None,
+               metrics_token: str | None = None, evals_fn: Callable[[], list] | None = None) -> FastAPI:
+    obs = observer or Observer()
     key = key or sec.secret()
     limiter = limiter or sec.RateLimiter()
     store.salt = store.salt or hmac.new(key.encode(), b"ip-hash-salt", "sha256").hexdigest()  # a salted hash, never the bare address
     app = FastAPI(title="ragx", docs_url=None, redoc_url=None)
+
+    @app.middleware("http")
+    async def instrument(request: Request, call_next):
+        t = time.perf_counter()
+        resp = await call_next(request)
+        route = getattr(request.scope.get("route"), "path", None)  # the route template, so ids in paths do not explode the labels
+        obs.request(route if route and route != "/" else "other", request.method, resp.status_code, time.perf_counter() - t)
+        for k, v in SECURITY_HEADERS.items():
+            resp.headers.setdefault(k, v)
+        return resp
 
     @app.exception_handler(ProviderError)
     def provider_down(request: Request, exc: ProviderError):
@@ -153,25 +185,47 @@ def create_app(store: Store, ask_fn: Callable[[str, str, list], dict], memory: M
         return {"access": sec.make_token(f"guest:{uuid.uuid4().hex}", "guest", "access", key, ttl_s=3600), "role": "guest"}
 
     # --- ask ------------------------------------------------------------
+    def blocked(reason: str, flags: list[str], modality: str) -> dict:
+        obs.guardrail(reason)
+        obs.ask("blocked", None, 0.0, 0, modality)
+        return {"text": REFUSE_TEXT, "refused": True, "reason": reason, "citations": [], "sources": [], "source_details": [], "flags": flags}
+
+    def score_online(question: str, sources: list, text: str) -> None:
+        try:
+            obs.online_faithfulness(judge_fn(question, sources, text))
+        except Exception:  # a judge outage must never touch the user's request; it is counted
+            obs.judged.labels("error").inc()
+
+    def respond(out: dict, flags: list[str], modality: str, t0: float, question: str, background: BackgroundTasks) -> tuple[object, dict]:
+        ov = check_output(out["text"], len(out["sources"]), out["refused"])
+        for f in flags + ov.flags:
+            obs.guardrail(f.split(":")[0])
+        obs.ask("refused" if out["refused"] else "answered", out.get("cache"), (time.perf_counter() - t0) * 1000, out.get("tokens", 0), modality)
+        if judge_fn and judge_rate and not out["refused"] and out.get("_sources") and random.random() < judge_rate:
+            background.add_task(score_online, question, out["_sources"], ov.text)  # runs after the response is sent
+        return ov, {"text": ov.text, "refused": out["refused"], "citations": out["citations"], "sources": out["sources"], "source_details": out.get("source_details", []),
+                    "flags": flags + ov.flags, "cache": out.get("cache"), "trace_id": out.get("trace_id"), "steps": out.get("steps", [])}
+
     @app.post("/api/ask")
-    def ask(b: Ask, request: Request, p: dict = Depends(need("ask"))):
+    def ask(b: Ask, request: Request, background: BackgroundTasks, p: dict = Depends(need("ask"))):
         throttle(p, request)
+        t0 = time.perf_counter()
         v = check_input(b.question, p["role"])
         if v.blocked:
             store.audit(p["sub"], "guardrail_block", v.reason, False, ip(request))
-            return {"text": REFUSE_TEXT, "refused": True, "reason": v.reason, "citations": [], "sources": [], "flags": v.flags}
+            return blocked(v.reason, v.flags, "text")
         user_id = uid(p)
         consent = bool(user_id and store.user(user_id)["memory_consent"])
         sess = f"{p['sub']}:{b.session_id}" if b.session_id else None
         mem_text = format_memory(memory.recall(user_id, v.text)) if consent else ""
         out = ask_fn(v.text, mem_text, memory.history(sess) if sess else [])
-        ov = check_output(out["text"], len(out["sources"]), out["refused"])
+        ov, body = respond(out, v.flags, "text", t0, v.text, background)
         if sess:
             memory.add_turn(sess, v.text, ov.text)
         if consent and propose_fn:
             for kind, content in propose_fn(v.text, ov.text):
                 memory.add(user_id, kind, content, consent=True)  # rules in add() still apply
-        return {"text": ov.text, "refused": out["refused"], "citations": out["citations"], "sources": out["sources"], "flags": v.flags + ov.flags, "cache": out.get("cache")}
+        return body
 
     @app.post("/api/ask-voice")
     async def ask_voice(request: Request, audio: UploadFile = File(...), p: dict = Depends(need("ask"))):
@@ -188,10 +242,11 @@ def create_app(store: Store, ask_fn: Callable[[str, str, list], dict], memory: M
         return {"transcript": transcribe_fn(data, kind), "confirm": True}  # bytes are dropped here, never stored
 
     @app.post("/api/ask-image")
-    async def ask_image(request: Request, image: UploadFile = File(...), question: str = Form(default="", max_length=500), p: dict = Depends(need("ask_image"))):
+    async def ask_image(request: Request, background: BackgroundTasks, image: UploadFile = File(...), question: str = Form(default="", max_length=500), p: dict = Depends(need("ask_image"))):
         if vision_fn is None:
             raise HTTPException(503, "image input is not configured")
         throttle(p, request)
+        t0 = time.perf_counter()
         data = await image.read(vimg.MAX_BYTES + 1)
         if len(data) > vimg.MAX_BYTES:
             raise HTTPException(413, "image too large")
@@ -201,18 +256,18 @@ def create_app(store: Store, ask_fn: Callable[[str, str, list], dict], memory: M
         qv = check_input(question, p["role"]) if question else None
         if qv and qv.blocked:
             store.audit(p["sub"], "guardrail_block", qv.reason, False, ip(request))
-            return {"text": REFUSE_TEXT, "refused": True, "reason": qv.reason, "citations": [], "sources": [], "flags": qv.flags}
+            return blocked(qv.reason, qv.flags, "image")
         d = vision_fn(data, mime, qv.text if qv else "")
         if d.get("blocked"):  # instructions hidden inside the picture
             store.audit(p["sub"], "guardrail_block", f"image:{d['blocked']}", False, ip(request))
-            return {"text": REFUSE_TEXT, "refused": True, "reason": "image_" + d["blocked"], "citations": [], "sources": [], "flags": ["image_injection"]}
+            return blocked("image_" + d["blocked"], ["image_injection"], "image")
         query = vimg.make_query(qv.text if qv else "", d)
         if not query:
-            return {"text": "I could not read anything useful in that image.", "refused": True, "reason": "unreadable", "citations": [], "sources": [], "flags": []}
+            obs.ask("refused", None, (time.perf_counter() - t0) * 1000, 0, "image")
+            return {"text": "I could not read anything useful in that image.", "refused": True, "reason": "unreadable", "citations": [], "sources": [], "source_details": [], "flags": []}
         out = ask_fn(query, "", [])
-        ov = check_output(out["text"], len(out["sources"]), out["refused"])
-        return {"text": ov.text, "refused": out["refused"], "citations": out["citations"], "sources": out["sources"], "flags": ov.flags,
-                "read_from_image": {"kind": d.get("kind"), "summary": d.get("summary"), "error_text": d.get("error_text")}}
+        _, body = respond(out, [], "image", t0, query, background)
+        return {**body, "read_from_image": {"kind": d.get("kind"), "summary": d.get("summary"), "error_text": d.get("error_text")}}
 
     @app.get("/api/history")
     def history(session_id: str, p: dict = Depends(need("view_history"))):
@@ -244,9 +299,47 @@ def create_app(store: Store, ask_fn: Callable[[str, str, list], dict], memory: M
         return {"deleted": True}
 
     # --- admin ----------------------------------------------------------
+    @app.get("/api/me")
+    def me(p: dict = Depends(principal)):
+        u = None if p["sub"].startswith("guest:") else store.user(int(p["sub"]))
+        return {"role": p["role"], "email": u["email"] if u else None, "guest": u is None, "memory_consent": bool(u and u["memory_consent"]), "permissions": sorted(sec.MATRIX[p["role"]])}
+
+    @app.post("/api/feedback")
+    def feedback(b: Feedback, p: dict = Depends(need("ask"))):
+        if b.value not in (-1, 1):
+            raise HTTPException(422, "value must be -1 or 1")
+        if not limiter.allow(f"fb:{p['sub']}", 60):
+            raise HTTPException(429, "too many requests")
+        obs.thumbs(b.value)
+        return {"ok": True}
+
+    @app.get("/metrics")
+    def prometheus(authorization: str | None = Header(default=None)):
+        """Prometheus scrape target. Off unless METRICS_TOKEN is set; scrapers send it as a bearer token."""
+        if not metrics_token:
+            raise HTTPException(404, "not found")
+        given = (authorization or "").removeprefix("Bearer ").strip()
+        if not hmac.compare_digest(given.encode(), metrics_token.encode()):
+            raise HTTPException(401, "unauthorized")
+        return Response(obs.exposition(), media_type="text/plain; version=0.0.4; charset=utf-8")
+
     @app.get("/api/admin/metrics")
     def metrics(p: dict = Depends(need("view_metrics"))):
-        return metrics_fn() if metrics_fn else {}
+        return {**obs.snapshot(), **(metrics_fn() if metrics_fn else {})}
+
+    @app.get("/api/admin/evals")
+    def evals(p: dict = Depends(need("view_metrics"))):
+        return {"results": evals_fn() if evals_fn else []}
+
+    @app.patch("/api/admin/users/{user_id}")
+    def patch_user(user_id: int, b: UserPatch, p: dict = Depends(need("manage_users"))):
+        if str(user_id) == p["sub"]:
+            raise HTTPException(400, "you cannot change your own role or status")  # avoids locking the last admin out
+        if b.role is not None and b.role not in sec.ROLES:
+            raise HTTPException(422, "unknown role")
+        if not store.update_user(user_id, b.role, b.is_active):
+            raise HTTPException(404, "not found")
+        return {"ok": True}
 
     @app.post("/api/admin/evals/run")
     def run_evals(p: dict = Depends(need("run_evals"))):
@@ -268,4 +361,6 @@ def create_app(store: Store, ask_fn: Callable[[str, str, list], dict], memory: M
     def audit(p: dict = Depends(need("manage_users"))):
         return {"rows": store.audit_rows()}
 
+    if web_dir:  # last, so every API route above wins over the static files
+        app.mount("/", StaticFiles(directory=str(web_dir), html=True), name="web")
     return app

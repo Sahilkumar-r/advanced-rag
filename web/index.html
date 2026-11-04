@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ragx docs assistant</title>
+  <meta name="description" content="Ask questions about the FastAPI and Pydantic docs. Every answer shows the pages it came from.">
+  <meta name="theme-color" content="#020617">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <h1>ragx</h1>
+    <span class="who" id="who"></span>
+    <button class="btn icon" id="theme-btn" type="button" aria-label="Switch between dark and light theme"></button>
+  </header>
+  <div id="banner" role="status" aria-live="polite" hidden></div>
+  <div class="shell">
+    <nav class="tabs" id="tabs" aria-label="Main" hidden></nav>
+    <main id="main" tabindex="-1"></main>
+  </div>
+  <noscript><p class="note">This app needs JavaScript.</p></noscript>
+</body>
+</html>

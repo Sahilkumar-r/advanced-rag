@@ -77,12 +77,15 @@ def main() -> None:
     ap.add_argument("--cite", action="store_true", help="use the stricter citation prompt (SYSTEM_CITE)")
     ap.add_argument("--gate2", action="store_true", help="use the broader need retrieval prompt (GATE_V2), self-RAG only")
     ap.add_argument("--systems", default="plain_rag,self_rag")
+    ap.add_argument("--sample", type=int, default=0, help="run only about N questions, spread evenly over the fixed set (for the nightly run)")
     args = ap.parse_args()
     system = SYSTEM_CITE if args.cite else SYSTEM
     runners = {"plain_rag": lambda q, r, p, l: plain_rag(q, r, p, l, system=system),
                "self_rag": lambda q, r, p, l: self_rag(q, r, p, l, system=system, gate=GATE_V2 if args.gate2 else GATE_V1)}
     out = {"variant": {"cite": args.cite, "gate2": args.gate2}, "systems": {}, "rows": {}}
     items = question_set()
+    if args.sample:
+        items = items[:: max(1, len(items) // args.sample)]
     for name, fn in ((s, runners[s]) for s in args.systems.split(",")):
         rows = []
         for it in items:

@@ -1,13 +1,86 @@
 name: evals-weekly
-# Skeleton, enabled in phase 7. Secrets come from repository secrets, never inline.
+# The full golden set for retrieval, generation, the judge calibration and the image eval, compared with the committed last good runs.
+# Skips, with a visible notice, when the API key secrets are not set. Uses free tier providers only; no OpenAI key is passed in.
 on:
+  schedule:
+    - cron: "0 3 * * 0"
   workflow_dispatch:
-  # schedule:
-  #   - cron: "0 3 * * 0"
+permissions:
+  contents: read
 jobs:
   full:
     runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      FASTEMBED_CACHE_PATH: ${{ github.workspace }}/.cache/fastembed
     steps:
       - uses: actions/checkout@v4
-      - name: Placeholder
-        run: echo "Will run the full golden set across all layers (phase 7)."
+      - name: Skip when the keys are not configured
+        id: keys
+        shell: bash
+        run: |
+          if [ -z "$GROQ_API_KEY" ] || [ -z "$GEMINI_API_KEY" ]; then
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Skipped: add GROQ_API_KEY and GEMINI_API_KEY as repository secrets to enable this run"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-python@v5
+        if: steps.keys.outputs.run == 'true'
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - if: steps.keys.outputs.run == 'true'
+        run: pip install -e ".[dev]"
+      - uses: actions/cache@v4
+        if: steps.keys.outputs.run == 'true'
+        with:
+          path: .cache/fastembed
+          key: fastembed-bge-small-en-v1.5
+      - name: Fetch the docs at the pinned commits
+        if: steps.keys.outputs.run == 'true'
+        run: python scripts/fetch_docs.py
+      - name: Keep the committed results as the last good run
+        if: steps.keys.outputs.run == 'true'
+        run: cp -r eval/results "$RUNNER_TEMP/last-good"
+      - name: Retrieval ablation (chunking study and modes)
+        if: steps.keys.outputs.run == 'true'
+        run: python scripts/run_retrieval_ablation.py
+      - name: Generation eval, plain RAG and self-RAG
+        if: steps.keys.outputs.run == 'true'
+        run: python scripts/run_generation_eval.py --cite --gate2 --tag weekly
+      - name: Judge calibration
+        if: steps.keys.outputs.run == 'true'
+        run: python scripts/run_judge_calibration.py
+      - name: Image eval (synthetic set)
+        if: steps.keys.outputs.run == 'true'
+        run: python scripts/run_image_eval.py
+      - name: Regression gate against the last good run (placeholder tolerances)
+        if: steps.keys.outputs.run == 'true'
+        shell: bash
+        run: |
+          LG="$RUNNER_TEMP/last-good"
+          rc=0  # every gate runs and prints its table; the step fails at the end if any of them regressed
+          echo "### Retrieval" | tee -a "$GITHUB_STEP_SUMMARY"
+          python scripts/regression_gate.py --new eval/results/01-retrieval.json --base "$LG/01-retrieval.json" \
+            --check modes.hybrid.dev.hit@5:0.03 --check modes.hybrid.dev.ndcg@10:0.03 --check modes.hybrid.held_out.ndcg@10:0.03 | tee -a "$GITHUB_STEP_SUMMARY" || rc=1
+          echo "### Generation" | tee -a "$GITHUB_STEP_SUMMARY"
+          python scripts/regression_gate.py --new eval/results/02-generation-weekly.json --base "$LG/02-generation-v3-bracketfix.json" \
+            --check systems.plain_rag.overall.faithfulness:0.05 --check systems.self_rag.overall.faithfulness:0.05 \
+            --check systems.plain_rag.overall.refusal_correct:0.07 --check systems.self_rag.overall.refusal_correct:0.07 | tee -a "$GITHUB_STEP_SUMMARY" || rc=1
+          echo "### Judge" | tee -a "$GITHUB_STEP_SUMMARY"
+          python scripts/regression_gate.py --new eval/results/02-judge-calibration.json --base "$LG/02-judge-calibration.json" --check agreement:0.10 | tee -a "$GITHUB_STEP_SUMMARY" || rc=1
+          echo "### Image" | tee -a "$GITHUB_STEP_SUMMARY"
+          python scripts/regression_gate.py --new eval/results/05-image.json --base "$LG/05-image.json" --check key_term_recall:0.10 --check hit@5:0.10 | tee -a "$GITHUB_STEP_SUMMARY" || rc=1
+          exit $rc
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.keys.outputs.run == 'true'
+        with:
+          name: evals-weekly-${{ github.run_id }}
+          path: eval/results/*.json
+          if-no-files-found: warn

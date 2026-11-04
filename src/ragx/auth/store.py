@@ -61,6 +61,17 @@ class Store:
         with self._c() as c:
             return [dict(r) | {"password_hash": None} for r in c.execute("SELECT * FROM users ORDER BY id")]
 
+    def update_user(self, user_id: int, role: str | None, is_active: bool | None) -> bool:
+        """Change role and or status. Disabling a user also revokes every refresh token they hold."""
+        with self._c() as c:
+            if role is not None:
+                c.execute("UPDATE users SET role=? WHERE id=?", (role, user_id))
+            if is_active is not None:
+                c.execute("UPDATE users SET is_active=? WHERE id=?", (int(is_active), user_id))
+                if not is_active:
+                    c.execute("UPDATE refresh_tokens SET revoked_at=? WHERE user_id=? AND revoked_at IS NULL", (time.time(), user_id))
+            return c.execute("SELECT 1 FROM users WHERE id=?", (user_id,)).fetchone() is not None
+
     def touch_login(self, user_id: int) -> None:
         with self._c() as c:
             c.execute("UPDATE users SET last_login_at=? WHERE id=?", (time.time(), user_id))

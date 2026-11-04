@@ -62,6 +62,14 @@ def format_context(sources: list[Source]) -> str:
     return "\n\n".join(f"[{s.n}] ({s.doc} > {s.heading})\n{s.text}" for s in sources)
 
 
+_BRACKETS = str.maketrans({"【": "[", "】": "]", "［": "[", "］": "]"})
+
+
+def normalise_brackets(text: str) -> str:
+    """gpt-oss writes citations as 【1】 (fullwidth brackets). Map them to [1] so parsing, the guardrails and the UI all see one format."""
+    return text.translate(_BRACKETS)
+
+
 def parse_citations(text: str, n_sources: int) -> list[int]:
     return sorted({int(m) for m in re.findall(r"\[(\d+)\]", text) if 1 <= int(m) <= n_sources})
 
@@ -70,4 +78,5 @@ def generate(question: str, sources: list[Source], llm: LLM, tier: str = "answer
     msgs = [{"role": "system", "content": system + extra_rule},
             {"role": "user", "content": f"{memory}Sources:\n{format_context(sources)}\n\nQuestion: {question}"}]
     c = llm(tier, msgs, max_tokens=1200)
-    return Answer(c.text, parse_citations(c.text, len(sources)), c.text.strip().startswith(REFUSAL[:20]), c)
+    text = normalise_brackets(c.text)
+    return Answer(text, parse_citations(text, len(sources)), text.strip().startswith(REFUSAL[:20]), c)

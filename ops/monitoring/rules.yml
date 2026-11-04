@@ -1,0 +1,30 @@
+# Online eval flags (docs/EVALS.md section 7: "a signal outside its tolerance flags that day").
+# EVERY THRESHOLD BELOW IS A PLACEHOLDER. They have not been tuned on real traffic; set them after a few weeks of data.
+groups:
+  - name: ragx-online
+    rules:
+      - alert: RagxDown
+        expr: up{job="ragx"} == 0
+        for: 5m
+        annotations: {summary: "The ragx app is not being scraped"}
+      - alert: FallbackRateHigh
+        expr: sum(increase(ragx_llm_fallbacks_total[1h])) / clamp_min(sum(increase(ragx_llm_calls_total{status="ok"}[1h])), 1) > 0.5
+        for: 30m
+        annotations: {summary: "More than half of LLM calls are served by a fallback provider (placeholder threshold)"}
+      - alert: ProviderErrorsHigh
+        expr: sum(increase(ragx_llm_calls_total{status="error"}[1h])) / clamp_min(sum(increase(ragx_llm_calls_total[1h])), 1) > 0.2
+        for: 30m
+        annotations: {summary: "More than 20 percent of provider calls failed (placeholder threshold)"}
+      - alert: RefusalRateHigh
+        expr: sum(increase(ragx_ask_total{outcome="refused"}[6h])) / clamp_min(sum(increase(ragx_ask_total[6h])), 1) > 0.4
+        for: 1h
+        annotations: {summary: "Refusal rate above 40 percent over 6 hours (placeholder threshold)"}
+      - alert: InjectionAttemptsSpike
+        expr: sum(increase(ragx_guardrail_total{kind=~"prompt_injection|image_prompt_injection|injection"}[1h])) > 20
+        annotations: {summary: "More than 20 blocked injection attempts in an hour (placeholder threshold)"}
+      - alert: OnlineFaithfulnessLow
+        expr: sum(increase(ragx_online_faithfulness_sum[24h])) / clamp_min(sum(increase(ragx_online_faithfulness_count[24h])), 1) < 0.8 and sum(increase(ragx_online_faithfulness_count[24h])) >= 10
+        annotations: {summary: "Judge faithfulness on sampled live answers averaged below 0.8 over 24 hours with at least 10 samples (placeholder threshold)"}
+      - alert: ThumbsDownRateHigh
+        expr: sum(increase(ragx_feedback_total{value="down"}[24h])) / clamp_min(sum(increase(ragx_feedback_total[24h])), 1) > 0.4 and sum(increase(ragx_feedback_total[24h])) >= 10
+        annotations: {summary: "More than 40 percent of thumbs in 24 hours were down, with at least 10 votes (placeholder threshold)"}

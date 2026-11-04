@@ -15,11 +15,16 @@ dependencies = [
   "argon2-cffi==25.1.0",
   "python-multipart==0.0.33",
   "uvicorn==0.54.0",
+  "prometheus-client==0.26.0",
 ]
 
 [project.optional-dependencies]
-# Pillow and pyttsx3 only build the synthetic image and voice test sets (pyttsx3 needs Windows voices).
-dev = ["pytest==9.2.0", "Pillow==11.3.0", "pyttsx3==2.99"]
+dev = ["pytest==9.2.0", "PyYAML==6.0.3", "ruff==0.17.3"]
+# Only for rebuilding the synthetic image and voice test sets and the icons (pyttsx3 needs Windows voices).
+datasets = ["Pillow==11.3.0", "pyttsx3==2.99"]
+
+[tool.ruff.lint]
+select = ["E9", "F"]  # syntax errors and pyflakes only: real bugs, not style
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

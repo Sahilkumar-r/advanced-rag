@@ -1,0 +1,535 @@
+{
+ "uid": "ragx-online",
+ "title": "ragx online evals",
+ "tags": [
+  "ragx"
+ ],
+ "schemaVersion": 39,
+ "version": 1,
+ "refresh": "30s",
+ "time": {
+  "from": "now-6h",
+  "to": "now"
+ },
+ "timezone": "browser",
+ "panels": [
+  {
+   "id": 1,
+   "type": "timeseries",
+   "title": "Questions per minute by outcome",
+   "description": "answered, refused or blocked by a guardrail",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "ragx-prom"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 0,
+    "y": 0
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "short"
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "table",
+     "placement": "bottom"
+    }
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "ragx-prom"
+     },
+     "expr": "sum by (outcome) (rate(ragx_ask_total[$__rate_interval])) * 60",
+     "legendFormat": "{{outcome}}"
+    }
+   ]
+  },
+  {
+   "id": 2,
+   "type": "timeseries",
+   "title": "Refusal rate",
+   "description": "share of questions the assistant declined to answer",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "ragx-prom"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 8,
+    "y": 0
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "percentunit"
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "table",
+     "placement": "bottom"
+    }
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "ragx-prom"
+     },
+     "expr": "sum(rate(ragx_ask_total{outcome=\"refused\"}[$__rate_interval])) / clamp_min(sum(rate(ragx_ask_total[$__rate_interval])), 1e-9)",
+     "legendFormat": ""
+    }
+   ]
+  },
+  {
+   "id": 3,
+   "type": "timeseries",
+   "title": "Cache hit rate",
+   "description": "",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "ragx-prom"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 16,
+    "y": 0
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "percentunit"
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "table",
+     "placement": "bottom"
+    }
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "ragx-prom"
+     },
+     "expr": "sum(rate(ragx_ask_total{cache!=\"none\"}[$__rate_interval])) / clamp_min(sum(rate(ragx_ask_total[$__rate_interval])), 1e-9)",
+     "legendFormat": ""
+    }
+   ]
+  },
+  {
+   "id": 4,
+   "type": "timeseries",
+   "title": "Answer latency p50 and p95",
+   "description": "includes cache hits; free tier throttling dominates the tail",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "ragx-prom"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 0,
+    "y": 8
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "s"
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "table",
+     "placement": "bottom"
+    }
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "ragx-prom"
+     },
+     "expr": "histogram_quantile(0.5, sum by (le) (rate(ragx_ask_seconds_bucket[$__rate_interval])))",
+     "legendFormat": "p50"
+    },
+    {
+     "refId": "B",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "ragx-prom"
+     },
+     "expr": "histogram_quantile(0.95, sum by (le) (rate(ragx_ask_seconds_bucket[$__rate_interval])))",
+     "legendFormat": "p95"
+    }
+   ]
+  },
+  {
+   "id": 5,
+   "type": "timeseries",
+   "title": "Tokens per minute",
+   "description": "",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "ragx-prom"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 8,
+    "y": 8
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "short"
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "table",
+     "placement": "bottom"
+    }
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "ragx-prom"
+     },
+     "expr": "sum by (kind) (rate(ragx_tokens_total[$__rate_interval])) * 60",
+     "legendFormat": "{{kind}}"
+    }
+   ]
+  },
+  {
+   "id": 6,
+   "type": "timeseries",
+   "title": "Provider calls per minute",
+   "description": "",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "ragx-prom"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 16,
+    "y": 8
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "short"
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "table",
+     "placement": "bottom"
+    }
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "ragx-prom"
+     },
+     "expr": "sum by (provider, status) (rate(ragx_llm_calls_total[$__rate_interval])) * 60",
+     "legendFormat": "{{provider}} {{status}}"
+    }
+   ]
+  },
+  {
+   "id": 7,
+   "type": "timeseries",
+   "title": "Fallback rate",
+   "description": "share of successful calls served by a provider other than the first choice",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "ragx-prom"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 0,
+    "y": 16
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "percentunit"
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "table",
+     "placement": "bottom"
+    }
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "ragx-prom"
+     },
+     "expr": "sum(rate(ragx_llm_fallbacks_total[$__rate_interval])) / clamp_min(sum(rate(ragx_llm_calls_total{status=\"ok\"}[$__rate_interval])), 1e-9)",
+     "legendFormat": ""
+    }
+   ]
+  },
+  {
+   "id": 8,
+   "type": "timeseries",
+   "title": "Guardrail triggers per hour",
+   "description": "input, image and output checks, by kind",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "ragx-prom"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 8,
+    "y": 16
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "short"
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "table",
+     "placement": "bottom"
+    }
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "ragx-prom"
+     },
+     "expr": "sum by (kind) (rate(ragx_guardrail_total[$__rate_interval])) * 3600",
+     "legendFormat": "{{kind}}"
+    }
+   ]
+  },
+  {
+   "id": 9,
+   "type": "timeseries",
+   "title": "Thumbs per hour",
+   "description": "",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "ragx-prom"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 16,
+    "y": 16
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "short"
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "table",
+     "placement": "bottom"
+    }
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "ragx-prom"
+     },
+     "expr": "sum by (value) (rate(ragx_feedback_total[$__rate_interval])) * 3600",
+     "legendFormat": "{{value}}"
+    }
+   ]
+  },
+  {
+   "id": 10,
+   "type": "timeseries",
+   "title": "Online faithfulness (sampled, judge)",
+   "description": "reference free score on a sampled slice of live answers; read it together with the sample count below",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "ragx-prom"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 0,
+    "y": 24
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "percentunit"
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "table",
+     "placement": "bottom"
+    }
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "ragx-prom"
+     },
+     "expr": "sum(rate(ragx_online_faithfulness_sum[1h])) / clamp_min(sum(rate(ragx_online_faithfulness_count[1h])), 1e-9)",
+     "legendFormat": ""
+    }
+   ]
+  },
+  {
+   "id": 11,
+   "type": "timeseries",
+   "title": "Judged samples",
+   "description": "how many sampled answers were scored, failed to parse, or errored",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "ragx-prom"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 8,
+    "y": 24
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "short"
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "table",
+     "placement": "bottom"
+    }
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "ragx-prom"
+     },
+     "expr": "sum by (result) (increase(ragx_online_judged_total[1h]))",
+     "legendFormat": "{{result}}"
+    }
+   ]
+  },
+  {
+   "id": 12,
+   "type": "stat",
+   "title": "Paid spend (USD)",
+   "description": "0 while only free tier providers answer",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "ragx-prom"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 16,
+    "y": 24
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "currencyUSD"
+    },
+    "overrides": []
+   },
+   "options": {
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ]
+    }
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "ragx-prom"
+     },
+     "expr": "sum(ragx_cost_usd_total)",
+     "legendFormat": ""
+    }
+   ]
+  },
+  {
+   "id": 13,
+   "type": "timeseries",
+   "title": "HTTP requests by status",
+   "description": "",
+   "datasource": {
+    "type": "prometheus",
+    "uid": "ragx-prom"
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 8,
+    "x": 0,
+    "y": 32
+   },
+   "fieldConfig": {
+    "defaults": {
+     "unit": "short"
+    },
+    "overrides": []
+   },
+   "options": {
+    "legend": {
+     "displayMode": "table",
+     "placement": "bottom"
+    }
+   },
+   "targets": [
+    {
+     "refId": "A",
+     "datasource": {
+      "type": "prometheus",
+      "uid": "ragx-prom"
+     },
+     "expr": "sum by (status) (rate(ragx_http_requests_total[$__rate_interval])) * 60",
+     "legendFormat": "{{status}}"
+    }
+   ]
+  }
+ ],
+ "description": "Online signals from live traffic (docs/EVALS.md section 7). Thresholds for flags live in ops/monitoring/rules.yml and are placeholders."
+}

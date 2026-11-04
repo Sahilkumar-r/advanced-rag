@@ -1,16 +1,64 @@
 name: ci
+# Free checks only: no LLM keys, no secrets. Runs on every pull request and on pushes to main.
 on:
   pull_request:
   push:
     branches: [main]
   workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
-  check:
+  test:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Placeholder until phase 0 adds dependencies and tests
-        run: echo "CI skeleton. See docs/06-IMPLEMENTATION-PLAN.md phase 7."
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: pip install -e ".[dev]"
+      - name: Lint (syntax errors and pyflakes)
+        run: ruff check src scripts tests
+      - name: Secret scan of tracked files
+        run: python scripts/scan_secrets.py
+      - name: JavaScript syntax
+        run: |
+          node --check web/app.js
+          node --check web/sw.js
+      - name: Unit tests (auth, RBAC matrix, guardrails, router, cache, memory, metrics, configs)
+        run: pytest -q
+      - name: Rule based safety eval must not get worse than the committed run
+        shell: bash
+        run: |
+          cp eval/results/04-safety.json "$RUNNER_TEMP/safety-base.json"
+          python scripts/run_safety_eval.py > /dev/null
+          python scripts/regression_gate.py --new eval/results/04-safety.json --base "$RUNNER_TEMP/safety-base.json" \
+            --check injection_block_rate:0.0 --check pii_cases_exact:0.0 --check retrieval_attack_drop_rate:0.0 --check retrieval_benign_keep_rate:0.0 \
+            --lower-is-better benign_false_refusal_rate:0.0 | tee -a "$GITHUB_STEP_SUMMARY"
+  retrieval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: pip install -e ".[dev]"
+      - uses: actions/cache@v4
+        with:
+          path: .cache/fastembed
+          key: fastembed-bge-small-en-v1.5
+      - name: Fetch the docs at the pinned commits
+        run: python scripts/fetch_docs.py
+      - name: Retrieval regression check against the committed last good run (tolerance 0.03, a placeholder)
+        shell: bash
+        env:
+          FASTEMBED_CACHE_PATH: ${{ github.workspace }}/.cache/fastembed
+        run: python scripts/ci_retrieval_check.py | tee -a "$GITHUB_STEP_SUMMARY"

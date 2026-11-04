@@ -41,19 +41,19 @@ Gate: security review; RBAC test matrix passes; safety eval table.
 ## Phase 5. Voice and image
 - [~] 5.1 Whisper STT endpoint; transcript confirm; word error check on a small recorded set made by Sahil. (done on a synthetic set; real recordings and screenshots still needed)
 - [~] 5.2 Image endpoint with a vision model; test set of error screenshots and diagrams. (done on a synthetic set; real recordings and screenshots still needed)
-- [ ] 5.3 Browser TTS option. (moved to phase 6: it is a browser feature)
+- [~] 5.3 Browser TTS option. (moved to phase 6: it is a browser feature) (built in Settings as spoken replies; not verified by ear)
 Gate: voice and image eval numbers, with failures listed.
 
 ## Phase 6. UI and UX
-- [ ] 6.1 Pick the visual direction with ui-ux-pro-max (2 or 3 mockups, Sahil chooses).
-- [ ] 6.2 PWA: login, chat, mic, attach, answer card, source drawer, history, memory, settings.
-- [ ] 6.3 Admin: users, eval dashboard, system metrics.
-- [ ] 6.4 Accessibility pass, Lighthouse mobile, real phone test.
+- [x] 6.1 Pick the visual direction with ui-ux-pro-max (2 or 3 mockups, Sahil chooses).
+- [x] 6.2 PWA: login, chat, mic, attach, answer card, source drawer, history, memory, settings.
+- [x] 6.3 Admin: users, eval dashboard, system metrics.
+- [~] 6.4 Accessibility pass, Lighthouse mobile, real phone test. (Lighthouse and performance trace recorded; real phone, keyboard walk through and screen reader pass not done)
 Gate: Lighthouse and axe results recorded; screens checklist from the design brief.
 
 ## Phase 7. Scheduled evals and CI
-- [ ] 7.1 GitHub Actions: ci.yml (tests, lint, secret scan), evals-nightly.yml (sample of traces), evals-weekly.yml (full golden set), manual dispatch.
-- [ ] 7.2 Regression gate with tolerances from docs/EVALS.md; results stored and shown in the dashboard.
+- [~] 7.1 GitHub Actions: ci.yml (tests, lint, secret scan), evals-nightly.yml (sample of traces), evals-weekly.yml (full golden set), manual dispatch. (written and checked locally; never run on GitHub)
+- [~] 7.2 Regression gate with tolerances from docs/EVALS.md; results stored and shown in the dashboard. (gate built and tested; no scheduled run has completed)
 Gate: at least two scheduled runs completed and visible.
 
 ## Phase 8. Deploy and publish (each step needs Sahil approval)

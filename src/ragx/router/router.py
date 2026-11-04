@@ -23,8 +23,10 @@ SPEND_FILE = ROOT / "data" / "state" / "openai_spend.json"
 
 class Router:
     def __init__(self, tiers: dict | None = None, client: Callable[[str, str], object] | None = None, breaker_threshold: int = 3,
-                 cooldown_s: float = 60.0, quotas: dict | None = None, now: Callable[[], float] = time.time, spend_file: Path = SPEND_FILE):
+                 cooldown_s: float = 60.0, quotas: dict | None = None, now: Callable[[], float] = time.time, spend_file: Path = SPEND_FILE,
+                 on_call: Callable[..., None] | None = None):
         load_env()
+        self.on_call = on_call  # observer hook: called once per provider attempt with provider, tier, ok, seconds, tokens, fallback, cost
         self.tiers = tiers or TIERS
         self.client = client or (lambda p, m: OpenAICompat(p, m, cache=False))  # prompts can hold user memory: never write them to the disk cache
         self.threshold, self.cooldown, self.now = breaker_threshold, cooldown_s, now
@@ -76,9 +78,12 @@ class Router:
                 continue
             extra = {"reasoning_effort": "low"} if "gpt-oss" in model else {}
             self.window[prov].append(self.now())
+            t0 = time.perf_counter()
             try:
                 c = self.client(prov, model).complete(messages, max_tokens=max_tokens, **extra, **kw)
             except ProviderError as e:
+                if self.on_call:
+                    self.on_call(provider=prov, tier=tier, ok=False, seconds=time.perf_counter() - t0)
                 self.stats["errors"] += 1
                 self.fail[prov] += 1
                 if self.fail[prov] >= self.threshold:
@@ -89,7 +94,9 @@ class Router:
             self.stats["calls"] += 1
             self.stats["by_provider"][prov] += 1
             self.stats["fallbacks"] += i > 0
-            if prov == "openai":
-                self.stats["cost_usd"] += self._charge(c)
+            cost = self._charge(c) if prov == "openai" else 0.0
+            self.stats["cost_usd"] += cost
+            if self.on_call:
+                self.on_call(provider=prov, tier=tier, ok=True, seconds=time.perf_counter() - t0, prompt=c.prompt_tokens, completion=c.completion_tokens, fallback=i > 0, cost=cost)
             return c
         raise ProviderError("router", None, f"all providers failed or skipped for tier {tier}: " + "; ".join(errors))

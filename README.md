@@ -2,7 +2,7 @@
 
 Advanced multimodal RAG assistant for the FastAPI and Pydantic docs: hybrid retrieval, self-RAG, a free tier model router, cache, memory, RBAC, guardrails, and layered evals.
 
-**Status: phases 0 and 1 done (retrieval only). There is no generation, API, UI or deployment yet. Measured results are below.**
+**Status: phases 0 to 7 built, locally. Phase 8 (GitHub repo, push, Hugging Face deploy) has not started and needs the owner's approval at each step. The monitoring stack and the GitHub workflows have not been run yet (see Phases 6 and 7). Measured results are below.**
 
 Baseline to beat: [`rag-demo`](https://github.com/Sahilkumar-r/rag-demo) (hit@5 1.00, MRR 0.89 on 30 hand written questions, retrieval only).
 
@@ -65,15 +65,16 @@ Answer model `openai/gpt-oss-120b` (Groq, fallback Cerebras), control calls `gpt
 
 **Judge calibration.** 30 faithfulness cases (16 faithful, 14 with a planted defect), written and labelled by Claude, **not reviewed by a human**: judge agreed with 30 of 30 (`eval/results/02-judge-calibration.json`). The defects were blunt, so this shows the judge is not broken and says little about subtle errors. Spot check at least 10 cases before trusting the generation numbers.
 
-| System | faithfulness | answers with a citation | citation accuracy | answerable answered | refusal correct | tokens / query | LLM calls / query |
-|---|---|---|---|---|---|---|---|
-| plain RAG | 0.926 | 0.50 | 0.994 | 0.897 | 0.907 | 1157 | 1.0 |
-| plain RAG, stricter citation rule | 0.923 | 0.60 | 0.978 | 0.862 | 0.884 | 1188 | 1.0 |
-| self-RAG | 0.906 | 0.33 | 0.955 | 0.828 | 0.860 | 2034 | 3.3 |
-| self-RAG, broader need-retrieval prompt | 0.909 | 0.35 | 0.958 | 0.897 | 0.907 | 2460 | 3.9 |
-| self-RAG, both changes | 0.907 | 0.74 | 0.955 | 0.931 | 0.930 | 2549 | 3.9 |
+**Correction, found while testing the UI.** The answer model writes citations with fullwidth brackets, 【1】, and the citation parser only matched `[1]`. The first version of this table therefore reported citation coverage of 33 to 74 percent, and an earlier line of this README called citation coverage the weakest part of generation. That was a parsing artifact. The parser now normalises the brackets (with a test) and the runs below were re measured; the old, uncorrected runs are still in `eval/results/` (`02-generation.json`, `-cite`, `-gate2`, `-v2`). Faithfulness moved by at most 2 points. The two intermediate rows of the old table (citation rule alone, gate alone) were not re run.
 
-Self-RAG did not improve faithfulness (0.907 against 0.926 for plain) and costs about 2.2 times the tokens and 3.9 times the calls. Its first version wrongly refused "how do I write tests for my API" and "connect to a SQL database" because the gate wanted the library named; the broader prompt fixed that (one change per row, same questions). Refusal correctness ends slightly higher (0.93 against 0.91) but one question is 3.4 points here, so treat gaps under about 5 points as noise. Answer relevancy was 1.0 for every system, which suggests the judge is lenient on that metric. Latency figures for the variant rows are not reported because unchanged calls came from the response cache; uncached p50 was 1.4 s for plain and 3.8 s for self-RAG (first run).
+| System (corrected runs) | faithfulness | answers with a citation | citation accuracy | answerable answered | refusal correct | tokens / query | LLM calls / query |
+|---|---|---|---|---|---|---|---|
+| plain RAG | 0.911 | 0.85 | 0.966 | 0.897 | 0.907 | 1157 | 1.0 |
+| plain RAG, stricter citation rule | 0.935 | 0.96 | 0.973 | 0.862 | 0.884 | 1188 | 1.0 |
+| self-RAG | 0.912 | 0.83 | 0.945 | 0.828 | 0.860 | 2034 | 3.3 |
+| self-RAG, stricter citation rule and broader need-retrieval prompt | 0.914 | 1.00 | 0.955 | 0.931 | 0.930 | 2548 | 3.9 |
+
+The stricter citation rule worked: citations went from 85 to 96 percent (plain) and from 83 to 100 percent (self-RAG) of answers. Self-RAG did not improve faithfulness (0.914 against 0.935 for plain with the same rule). It answered more of the answerable questions (0.93 against 0.86) and refused more correctly overall (0.93 against 0.88), at about 2.1 times the tokens and 3.9 times the calls. One question is 3.4 points here, so only the token and call costs are clearly different. The first self-RAG version wrongly refused "how do I write tests for my API" and "connect to a SQL database" because its gate wanted the library named; the broader prompt fixed that. Answer relevancy was 1.0 for every system, which suggests the judge is lenient on that metric. Uncached p50 latency was 1.4 s for plain and 3.8 s for self-RAG (first run, before the corrections; the answers were unchanged).
 
 ### Phase 3: cache, router, system
 Router: ordered fallback per tier, circuit breaker, quota counters, capped OpenAI last resort that stays off unless a model and prices are set in `.env` (we do not guess prices). Tests cover each of these with fake providers.
@@ -140,7 +141,26 @@ Most errors are jargon heard as everyday words: "Pydantic" as "pedantic", "Uvico
 
 The injection result is partly luck of this model: the guard on the extraction is only exercised by a unit test with a fake model, not by a real image. Code snippets score low on key terms because the model summarises code instead of copying it, though retrieval still worked. One diagram question (nested models) missed the right page. All 18 calls went to Gemini; the OpenRouter vision fallback is configured but has never been used, so it is unproven. Not tested: photos, blurry or cropped screenshots, dark and light themes from real tools, large traceback screenshots, non English text.
 
-**Full path smoke test** with the real services (login, a text question, an injection attempt, a voice clip, a screenshot) worked end to end. The answer to the text question carried no `[n]` citation, so the response flags `no_citation`: citation coverage is still the weakest part of generation.
+**Full path smoke test** with the real services (login, a text question, an injection attempt, a voice clip, a screenshot) worked end to end. That first run flagged the answer as having no citation; the cause was the fullwidth bracket bug described under Phase 2, since fixed.
+
+### Phase 6: UI and online evals
+Direction A, "terminal calm" (dark first, green accent, Fira Code and Fira Sans with system fallbacks), chosen from three mockups. A dependency free PWA served by the API at `/`; screens, states and gaps are listed in [web/README.md](web/README.md). Run it with `python scripts/serve.py`.
+
+**Acceptance checks.** Lighthouse, mobile emulation (390 by 844), run through the browser on 2026-11-05: Accessibility 100, Best Practices 100, SEO 100 on the populated admin Evals page (50 audits passed, 0 failed) and again on the chat page with an answer card (32 passed, 0 failed). Performance trace on the same build, loopback and no throttling: LCP 148 ms, CLS 0.00, TTFB 3 ms. That is a local lab number, not a real network one, and the Lighthouse performance score itself was not measured.
+Not done: a pass on a real phone, a keyboard only walk through every screen, a screen reader pass, and an audit in the light theme. Lighthouse runs the axe rules; no separate axe run was made.
+
+**Found by using it in a browser and fixed:** the nav showed on the sign in screen, a stray focus ring, a wrapping placeholder, a wrong password treated as an expired session, the literal word "null" on the Memory screen, and the fullwidth citation bracket bug described under Phase 2. Also confirmed in the browser: expired session returns to sign in with a notice, memory consent, saving a note, and refusing a note that looks like an instruction.
+
+**Online evals are recorded in Prometheus and drawn in Grafana** (LangGraph is an agent framework, not an eval store; see [ops/monitoring/README.md](ops/monitoring/README.md)). Recorded: answered, refused and blocked counts, cache kind, latency histogram, tokens, provider calls, errors and fallbacks, paid spend, guardrail triggers by kind, thumbs, and a **sampled reference free faithfulness score**: 5 percent of live answers (`RAGX_ONLINE_JUDGE_RATE`) are scored by the judge after the response is sent. Checked live against the running app: `/metrics` answers 401 without the token and, with it, exports the series above; a sampled answer was scored and appeared as `ragx_online_faithfulness_count 1`, and the admin System tab shows the same numbers. A 13 panel Grafana dashboard and 7 alert rules are generated from and tested against the metric names. **The Docker stack itself has not been started** (Docker Desktop was not running), every alert threshold is a placeholder, and these online signals from EVALS.md are not recorded: reformulation, source click and copy rates, abandoned answers, weekly drift, and the human review queue.
+
+### Phase 7: CI and scheduled evals (GitHub Actions)
+Three workflows in `.github/workflows/` (Jenkins is not used; Actions covers it):
+- `ci.yml` on every pull request and push to main, free and keyless: lint (syntax errors and pyflakes), a secret scan of tracked files, a JavaScript syntax check, the unit tests (auth and RBAC matrix, guardrails, router, cache, memory, metrics, configs, workflows), the rule based safety eval compared with the committed run, and a retrieval regression check (rebuilds the index from the docs at the pinned commits in `eval/datasets/docs.lock.json` and compares hybrid hit@5 and nDCG@10 with the committed last good run, tolerance 0.03).
+- `evals-nightly.yml` at 02:00 UTC: a fixed sample of about 12 of the 43 generation questions, gated against the committed run, result uploaded as an artifact. The online sample from live traffic is the Prometheus metric above; traces live on the server, not on a runner.
+- `evals-weekly.yml` Sundays at 03:00 UTC: retrieval ablation, generation eval (plain and self-RAG), judge calibration and the image eval, each gated against the committed last good run, tables written to the run summary, all result files uploaded.
+Nightly and weekly skip with a visible notice until `GROQ_API_KEY` and `GEMINI_API_KEY` are added as repository secrets, and never receive an OpenAI key. The regression gate (`src/ragx/evals/gate.py`) treats a metric missing from a new run as a regression. All tolerances are placeholders until real run to run noise is known.
+
+**Verified locally:** every command the CI job runs was run here and passes, including the retrieval check (identical to the committed numbers, so the pipeline is deterministic) and a locked docs fetch that reproduced the baseline docs byte for byte. Tests parse the workflows and check that pinned actions, scripts, result files and every gated metric path exist. **Not verified:** the workflows have never run on GitHub, so setup, caching and the `FASTEMBED_CACHE_PATH` setting are untested, and no scheduled run has completed (the Phase 7 gate asks for two).
 
 ## Docs
 1. [Product requirements](docs/01-PRD.md)

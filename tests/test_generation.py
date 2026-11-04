@@ -33,6 +33,12 @@ def test_citations_ignore_out_of_range():
     assert parse_citations("yes [1][3] and [9]", 3) == [1, 3]
 
 
+def test_fullwidth_bracket_citations_are_normalised_so_they_count():
+    llm = fake_llm([("ONLY the numbered sources", "Use Path() 【1】 and also 【2】.")])
+    r = plain_rag("how?", lambda q: CHILDREN, PARENTS, llm)
+    assert r.text == "Use Path() [1] and also [2]." and r.citations == [1, 2]
+
+
 def test_plain_rag_answers_with_citation():
     llm = fake_llm([("ONLY the numbered sources", "Use Path() [1]")])
     r = plain_rag("how?", lambda q: CHILDREN, PARENTS, llm)
