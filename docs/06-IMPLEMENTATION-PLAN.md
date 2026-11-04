@@ -59,7 +59,7 @@ Gate: at least two scheduled runs completed and visible.
 ## Phase 8. Deploy and publish (each step needs Sahil approval)
 - [~] 8.1 Dockerfile for the Space; secrets set in Space settings (Sahil enters them). (image built and tested locally; Space secrets still to be entered by the owner)
 - [x] 8.2 Create the GitHub repo (public or private as Sahil decides) and push; git identity checked. (public repo Sahilkumar-r/advanced-rag created and pushed with the owner's approval)
-- [ ] 8.3 Deploy the Space; test on phone and laptop; record cold start time.
+- [ ] 8.3 Deploy the Space; test on phone and laptop; record cold start time. (blocked 2026-11-05: Hugging Face returned 402, Docker Spaces on free cpu-basic need a PRO subscription)
 - [~] 8.4 README with the measured table, limitations, and a demo credentials policy (no passwords in the README). (measured tables, limits and credentials policy are in the README; the public URL does not exist yet)
 - [~] 8.5 Update the roadmap tracker (data/projects.json entry 07, run generate.mjs, redeploy tracker) and write portfolio text. (portfolio text drafted in deploy/portfolio.md; the roadmap tracker has not been touched)
 Gate: public URL works; every metric in SPEC.md has a measured number.

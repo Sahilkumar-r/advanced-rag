@@ -2,7 +2,7 @@
 
 Advanced multimodal RAG assistant for the FastAPI and Pydantic docs: hybrid retrieval, self-RAG, a free tier model router, cache, memory, RBAC, guardrails, and layered evals.
 
-**Status: phases 0 to 7 built; the code is public at github.com/Sahilkumar-r/advanced-rag and CI passes there. The Phase 8 container image is built and tested locally. The Hugging Face Space has not been created, so there is no public URL yet. Measured results are below.**
+**Status: phases 0 to 7 built; the code is public at github.com/Sahilkumar-r/advanced-rag and CI passes there. The Phase 8 container image is built and tested locally. The Hugging Face Space has not been created (Hugging Face now wants a PRO subscription for Docker Spaces), so there is no public URL yet. Measured results are below.**
 
 Baseline to beat: [`rag-demo`](https://github.com/Sahilkumar-r/rag-demo) (hit@5 1.00, MRR 0.89 on 30 hand written questions, retrieval only).
 
@@ -179,6 +179,8 @@ The GitHub repository was created (public) and pushed on the owner's approval; t
 Not verified: anything on Hugging Face itself (its memory and CPU limits, how long a cold start takes there, whether a free Space sleeps and for how long), and a real phone.
 
 **Demo credentials policy.** Demo users are created at start from three secrets, `DEMO_ADMIN_PASSWORD`, `DEMO_DEVELOPER_PASSWORD` and `DEMO_VIEWER_PASSWORD` (12 or more characters each), held in the host's secret store. No password appears in the repository, the image or this README. Give them to testers privately; rotate by changing the secret and restarting. Guests need no password and are limited to 5 requests a minute per address. Without the secrets only guest access exists.
+
+**Hosting blocker found 2026-11-05.** Creating the Space through the Hugging Face API (`scripts/deploy_space.py`) returned `402 Payment Required` with the message "Static Spaces are free for everyone, but hosting Gradio and Docker Spaces on free cpu-basic requires a PRO subscription." The project plan assumed a free Docker Space. Nothing was created and no secret was sent. Options: subscribe to PRO and rerun `python scripts/deploy_space.py` (it is ready and idempotent), host the same image somewhere else, or stay local. No public URL exists until one of these happens.
 
 **Limits to keep in the open.** The free Space disk is ephemeral, so users are re created on every start and memories are lost on restart. Free tier providers rate limit and change models, and answers can be slow and wrong. Behind the Space proxy the per address guest limit is shared by everyone unless proxy headers are trusted (`RAGX_TRUST_PROXY=1`), which is only safe if the container can be reached through the proxy alone.
 

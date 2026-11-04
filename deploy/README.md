@@ -21,7 +21,9 @@ Generate values locally with `python scripts/init_env.py` (it prints names only;
 2. **8.2 GitHub** (done 2026-11-05): the repository was created and `main` pushed. `python scripts/set_github_secrets.py` set the repository secrets
    `GROQ_API_KEY`, `GEMINI_API_KEY` and `OPENAI_API_KEY` from `.env` (values go to `gh` on stdin; no workflow reads the OpenAI one). Without the first two
    the nightly and weekly eval workflows skip with a notice. To add more, for example `CEREBRAS_API_KEY`, run the script with those names.
-3. **8.3 Space** (needs your approval and your Hugging Face account): create a Space with the Docker SDK, then
+3. **8.3 Space.** `python scripts/deploy_space.py` does all of this (create the Space, upload the bundle, set the secrets, watch the build) using `HF_TOKEN`
+   from `.env`. **Blocked on 2026-11-05:** the API answered `402 Payment Required`, because Docker Spaces on free cpu-basic now need a Hugging Face PRO
+   subscription. The manual route below needs the same plan. Create a Space with the Docker SDK, then
    `python scripts/make_space_bundle.py <empty folder>`, commit that folder to the Space's git repo and push it. Enter the secrets above in the
    Space settings, wait for the build, and open the Space URL.
 4. **Test and record:** on a laptop and on a real phone (sign in, ask, voice, image, memory, admin), and note the cold start time.
