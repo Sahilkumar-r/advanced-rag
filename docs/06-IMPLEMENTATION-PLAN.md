@@ -5,17 +5,17 @@ Each phase ends with a **gate**: measured numbers written to the README (good or
 Effort is an estimate, not a promise: roughly 2 to 3 weeks of focused work, inside week 5 of the roadmap and spilling over if needed.
 
 ## Phase 0. Baseline and repo bootstrap
-- [ ] 0.1 Create venv (Python 3.12), pin dependencies, pytest runs.
-- [ ] 0.2 Copy baseline code and the 30 question set from rag-demo; reproduce its numbers (hit@5, MRR) in this repo.
-- [ ] 0.3 Convert metrics to the new definitions (recall@k, precision@k, MRR, nDCG, context recall and precision).
+- [x] 0.1 Create venv (Python 3.12), pin dependencies, pytest runs.
+- [x] 0.2 Copy baseline code and the 30 question set from rag-demo; reproduce its numbers (hit@5, MRR) in this repo.
+- [~] 0.3 Convert metrics to the new definitions (recall@k, precision@k, MRR, nDCG, context recall and precision). (done: recall, precision, MRR, nDCG; not done: context recall and precision, which need the LLM judge)
 Gate: baseline table matches rag-demo or the difference is explained.
 
 ## Phase 1. Ingestion, indexes, retrieval evals
-- [ ] 1.1 Fetch FastAPI and Pydantic docs with licenses; document records.
-- [ ] 1.2 Parent child chunking; chunk size and overlap study (128, 256, 512 tokens; 0 and 15 percent overlap; header on and off).
-- [ ] 1.3 Dense + BM25 + RRF; Qdrant HNSW; FAISS flat and IVF; MMR; rerank; query rewrite and HyDE.
-- [ ] 1.4 Golden set: 40 hand written questions plus synthetic up to 100+, labelled by type and reviewed; imports the 30 from rag-demo.
-- [ ] 1.5 Retrieval eval runner and ablation table (also latency, memory, build time). Larger synthetic corpus for the ANN study, labelled synthetic.
+- [x] 1.1 Fetch FastAPI and Pydantic docs with licenses; document records.
+- [x] 1.2 Parent child chunking; chunk size and overlap study (128, 256, 512 tokens; 0 and 15 percent overlap; header on and off).
+- [~] 1.3 Dense + BM25 + RRF; Qdrant HNSW; FAISS flat and IVF; MMR; rerank; query rewrite and HyDE. (done: dense, BM25, RRF, FAISS flat, HNSW, IVF, MMR, rerank; not done: Qdrant, query rewrite, HyDE)
+- [~] 1.4 Golden set: 40 hand written questions plus synthetic up to 100+, labelled by type and reviewed; imports the 30 from rag-demo. (done: 128 cases; the 41 Claude written questions still need Sahil review)
+- [x] 1.5 Retrieval eval runner and ablation table (also latency, memory, build time). Larger synthetic corpus for the ANN study, labelled synthetic.
 Gate: ablation table in README with winners, losers and the chosen defaults.
 
 ## Phase 2. Generation and self-RAG
