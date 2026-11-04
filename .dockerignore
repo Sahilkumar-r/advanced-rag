@@ -1,0 +1,17 @@
+# Allow list: nothing reaches the build context unless it is named here, so .env, .git, data and traces can never end up in an image.
+*
+!pyproject.toml
+!src/**
+!web/**
+!scripts/serve.py
+!scripts/seed_users.py
+!scripts/prebuild.py
+!scripts/space_entry.py
+!eval/results/**
+!eval/datasets/docs.lock.json
+# The pinned, MIT licensed docs (fetched by scripts/fetch_docs.py), shipped with their licence and the notice, so the image never needs git or the network for them.
+!data/raw/**
+!NOTICE.md
+!LICENSE
+**/__pycache__
+**/*.pyc

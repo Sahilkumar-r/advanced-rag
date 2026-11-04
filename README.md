@@ -2,7 +2,7 @@
 
 Advanced multimodal RAG assistant for the FastAPI and Pydantic docs: hybrid retrieval, self-RAG, a free tier model router, cache, memory, RBAC, guardrails, and layered evals.
 
-**Status: phases 0 to 7 built, locally. Phase 8 (GitHub repo, push, Hugging Face deploy) has not started and needs the owner's approval at each step. The GitHub workflows have not been run yet (see Phase 7). Measured results are below.**
+**Status: phases 0 to 7 built, locally, and the Phase 8 container image is built and tested locally. Creating the GitHub repo, pushing and deploying the Space have not been done and need the owner's approval at each step. The GitHub workflows have not been run yet (see Phase 7). Measured results are below.**
 
 Baseline to beat: [`rag-demo`](https://github.com/Sahilkumar-r/rag-demo) (hit@5 1.00, MRR 0.89 on 30 hand written questions, retrieval only).
 
@@ -161,6 +161,28 @@ Three workflows in `.github/workflows/` (Jenkins is not used; Actions covers it)
 Nightly and weekly skip with a visible notice until `GROQ_API_KEY` and `GEMINI_API_KEY` are added as repository secrets, and never receive an OpenAI key. The regression gate (`src/ragx/evals/gate.py`) treats a metric missing from a new run as a regression. All tolerances are placeholders until real run to run noise is known.
 
 **Verified locally:** every command the CI job runs was run here and passes, including the retrieval check (identical to the committed numbers, so the pipeline is deterministic) and a locked docs fetch that reproduced the baseline docs byte for byte. The whole `ci.yml` sequence also passed in a fresh clone of the committed repository with a new virtual environment installed from `pyproject.toml` alone (12 of 12 steps), which is the closest rehearsal possible without pushing. Tests parse the workflows and check that pinned actions, scripts, result files and every gated metric path exist. **Not verified:** the workflows have never run on GitHub, so setup, caching and the `FASTEMBED_CACHE_PATH` setting are untested, and no scheduled run has completed (the Phase 7 gate asks for two).
+
+### Phase 8: deploy and publish (the local part)
+Built and tested on this machine; **nothing has been pushed, created or deployed**, and the GitHub repository and the Hugging Face Space each need the owner's decision first. Steps and the secrets list are in [deploy/README.md](deploy/README.md).
+
+**The container image** (`Dockerfile`, port 7860, runs as user 1000). The docs are copied from the build context at the commits pinned in `eval/datasets/docs.lock.json`, so the build needs only PyPI and the embedding model; the embeddings are pre computed at build time. A `.dockerignore` allow list means `.env`, `.git`, `data/state` and traces cannot enter an image, and `scripts/make_space_bundle.py` builds the Space repo from the same list (both are tested). Checked on 2026-11-05:
+
+| | |
+|---|---|
+| image size | 714 MB |
+| build | 27 minutes in total here, including three failed attempts caused by network timeouts to PyPI and Docker Hub (pip retries were added); pre building the 907 chunks took 385 s of that, on a slow connection |
+| inside the image | user `user` (uid 1000), no `.env`, no secret in its environment, 41 FastAPI and 20 Pydantic files with their licence and NOTICE |
+| cold start, `docker run` to first healthy response | 6.8 s (includes seeding the demo users and loading the embeddings; local, not a Space) |
+| memory | 360 MiB idle, 364 MiB after a question, a voice clip and an image |
+| through the running container | the UI with its security headers, wrong password refused, developer login, a cited answer (citations 1 and 3, four sources), the repeat served from cache in 0.2 s, voice transcript correct in 0.5 s, image read correctly in 2.4 s, `/metrics` 401 without the token and 200 with it, viewer refused on the image endpoint (403) |
+
+Not verified: anything on Hugging Face itself (its memory and CPU limits, how long a cold start takes there, whether a free Space sleeps and for how long), and a real phone.
+
+**Demo credentials policy.** Demo users are created at start from three secrets, `DEMO_ADMIN_PASSWORD`, `DEMO_DEVELOPER_PASSWORD` and `DEMO_VIEWER_PASSWORD` (12 or more characters each), held in the host's secret store. No password appears in the repository, the image or this README. Give them to testers privately; rotate by changing the secret and restarting. Guests need no password and are limited to 5 requests a minute per address. Without the secrets only guest access exists.
+
+**Limits to keep in the open.** The free Space disk is ephemeral, so users are re created on every start and memories are lost on restart. Free tier providers rate limit and change models, and answers can be slow and wrong. Behind the Space proxy the per address guest limit is shared by everyone unless proxy headers are trusted (`RAGX_TRUST_PROXY=1`), which is only safe if the container can be reached through the proxy alone.
+
+**Gate check against `SPEC.md` ("every metric has a measured number"): not met yet.** Missing: context recall and context precision (they need reference answers the golden set does not have), a measured PII leak rate on live answers (only the rule tests, 8 output cases, exist), and a public URL, a phone test, and two completed scheduled eval runs.
 
 ## Docs
 1. [Product requirements](docs/01-PRD.md)

@@ -17,3 +17,5 @@ data/state/
 traces/
 ops/monitoring/secrets/
 data/*.log
+data/*.done
+data/*.attempts
