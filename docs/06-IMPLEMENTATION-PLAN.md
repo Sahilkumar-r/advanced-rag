@@ -19,23 +19,23 @@ Gate: baseline table matches rag-demo or the difference is explained.
 Gate: ablation table in README with winners, losers and the chosen defaults.
 
 ## Phase 2. Generation and self-RAG
-- [ ] 2.1 Provider adapters for Groq and Gemini first; mock provider for tests.
-- [ ] 2.2 Cited answer prompt, refusal rules, context assembly (parent expansion).
-- [ ] 2.3 Self-RAG controller (need retrieval, relevance, support, usefulness, retry cap 2).
-- [ ] 2.4 Generation eval: faithfulness, answer relevancy, citation accuracy, refusal correctness; judge from a different model family; hand label 30 cases to calibrate the judge.
+- [x] 2.1 Provider adapters for Groq and Gemini first; mock provider for tests.
+- [x] 2.2 Cited answer prompt, refusal rules, context assembly (parent expansion).
+- [x] 2.3 Self-RAG controller (need retrieval, relevance, support, usefulness, retry cap 2).
+- [~] 2.4 Generation eval: faithfulness, answer relevancy, citation accuracy, refusal correctness; judge from a different model family; hand label 30 cases to calibrate the judge. (done; the 30 judge cases are Claude labelled, unreviewed)
 Gate: plain RAG vs self-RAG table (quality, latency, tokens).
 
 ## Phase 3. Router, cache, pipeline and system evals
-- [ ] 3.1 Router with tiers, fallback chain, circuit breaker, quota counters, OpenAI budget cap.
-- [ ] 3.2 Exact and semantic cache; threshold tuned on the eval set; wrong hit rate measured.
-- [ ] 3.3 Tracing (JSONL, optional Langfuse), token and cost accounting.
-- [ ] 3.4 Pipeline eval (end to end) and system eval (latency percentiles, tokens, cost, cache hit rate, fallback rate).
+- [x] 3.1 Router with tiers, fallback chain, circuit breaker, quota counters, OpenAI budget cap.
+- [x] 3.2 Exact and semantic cache; threshold tuned on the eval set; wrong hit rate measured.
+- [x] 3.3 Tracing (JSONL, optional Langfuse), token and cost accounting.
+- [x] 3.4 Pipeline eval (end to end) and system eval (latency percentiles, tokens, cost, cache hit rate, fallback rate).
 Gate: system table with real numbers; free route cost verified.
 
 ## Phase 4. Auth, RBAC, guardrails, memory
-- [ ] 4.1 Users, roles, permissions, JWT, argon2, rate limits, audit log; seed script.
-- [ ] 4.2 Guardrails (input, retrieval, output) with a labelled safety eval set (injection, PII, off topic, unsupported claims).
-- [ ] 4.3 Six memory types with consent, view and delete endpoints; memory ablation on multi turn cases.
+- [x] 4.1 Users, roles, permissions, JWT, argon2, rate limits, audit log; seed script.
+- [x] 4.2 Guardrails (input, retrieval, output) with a labelled safety eval set (injection, PII, off topic, unsupported claims).
+- [~] 4.3 Six memory types with consent, view and delete endpoints; memory ablation on multi turn cases. (done; long term memory effect on answers not measured)
 Gate: security review; RBAC test matrix passes; safety eval table.
 
 ## Phase 5. Voice and image

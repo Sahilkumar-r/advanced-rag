@@ -1,0 +1,17 @@
+{
+  "note": "12 two turn cases where the follow up question only makes sense with the earlier turn. Written and labelled by Claude, NOT reviewed by a human. expected = pages that answer the follow up.",
+  "cases": [
+    {"id": "m01", "history": [["user", "How do I declare a path parameter?"], ["assistant", "Put the name in curly braces in the path and as a function argument with a type [1]."]], "q": "How do I add a minimum value check to it?", "expected": ["fastapi/path-params-numeric-validations.md"]},
+    {"id": "m02", "history": [["user", "How do I read a cookie value in an endpoint?"], ["assistant", "Declare a parameter with the Cookie class [1]."]], "q": "Can I group several of them into one model?", "expected": ["fastapi/cookie-param-models.md"]},
+    {"id": "m03", "history": [["user", "How do I upload a file?"], ["assistant", "Use File and UploadFile parameters [1]."]], "q": "What if I also need form fields in the same request?", "expected": ["fastapi/request-forms-and-files.md"]},
+    {"id": "m04", "history": [["user", "How do I add middleware to the app?"], ["assistant", "Decorate a function with @app.middleware('http') [1]."]], "q": "How do I use one to allow requests from another origin?", "expected": ["fastapi/cors.md"]},
+    {"id": "m05", "history": [["user", "How do I validate a field in a pydantic model?"], ["assistant", "Use a field validator [1]."]], "q": "What order do they run in when I have several?", "expected": ["pydantic/validators.md"]},
+    {"id": "m06", "history": [["user", "How do I declare a union type field in pydantic?"], ["assistant", "Annotate the field with a union of types [1]."]], "q": "How can I pick the right member using a tag field?", "expected": ["pydantic/unions.md"]},
+    {"id": "m07", "history": [["user", "How do I get the JSON schema of a model?"], ["assistant", "Call model_json_schema [1]."]], "q": "How do I add extra keys to it for one field?", "expected": ["pydantic/json_schema.md", "pydantic/fields.md"]},
+    {"id": "m08", "history": [["user", "How do I dump a model to a dict?"], ["assistant", "Call model_dump [1]."]], "q": "How do I leave one field out of that?", "expected": ["pydantic/serialization.md", "pydantic/fields.md"]},
+    {"id": "m09", "history": [["user", "How do I declare a request body in FastAPI?"], ["assistant", "Declare a parameter whose type is a Pydantic model [1]."]], "q": "How do I give one of its fields a maximum value?", "expected": ["fastapi/body-fields.md"]},
+    {"id": "m10", "history": [["user", "How do I return an error from an endpoint?"], ["assistant", "Raise an HTTPException with a status code and detail [1]."]], "q": "How do I change how those are handled for the whole app?", "expected": ["fastapi/handling-errors.md"]},
+    {"id": "m11", "history": [["user", "What is strict mode in pydantic?"], ["assistant", "It turns off type coercion during validation [1]."]], "q": "And which inputs are converted when it is off?", "expected": ["pydantic/conversion_table.md", "pydantic/strict_mode.md"]},
+    {"id": "m12", "history": [["user", "How do I connect the app to a SQL database?"], ["assistant", "Create a session dependency with SQLModel [1]."]], "q": "How do I send back only some of the columns?", "expected": ["fastapi/response-model.md", "fastapi/sql-databases.md"]}
+  ]
+}

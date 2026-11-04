@@ -1,0 +1,103 @@
+{
+  "n": 12,
+  "labeller": "claude, unreviewed",
+  "retrieval_only": true,
+  "memory_off": {
+    "hit@5": 0.5833,
+    "recall@5": 0.5,
+    "mrr": 0.3681,
+    "ndcg@10": 0.4307
+  },
+  "memory_on": {
+    "hit@5": 0.8333,
+    "recall@5": 0.75,
+    "mrr": 0.7083,
+    "ndcg@10": 0.743
+  },
+  "cases": [
+    {
+      "id": "m01",
+      "q": "How do I add a minimum value check to it?",
+      "standalone": "How do I add a minimum value check to a path parameter in FastAPI?",
+      "hit_off": 1.0,
+      "hit_on": 0.0
+    },
+    {
+      "id": "m02",
+      "q": "Can I group several of them into one model?",
+      "standalone": "Can I group several cookie parameters into one Pydantic model in a FastAPI endpoint?",
+      "hit_off": 1.0,
+      "hit_on": 1.0
+    },
+    {
+      "id": "m03",
+      "q": "What if I also need form fields in the same request?",
+      "standalone": "How can I upload a file and include form fields in the same request using FastAPI?",
+      "hit_off": 1.0,
+      "hit_on": 1.0
+    },
+    {
+      "id": "m04",
+      "q": "How do I use one to allow requests from another origin?",
+      "standalone": "How do I add CORS middleware to a FastAPI app to allow requests from another origin?",
+      "hit_off": 1.0,
+      "hit_on": 1.0
+    },
+    {
+      "id": "m05",
+      "q": "What order do they run in when I have several?",
+      "standalone": "In Pydantic, what order do multiple field validators run in?",
+      "hit_off": 0.0,
+      "hit_on": 1.0
+    },
+    {
+      "id": "m06",
+      "q": "How can I pick the right member using a tag field?",
+      "standalone": "How can I pick the right member of a union type field in Pydantic using a tag field?",
+      "hit_off": 1.0,
+      "hit_on": 1.0
+    },
+    {
+      "id": "m07",
+      "q": "How do I add extra keys to it for one field?",
+      "standalone": "How do I add extra keys to the JSON schema of a Pydantic model for one field?",
+      "hit_off": 0.0,
+      "hit_on": 1.0
+    },
+    {
+      "id": "m08",
+      "q": "How do I leave one field out of that?",
+      "standalone": "How do I exclude a specific field when dumping a Pydantic model to a dictionary?",
+      "hit_off": 1.0,
+      "hit_on": 1.0
+    },
+    {
+      "id": "m09",
+      "q": "How do I give one of its fields a maximum value?",
+      "standalone": "How do I give a field in a FastAPI request body Pydantic model a maximum value?",
+      "hit_off": 0.0,
+      "hit_on": 0.0
+    },
+    {
+      "id": "m10",
+      "q": "How do I change how those are handled for the whole app?",
+      "standalone": "How can I change the global error handling for HTTPExceptions in a FastAPI application?",
+      "hit_off": 0.0,
+      "hit_on": 1.0
+    },
+    {
+      "id": "m11",
+      "q": "And which inputs are converted when it is off?",
+      "standalone": "Which inputs are converted when strict mode is off in Pydantic?",
+      "hit_off": 1.0,
+      "hit_on": 1.0
+    },
+    {
+      "id": "m12",
+      "q": "How do I send back only some of the columns?",
+      "standalone": "How do I send back only some of the columns in a FastAPI response using Pyd",
+      "hit_off": 0.0,
+      "hit_on": 1.0
+    }
+  ]
+}

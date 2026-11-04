@@ -12,3 +12,6 @@ data/*.sqlite
 traces/
 node_modules/
 .claude/settings.local.json
+data/cache/
+data/state/
+traces/

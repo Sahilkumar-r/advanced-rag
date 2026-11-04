@@ -1,0 +1,127 @@
+{
+  "n_cache_entries": 128,
+  "n_paraphrases": 36,
+  "paraphrases": "synthetic, written by the fast tier model",
+  "chosen": {
+    "threshold": 0.94,
+    "paraphrase_hit_rate": 0.6111,
+    "paraphrase_right_hit_rate": 0.6111,
+    "other_question_hit_rate": 0.0469,
+    "wrong_hit_rate": 0.0
+  },
+  "rows": [
+    {
+      "threshold": 0.7,
+      "paraphrase_hit_rate": 1.0,
+      "paraphrase_right_hit_rate": 1.0,
+      "other_question_hit_rate": 0.9922,
+      "wrong_hit_rate": 0.7188
+    },
+    {
+      "threshold": 0.72,
+      "paraphrase_hit_rate": 1.0,
+      "paraphrase_right_hit_rate": 1.0,
+      "other_question_hit_rate": 0.9844,
+      "wrong_hit_rate": 0.7109
+    },
+    {
+      "threshold": 0.74,
+      "paraphrase_hit_rate": 1.0,
+      "paraphrase_right_hit_rate": 1.0,
+      "other_question_hit_rate": 0.9688,
+      "wrong_hit_rate": 0.6953
+    },
+    {
+      "threshold": 0.76,
+      "paraphrase_hit_rate": 1.0,
+      "paraphrase_right_hit_rate": 1.0,
+      "other_question_hit_rate": 0.9141,
+      "wrong_hit_rate": 0.6562
+    },
+    {
+      "threshold": 0.78,
+      "paraphrase_hit_rate": 1.0,
+      "paraphrase_right_hit_rate": 1.0,
+      "other_question_hit_rate": 0.8047,
+      "wrong_hit_rate": 0.5469
+    },
+    {
+      "threshold": 0.8,
+      "paraphrase_hit_rate": 1.0,
+      "paraphrase_right_hit_rate": 1.0,
+      "other_question_hit_rate": 0.6641,
+      "wrong_hit_rate": 0.4375
+    },
+    {
+      "threshold": 0.82,
+      "paraphrase_hit_rate": 1.0,
+      "paraphrase_right_hit_rate": 1.0,
+      "other_question_hit_rate": 0.5469,
+      "wrong_hit_rate": 0.3672
+    },
+    {
+      "threshold": 0.84,
+      "paraphrase_hit_rate": 1.0,
+      "paraphrase_right_hit_rate": 1.0,
+      "other_question_hit_rate": 0.4453,
+      "wrong_hit_rate": 0.2812
+    },
+    {
+      "threshold": 0.86,
+      "paraphrase_hit_rate": 0.9722,
+      "paraphrase_right_hit_rate": 0.9722,
+      "other_question_hit_rate": 0.3125,
+      "wrong_hit_rate": 0.1875
+    },
+    {
+      "threshold": 0.88,
+      "paraphrase_hit_rate": 0.9722,
+      "paraphrase_right_hit_rate": 0.9722,
+      "other_question_hit_rate": 0.2188,
+      "wrong_hit_rate": 0.1094
+    },
+    {
+      "threshold": 0.9,
+      "paraphrase_hit_rate": 0.9444,
+      "paraphrase_right_hit_rate": 0.9444,
+      "other_question_hit_rate": 0.1406,
+      "wrong_hit_rate": 0.0781
+    },
+    {
+      "threshold": 0.92,
+      "paraphrase_hit_rate": 0.8333,
+      "paraphrase_right_hit_rate": 0.8333,
+      "other_question_hit_rate": 0.0625,
+      "wrong_hit_rate": 0.0156
+    },
+    {
+      "threshold": 0.94,
+      "paraphrase_hit_rate": 0.6111,
+      "paraphrase_right_hit_rate": 0.6111,
+      "other_question_hit_rate": 0.0469,
+      "wrong_hit_rate": 0.0
+    },
+    {
+      "threshold": 0.96,
+      "paraphrase_hit_rate": 0.25,
+      "paraphrase_right_hit_rate": 0.25,
+      "other_question_hit_rate": 0.0312,
+      "wrong_hit_rate": 0.0
+    },
+    {
+      "threshold": 0.98,
+      "paraphrase_hit_rate": 0.0556,
+      "paraphrase_right_hit_rate": 0.0556,
+      "other_question_hit_rate": 0.0312,
+      "wrong_hit_rate": 0.0
+    },
+    {
+      "threshold": 0.99,
+      "paraphrase_hit_rate": 0.0,
+      "paraphrase_right_hit_rate": 0.0,
+      "other_question_hit_rate": 0.0312,
+      "wrong_hit_rate": 0.0
+    }
+  ],
+  "rule": "lowest threshold with wrong hit rate <= 1%"
+}

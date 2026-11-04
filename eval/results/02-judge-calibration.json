@@ -1,0 +1,25 @@
+{
+  "n": 30,
+  "unparsed": 0,
+  "agreement": 1.0,
+  "unfaithful_recall": 1.0,
+  "unfaithful_precision": 1.0,
+  "confusion": {
+    "caught_unfaithful": 14,
+    "missed_unfaithful": 0,
+    "false_alarm": 0,
+    "correct_faithful": 16
+  },
+  "disagreements": [],
+  "labeller": "claude, unreviewed",
+  "judge_models": [
+    [
+      "gemini",
+      "gemini-3.5-flash-lite"
+    ],
+    [
+      "gemini",
+      "gemini-3.5-flash"
+    ]
+  ]
+}

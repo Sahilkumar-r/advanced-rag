@@ -1,0 +1,3307 @@
+{
+  "systems": {
+    "plain_rag": {
+      "overall": {
+        "n": 43,
+        "faithfulness": 0.926,
+        "answer_relevancy": 1.0,
+        "citation_accuracy": 0.9938,
+        "answers_with_a_citation": 0.5,
+        "refusal_correct": 0.907,
+        "answerable_answered": 0.8966,
+        "off_topic_refused": 1.0,
+        "unanswerable_refused": 0.8333,
+        "tokens_per_query": 1157,
+        "calls_per_query": 1,
+        "p50_latency_ms_uncached": 1405,
+        "retries_mean": 0,
+        "judge_unparsed": 0
+      },
+      "answerable": {
+        "n": 29,
+        "faithfulness": 0.9328,
+        "answer_relevancy": 1.0,
+        "citation_accuracy": 0.9936,
+        "answers_with_a_citation": 0.5,
+        "refusal_correct": 0.8966,
+        "answerable_answered": 0.8966,
+        "off_topic_refused": null,
+        "unanswerable_refused": null,
+        "tokens_per_query": 1226,
+        "calls_per_query": 1,
+        "p50_latency_ms_uncached": 1406,
+        "retries_mean": 0,
+        "judge_unparsed": 0
+      },
+      "off_topic": {
+        "n": 8,
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "citation_accuracy": null,
+        "answers_with_a_citation": null,
+        "refusal_correct": 1.0,
+        "answerable_answered": null,
+        "off_topic_refused": 1.0,
+        "unanswerable_refused": null,
+        "tokens_per_query": 998,
+        "calls_per_query": 1,
+        "p50_latency_ms_uncached": 920,
+        "retries_mean": 0,
+        "judge_unparsed": 0
+      },
+      "unanswerable": {
+        "n": 6,
+        "faithfulness": 0.75,
+        "answer_relevancy": null,
+        "citation_accuracy": 1.0,
+        "answers_with_a_citation": null,
+        "refusal_correct": 0.8333,
+        "answerable_answered": null,
+        "off_topic_refused": null,
+        "unanswerable_refused": 0.8333,
+        "tokens_per_query": 1040,
+        "calls_per_query": 1,
+        "p50_latency_ms_uncached": 7108,
+        "retries_mean": 0,
+        "judge_unparsed": 0
+      },
+      "errors": 0
+    },
+    "self_rag": {
+      "overall": {
+        "n": 43,
+        "faithfulness": 0.9063,
+        "answer_relevancy": 1.0,
+        "citation_accuracy": 0.955,
+        "answers_with_a_citation": 0.3333,
+        "refusal_correct": 0.8605,
+        "answerable_answered": 0.8276,
+        "off_topic_refused": 1.0,
+        "unanswerable_refused": 0.8333,
+        "tokens_per_query": 2034,
+        "calls_per_query": 3.28,
+        "p50_latency_ms_uncached": 3763,
+        "retries_mean": 0.16,
+        "judge_unparsed": 0
+      },
+      "answerable": {
+        "n": 29,
+        "faithfulness": 0.9337,
+        "answer_relevancy": 1.0,
+        "citation_accuracy": 0.9531,
+        "answers_with_a_citation": 0.3333,
+        "refusal_correct": 0.8276,
+        "answerable_answered": 0.8276,
+        "off_topic_refused": null,
+        "unanswerable_refused": null,
+        "tokens_per_query": 2578,
+        "calls_per_query": 3.76,
+        "p50_latency_ms_uncached": 4569,
+        "retries_mean": 0.03,
+        "judge_unparsed": 0
+      },
+      "off_topic": {
+        "n": 8,
+        "faithfulness": null,
+        "answer_relevancy": null,
+        "citation_accuracy": null,
+        "answers_with_a_citation": null,
+        "refusal_correct": 1.0,
+        "answerable_answered": null,
+        "off_topic_refused": 1.0,
+        "unanswerable_refused": null,
+        "tokens_per_query": 147,
+        "calls_per_query": 1,
+        "p50_latency_ms_uncached": 1314,
+        "retries_mean": 0,
+        "judge_unparsed": 0
+      },
+      "unanswerable": {
+        "n": 6,
+        "faithfulness": 0.25,
+        "answer_relevancy": null,
+        "citation_accuracy": 1.0,
+        "answers_with_a_citation": null,
+        "refusal_correct": 0.8333,
+        "answerable_answered": null,
+        "off_topic_refused": null,
+        "unanswerable_refused": 0.8333,
+        "tokens_per_query": 1922,
+        "calls_per_query": 4,
+        "p50_latency_ms_uncached": 4765,
+        "retries_mean": 1,
+        "judge_unparsed": 0
+      },
+      "errors": 0
+    }
+  },
+  "rows": {
+    "plain_rag": [
+      {
+        "id": "g000",
+        "q": "How do I declare a path parameter?",
+        "kind": "answerable",
+        "text": "You declare a path parameter by adding it as a function argument, giving it a type annotation, and using FastAPI\u2019s `Path` (or just the type) to mark it as a path parameter. For example:\n\n```python\nfrom fastapi import FastAPI, Path\nfrom enum import Enum\n\nclass ModelName(str, Enum):\n    alexnet = \"alexnet\"\n    resnet = \"resnet\"\n\napp = FastAPI()\n\n@app.get(\"/models/{model_name}\")\ndef read_model(model_name: ModelName = Path(...)):\n    return {\"model_name\": model_name}\n```\n\nThe `{model_name}` part in the route makes the argument a path parameter, and `Path(...)` (or simply the type annotation) declares it as required. You can also add metadata such as `title`, `description`, etc., just like with `Query` parameters\u30103\u3011\u30101\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 929,
+        "calls": 1,
+        "latency_ms": 2615.9513000002335,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 0.625,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/path-params-numeric-validations.md > Path Parameters and Numeric Validations { #path-parameters-and-numeric-validations } > Declare metadata { #declare-metadata }",
+          "fastapi/path-params.md > Path Parameters { #path-parameters } > Path parameters containing paths { #path-parameters-containing-paths } > OpenAPI support { #openapi-support }",
+          "fastapi/path-params.md > Path Parameters { #path-parameters } > Predefined values { #predefined-values } > Declare a *path parameter* { #declare-a-path-parameter }",
+          "fastapi/path-params.md > Path Parameters { #path-parameters } > Path parameters containing paths { #path-parameters-containing-paths } > Path convertor { #path-convertor }"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 5,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g003",
+        "q": "How do I read a cookie value in an endpoint?",
+        "kind": "answerable",
+        "text": "Read a cookie by declaring a parameter that uses FastAPI\u2019s `Cookie` class.  \nFastAPI will extract the cookie value from the incoming request and pass it to the endpoint:\n\n```python\nfrom fastapi import FastAPI, Cookie\n\napp = FastAPI()\n\n@app.get(\"/items/\")\ndef read_cookie(session_id: str = Cookie(...)):\n    return {\"session_id\": session_id}\n```\n\nIf you prefer a Pydantic model, define the fields in the model and declare the parameter as `Cookie`; FastAPI will populate each field from the request\u2019s cookies\u202f[1][3].",
+        "refused": false,
+        "citations": [
+          1,
+          3
+        ],
+        "tokens": 1413,
+        "calls": 1,
+        "latency_ms": 1392.1919000003982,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 0.4,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/cookie-param-models.md > Cookie Parameter Models { #cookie-parameter-models } > Cookies with a Pydantic Model { #cookies-with-a-pydantic-model }",
+          "fastapi/cookie-param-models.md > Cookie Parameter Models { #cookie-parameter-models } > Forbid Extra Cookies { #forbid-extra-cookies }",
+          "fastapi/cookie-params.md > Cookie Parameters { #cookie-parameters } > Declare `Cookie` parameters { #declare-cookie-parameters }",
+          "fastapi/testing.md > Testing { #testing } > Testing: extended example { #testing-extended-example } > Extended testing file { #extended-testing-file }"
+        ],
+        "judge": {
+          "total_claims": 5,
+          "supported_claims": 2,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g006",
+        "q": "How do I run a task after returning a response?",
+        "kind": "answerable",
+        "text": "You can define a **background task** and add it to the request so it runs after the response is returned\u202f\u2014\u202fFastAPI will send the response immediately and then execute the task in the background\u202f[1].",
+        "refused": false,
+        "citations": [
+          1
+        ],
+        "tokens": 1072,
+        "calls": 1,
+        "latency_ms": 3186.7284999998446,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/background-tasks.md > Background Tasks { #background-tasks }",
+          "fastapi/middleware.md > Middleware { #middleware } > Create a middleware { #create-a-middleware } > Before and after the `response` { #before-and-after-the-response }",
+          "fastapi/response-model.md > Response Model - Return Type { #response-model-return-type }",
+          "fastapi/response-model.md > Response Model - Return Type { #response-model-return-type } > `response_model` Parameter { #response-model-parameter } > `response_model` Priority { #response-model-priority }"
+        ],
+        "judge": {
+          "total_claims": 2,
+          "supported_claims": 2,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g009",
+        "q": "How do I return an HTTP error with a custom status code and detail message?",
+        "kind": "answerable",
+        "text": "Raise a `fastapi.HTTPException`, passing the desired status code and any JSON\u2011serializable value for `detail` (e.g., a string message). FastAPI will automatically convert it to a JSON error response with that status code.  \n\n```python\nfrom fastapi import FastAPI, HTTPException\n\napp = FastAPI()\n\n@app.get(\"/items/{item_id}\")\ndef read_item(item_id: str):\n    if item_id not in database:\n        raise HTTPException(status_code=404, detail=\"Item not found\")\n    return {\"item\": database[item_id]}\n```\n\nThe `detail` can be any JSON\u2011serializable type (dict, list, etc.)\u202f[1].",
+        "refused": false,
+        "citations": [
+          1
+        ],
+        "tokens": 1191,
+        "calls": 1,
+        "latency_ms": 1356.1609999997017,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/handling-errors.md > Handling Errors { #handling-errors } > Use `HTTPException` { #use-httpexception } > The resulting response { #the-resulting-response }",
+          "fastapi/handling-errors.md > Handling Errors { #handling-errors }",
+          "fastapi/response-status-code.md > Response Status Code { #response-status-code } > About HTTP status codes { #about-http-status-codes }",
+          "fastapi/response-status-code.md > Response Status Code { #response-status-code }"
+        ],
+        "judge": {
+          "total_claims": 6,
+          "supported_claims": 6,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g012",
+        "q": "How do I write automated tests for my API?",
+        "kind": "answerable",
+        "text": "To test a FastAPI API automatically you use **Starlette\u2019s/TestClient\u2019s** synchronous client:\n\n1. **Add the test dependencies**  \n   ```bash\n   $ uv add httpx      # client used by TestClient\n   $ uv add pytest    # test runner\n   ```  \n   (see [3] and [4]).\n\n2. **Create a `TestClient`** by passing your FastAPI app to it:\n\n   ```python\n   from fastapi.testclient import TestClient\n   from myapp import app\n\n   client = TestClient(app)\n   ```\n\n3. **Write test functions** whose names start with `test_` (the standard pytest convention).  \n   The functions are normal `def`, not `async def`, and you call the client synchronously:\n\n   ```python\n   def test_read_root():\n       response = client.get(\"/\")          # any HTTP method\n       assert response.status_code == 200\n       assert response.json() == {\"msg\": \"Hello World\"}\n   ```\n\n4. **Pass data to the endpoint** using the same parameters as `httpx` (the client behind TestClient):\n   * Path/query parameters \u2192 add them to the URL.  \n   * JSON body \u2192 `json=` with a Python dict.  \n   * Form data \u2192 `data=`.  \n   * Headers \u2192 `headers=` dict.  \n   * Cookies \u2192 `cookies=` dict.  \n\n   Example for a POST with JSON (from [1]):\n\n   ```python\n   def test_create_item():\n       payload = {\"name\": \"Foo\", \"price\": 42}\n       response = client.post(\"/items/\", json=payload)\n       assert response.status_code == 201\n   ```\n\n5. **Run the tests** with pytest:\n\n   ```bash\n   $ uv run pytest\n   ```\n\n   Pytest will discover the `test_*.py` files, execute the functions, and report the results (see [4]).\n\nThese steps give you a full automated test suite for your FastAPI API.",
+        "refused": false,
+        "citations": [
+          1,
+          3,
+          4
+        ],
+        "tokens": 1626,
+        "calls": 1,
+        "latency_ms": 2393.70289999988,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/testing.md > Testing { #testing } > Testing: extended example { #testing-extended-example } > Extended testing file { #extended-testing-file }",
+          "fastapi/metadata.md > Metadata and Docs URLs { #metadata-and-docs-urls } > Metadata for API { #metadata-for-api }",
+          "fastapi/testing.md > Testing { #testing } > Using `TestClient` { #using-testclient }",
+          "fastapi/testing.md > Testing { #testing } > Run it { #run-it }"
+        ],
+        "judge": {
+          "total_claims": 13,
+          "supported_claims": 13,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 4,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 4,
+              "supports": true
+            },
+            {
+              "n": 4,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g015",
+        "q": "How do I structure a larger application across multiple files?",
+        "kind": "answerable",
+        "text": "To keep a FastAPI project manageable you can split it into several modules and packages instead of putting everything in one file.  \n\nA common layout is:\n\n```\n.\n\u251c\u2500\u2500 app\n\u2502   \u251c\u2500\u2500 __init__.py\n\u2502   \u251c\u2500\u2500 main.py          # creates the FastAPI instance and includes routers\n\u2502   \u251c\u2500\u2500 dependencies.py\n\u2502   \u2514\u2500\u2500 routers\n\u2502       \u251c\u2500\u2500 __init__.py\n\u2502       \u251c\u2500\u2500 items.py\n\u2502       \u2514\u2500\u2500 users.py\n\u2502   \u2514\u2500\u2500 internal\n\u2502       \u251c\u2500\u2500 __init__.py\n\u2502       \u2514\u2500\u2500 admin.py\n```\n\n* Each directory (e.g., `app`, `app/routers`, `app/internal`) contains an `__init__.py` so Python treats them as packages and lets you import code across files\u202f[2].  \n* In `app/main.py` you import the routers (e.g., `from app.routers import items`) and create the main `FastAPI` object, then include the routers with `app.include_router(...)`\u202f[4].  \n* This structure mirrors Flask\u2019s Blueprints, giving you modular, reusable components while retaining FastAPI\u2019s flexibility\u202f[1].\n\nThus, organize your code into a package with an `app` directory, separate modules for routers, dependencies, and any internal logic, and use `__init__.py` files to enable imports between them.",
+        "refused": false,
+        "citations": [
+          1,
+          2,
+          4
+        ],
+        "tokens": 1046,
+        "calls": 1,
+        "latency_ms": 1525.4349999995611,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/bigger-applications.md > Bigger Applications - Multiple Files { #bigger-applications-multiple-files }",
+          "fastapi/bigger-applications.md > Bigger Applications - Multiple Files { #bigger-applications-multiple-files } > An example file structure { #an-example-file-structure }",
+          "fastapi/bigger-applications.md > Bigger Applications - Multiple Files { #bigger-applications-multiple-files } > Include the same router multiple times with different `prefix` { #include-the-same-router-multiple-times-with-different-prefix }",
+          "fastapi/bigger-applications.md > Bigger Applications - Multiple Files { #bigger-applications-multiple-files } > The main `FastAPI` { #the-main-fastapi }"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 8,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 4,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g018",
+        "q": "How do I require a path parameter to be greater than a number?",
+        "kind": "answerable",
+        "text": "Use the `Path` function (or `Query`, etc.) and set the **`gt`** argument to the minimum value you want. For example, to require the path parameter `item_id` to be greater than\u202f0:\n\n```python\nfrom fastapi import FastAPI, Path\n\napp = FastAPI()\n\n@app.get(\"/items/{item_id}\")\ndef read_item(item_id: int = Path(..., gt=0)):\n    return {\"item_id\": item_id}\n```\n\nThe `gt` argument means \u201cgreater than\u201d and enforces that the value must be strictly larger than the specified number\u202f[1].",
+        "refused": false,
+        "citations": [
+          1
+        ],
+        "tokens": 857,
+        "calls": 1,
+        "latency_ms": 2231.021700000383,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/path-params-numeric-validations.md > Path Parameters and Numeric Validations { #path-parameters-and-numeric-validations } > Number validations: floats, greater than and less than { #number-validations-floats-greater-than-and-less-than }",
+          "fastapi/path-params-numeric-validations.md > Path Parameters and Numeric Validations { #path-parameters-and-numeric-validations } > Number validations: greater than and less than or equal { #number-validations-greater-than-and-less-than-or-equal }",
+          "fastapi/path-params-numeric-validations.md > Path Parameters and Numeric Validations { #path-parameters-and-numeric-validations } > Number validations: greater than or equal { #number-validations-greater-than-or-equal }",
+          "fastapi/path-params-numeric-validations.md > Path Parameters and Numeric Validations { #path-parameters-and-numeric-validations } > Declare metadata { #declare-metadata }"
+        ],
+        "judge": {
+          "total_claims": 3,
+          "supported_claims": 3,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g021",
+        "q": "How do I use UUID or datetime values as parameters?",
+        "kind": "answerable",
+        "text": "FastAPI lets you declare parameters with the standard Python types `UUID`, `datetime.datetime`, `datetime.date`, `datetime.time`, or `datetime.timedelta`.  \nWhen a request is received, FastAPI parses the incoming string values into the appropriate Python objects and then returns them as strings in the response (ISO\u20118601 for dates/times, a plain string for UUIDs, and a float of total seconds for `timedelta`)\u30101\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 1204,
+        "calls": 1,
+        "latency_ms": 1085.3532000000996,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/extra-data-types.md > Extra Data Types { #extra-data-types } > Other data types { #other-data-types }",
+          "pydantic/models.md > Basic model usage > Validating data",
+          "pydantic/dataclasses.md > ",
+          "pydantic/fields.md > The annotated pattern > Default values"
+        ],
+        "judge": {
+          "total_claims": 2,
+          "supported_claims": 2,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g024",
+        "q": "How do I run my app under a debugger?",
+        "kind": "answerable",
+        "text": "Run the FastAPI app directly from your IDE\u2019s debugger.\u202fFor example:\n\n* **VS\u202fCode** \u2013 add a Python debug configuration and use **\u201cPython: Current File (Integrated Terminal)\u201d**; the debugger will start Uvicorn with your FastAPI code and stop at breakpoints\u30101\u2020L1-L9\u3011.  \n* **PyCharm** \u2013 open the **Run \u2192 Debug\u2026** menu, select your `main.py` (or the file that creates the `FastAPI` instance), and the debugger will launch the server and honor breakpoints\u30101\u2020L13-L19\u3011.  \n\nIn both cases the IDE connects the debugger to the process that runs the FastAPI application, allowing you to step through code, inspect variables, etc\u30102\u2020L1-L2\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 936,
+        "calls": 1,
+        "latency_ms": 1384.835299999395,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/debugging.md > Debugging { #debugging } > Run your code with your debugger { #run-your-code-with-your-debugger }",
+          "fastapi/debugging.md > Debugging { #debugging }",
+          "fastapi/first-steps.md > First Steps { #first-steps } > Recap { #recap }",
+          "fastapi/frontend.md > Frontend { #frontend } > Serve a Frontend { #serve-a-frontend }"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 8,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g027",
+        "q": "How do I stream server-sent events to a client?",
+        "kind": "answerable",
+        "text": "You stream Server\u2011Sent Events by returning a response whose media type is **`text/event-stream`** and yielding the event strings (with `data:`, `event:`, `id:` \u2026 fields) from a FastAPI endpoint. Browsers can then consume the stream with the built\u2011in `EventSource` API. FastAPI added this support in version\u202f0.135.0\u30102\u3011.  \n\nTypical steps are:\n\n1. Define an endpoint that returns a `StreamingResponse` (or any async generator) with `media_type=\"text/event-stream\"`.  \n2. Inside the generator, yield strings formatted as SSE events, e.g.:\n\n```python\nfrom fastapi import FastAPI\nfrom fastapi.responses import StreamingResponse\nimport asyncio\n\napp = FastAPI()\n\nasync def event_generator():\n    while True:\n        yield f'data: {{ \"msg\": \"hello\" }}\\n\\n'\n        await asyncio.sleep(1)\n\n@app.get(\"/sse\")\nasync def sse_endpoint():\n    return StreamingResponse(event_generator(), media_type=\"text/event-stream\")\n```\n\nThe client can then connect with:\n\n```js\nconst source = new EventSource(\"/sse\");\nsource.onmessage = (e) => console.log(e.data);\n```\n\nEach block of text separated by a blank line is an SSE event, using fields like `data`, `event`, `id`, and `retry`\u30101\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 1023,
+        "calls": 1,
+        "latency_ms": 1405.508099999679,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 0.7692307692307693,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/server-sent-events.md > Server-Sent Events (SSE) { #server-sent-events-sse } > What are Server-Sent Events? { #what-are-server-sent-events }",
+          "fastapi/server-sent-events.md > Server-Sent Events (SSE) { #server-sent-events-sse }",
+          "fastapi/stream-json-lines.md > Stream JSON Lines { #stream-json-lines } > Server-Sent Events (SSE) { #server-sent-events-sse }",
+          "fastapi/server-sent-events.md > Server-Sent Events (SSE) { #server-sent-events-sse } > Resuming with `Last-Event-ID` { #resuming-with-last-event-id }"
+        ],
+        "judge": {
+          "total_claims": 13,
+          "supported_claims": 10,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g030",
+        "q": "How do I make a field accept a different name in the input data than the attribute name?",
+        "kind": "answerable",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 1195,
+        "calls": 1,
+        "latency_ms": 1189.6544000001086,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": false,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "pydantic/fields.md > ",
+          "pydantic/fields.md > The annotated pattern > Discriminator",
+          "pydantic/fields.md > The annotated pattern > Default values",
+          "pydantic/experimental.md > Experimental Features > Partial Validation > How Partial Validation Works > 2. Ignore errors in the last element of the input"
+        ]
+      },
+      {
+        "id": "g033",
+        "q": "How do I stop pydantic from converting the string '123' into an int?",
+        "kind": "answerable",
+        "text": "Use Pydantic\u2019s strict mode (or the `Strict` type) so that values must already be of the correct type; otherwise a validation error is raised instead of being coerced.\u202fFor example, declaring a field as `Strict[int]` (or enabling strict mode globally) will prevent the string `'123'` from being automatically converted to an `int`\u202f[3].",
+        "refused": false,
+        "citations": [
+          3
+        ],
+        "tokens": 1369,
+        "calls": 1,
+        "latency_ms": 2409.614000000147,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "pydantic/types.md > Utility types > `OnErrorOmit` > `FailFast`",
+          "pydantic/serialization.md > ",
+          "pydantic/strict_mode.md > ",
+          "fastapi/path-params.md > Path Parameters { #path-parameters } > Data <dfn title=\"also known as: serialization, parsing, marshalling\">conversion</dfn> { #data-conversion }"
+        ],
+        "judge": {
+          "total_claims": 5,
+          "supported_claims": 5,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 3,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g036",
+        "q": "How do I dump a model to a JSON string and leave some fields out?",
+        "kind": "answerable",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 1443,
+        "calls": 1,
+        "latency_ms": 885.5855000001611,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": false,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "pydantic/serialization.md > ",
+          "pydantic/json_schema.md > Generating JSON Schema > Customizing JSON Schema > Field-Level Customization",
+          "fastapi/sql-databases.md > SQL (Relational) Databases { #sql-relational-databases } > Update the App with Multiple Models { #update-the-app-with-multiple-models } > Create Multiple Models { #create-multiple-models } > `HeroUpdate` - the *data model* to update a hero { #heroupdate-the-data-model-to-update-a-hero }",
+          "pydantic/serialization.md > Serializing data > Field inclusion and exclusion > As parameters to the serialization methods > Excluding and including specific fields"
+        ]
+      },
+      {
+        "id": "g039",
+        "q": "How can I add extra keys to the JSON Schema of one field?",
+        "kind": "answerable",
+        "text": "Add the extra keys with the `json_schema_extra` argument when you declare the field.  \n`json_schema_extra` can be a dictionary (or a callable) that will be merged into the generated JSON\u202fSchema for that specific field\u30101\u2020L1-L4\u3011\u30102\u2020L1-L3\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 1031,
+        "calls": 1,
+        "latency_ms": 1091.6133999999147,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/body-fields.md > Body - Fields { #body-fields } > Add extra information { #add-extra-information }",
+          "pydantic/json_schema.md > Generating JSON Schema > Customizing JSON Schema > Using `json_schema_extra`",
+          "fastapi/schema-extra-example.md > Declare Request Example Data { #declare-request-example-data } > Extra JSON Schema data in Pydantic models { #extra-json-schema-data-in-pydantic-models }",
+          "pydantic/json_schema.md > Generating JSON Schema > Customizing JSON Schema"
+        ],
+        "judge": {
+          "total_claims": 3,
+          "supported_claims": 3,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g042",
+        "q": "How do I refer to a class that is only defined later in the file?",
+        "kind": "answerable",
+        "text": "Use a forward annotation.\u202fEither wrap the type name in quotes or enable postponed evaluation of annotations:\n\n```python\nfrom __future__ import annotations   # optional for Python <\u202f3.14\n\nclass Model(BaseModel):\n    a: MyInt          # without the future import this is equivalent to a: 'MyInt'\n\nMyInt = int\n```\n\nThe quoted string (or the `__future__` import) tells Pydantic to resolve the type after the class is defined\u202f[1].",
+        "refused": false,
+        "citations": [
+          1
+        ],
+        "tokens": 1213,
+        "calls": 1,
+        "latency_ms": 4363.764799999444,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 0.8333333333333334,
+        "relevancy": 1.0,
+        "citation_accuracy": 0.8333333333333334,
+        "sources": [
+          "pydantic/forward_annotations.md > Python 3.14 and greater > Python 3.13 and lower",
+          "fastapi/testing.md > Testing { #testing } > Testing: extended example { #testing-extended-example } > Extended testing file { #extended-testing-file }",
+          "pydantic/performance.md > Performance tips > Avoid extra information via subclasses of primitives",
+          "fastapi/bigger-applications.md > Bigger Applications - Multiple Files { #bigger-applications-multiple-files } > Another module with `APIRouter` { #another-module-with-apirouter } > Import the dependencies { #import-the-dependencies } > How relative imports work { #how-relative-imports-work }"
+        ],
+        "judge": {
+          "total_claims": 6,
+          "supported_claims": 5,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": false
+            }
+          ]
+        }
+      },
+      {
+        "id": "g045",
+        "q": "How can I make validation of JSON input faster?",
+        "kind": "answerable",
+        "text": "Use the JSON\u2011specific validation method instead of parsing the payload yourself, and keep the string\u2011caching feature enabled.\n\n* Call the model\u2019s **`model_validate_json()`** method, which validates the JSON string/bytes directly and avoids the extra Python `json.loads()` step\u202f[1][2].\n* Leave the **`cache_strings`** config at its default (`True`/`'all'`) so that repeated short strings are cached during parsing, which gives a performance boost\u202f[4].\n\nThese two steps give the fastest validation path for JSON input.",
+        "refused": false,
+        "citations": [
+          1,
+          2,
+          4
+        ],
+        "tokens": 1412,
+        "calls": 1,
+        "latency_ms": 2662.123899999642,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "pydantic/performance.md > Performance tips > In general, use `model_validate_json()` not `model_validate(json.loads(...))`",
+          "pydantic/models.md > Basic model usage > Validating data",
+          "pydantic/experimental.md > Experimental Features > Partial Validation",
+          "pydantic/json.md > JSON > Json Parsing > Caching Strings"
+        ],
+        "judge": {
+          "total_claims": 6,
+          "supported_claims": 6,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 4,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g048",
+        "q": "How do I create a custom type with its own validation logic?",
+        "kind": "answerable",
+        "text": "Create a custom class (or an\u202f`Annotated`\u202fmetadata object) and implement the special method\u202f`__get_pydantic_core_schema__`.  \nPydantic will call this method during schema generation; inside it you return a core\u2011schema that wraps the original validation with your own logic (e.g., an after\u2011validator).\n\n**Example as a class method**\n\n```python\nfrom pydantic import GetCoreSchemaHandler, TypeAdapter\nfrom pydantic_core import CoreSchema, core_schema\n\nclass Username(str):\n    @classmethod\n    def __get_pydantic_core_schema__(\n        cls, source_type, handler: GetCoreSchemaHandler\n    ) -> CoreSchema:\n        # run the normal str validation, then apply the class itself as a validator\n        return core_schema.no_info_after_validator_function(cls, handler(str))\n\nta = TypeAdapter(Username)\nres = ta.validate_python('abc')\nassert isinstance(res, Username)      # \u2705 custom type returned\n```\n\nThe method receives the *source_type* and a *handler* that can generate the schema for the underlying type (`handler(str)`). By wrapping it with `core_schema.no_info_after_validator_function` you add your own validation step\u202f\u2014\u202fhere simply converting the value to the custom subclass\u202f\u2014\u202fand return the resulting schema\u202f[3].\n\n**Example as an `Annotated` validator**\n\n```python\nfrom collections.abc import Callable\nfrom dataclasses import dataclass\nfrom typing import Annotated, Any\n\nfrom pydantic import BaseModel, GetCoreSchemaHandler\nfrom pydantic_core import CoreSchema, core_schema\n\n@dataclass(frozen=True)\nclass MyAfterValidator:\n    func: Callable[[Any], Any]\n\n    def __get_pydantic_core_schema__(\n        self, source_type: Any, handler: GetCoreSchemaHandler\n    ) -> CoreSchema:\n        return core_schema.no_info_after_validator_function(\n            self.func, handler(source_type)\n        )\n\nUsername = Annotated[str, MyAfterValidator(str.lower)]\n\nclass Model(BaseModel):\n    name: Username\n\nassert Model(name='ABC').name == 'abc'   # \u2705 validation applied\n```\n\nHere the metadata object (`MyAfterValidator`) implements `__get_pydantic_core_schema__`; Pydantic calls it to add the `str.lower` after\u2011validator to the normal `str` schema\u202f[2].\n\n**Summary**\n\n1. Define a custom class or a metadata dataclass.  \n2. Implement `__get_pydantic_core_schema__(cls, source_type, handler)` (or as an instance method for metadata).  \n3. Use `handler` to obtain the base schema and wrap it with a core\u2011schema validator such as `core_schema.no_info_after_validator_function`.  \n\nThis is the recommended way to give a custom type its own validation logic in Pydantic\u202fV2\u202f[1][3].",
+        "refused": false,
+        "citations": [
+          1,
+          2,
+          3
+        ],
+        "tokens": 2130,
+        "calls": 1,
+        "latency_ms": 2916.4945000002263,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "pydantic/types.md > Utility types > Custom Types > Customizing validation with `__get_pydantic_core_schema__` <a name=\"customizing_validation_with_get_pydantic_core_schema\"></a>",
+          "pydantic/types.md > Utility types > Custom Types > Customizing validation with `__get_pydantic_core_schema__` <a name=\"customizing_validation_with_get_pydantic_core_schema\"></a> > As an annotation",
+          "pydantic/types.md > Utility types > Custom Types > Customizing validation with `__get_pydantic_core_schema__` <a name=\"customizing_validation_with_get_pydantic_core_schema\"></a> > As a method on a custom type",
+          "pydantic/types.md > Utility types > Custom Types > Handling custom generic classes > Generic containers"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 8,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g051",
+        "q": "What order do multiple validators on one field run in?",
+        "kind": "answerable",
+        "text": "Multiple validators attached to a single field are applied in a specific sequence:\n\n* **`BeforeValidator`** and **`WrapValidator`** run **from right\u2011to\u2011left** (the last\u2011declared validator runs first).  \n* **`AfterValidator`** runs **from left\u2011to\u2011right** (the first\u2011declared validator runs first)\u30101\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 1313,
+        "calls": 1,
+        "latency_ms": 1317.4417999998695,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "pydantic/validators.md > Field validators > Ordering of validators",
+          "pydantic/models.md > Basic model usage > Field ordering",
+          "pydantic/validators.md > ",
+          "pydantic/validators.md > Field validators > Validation info > Validation data"
+        ],
+        "judge": {
+          "total_claims": 5,
+          "supported_claims": 5,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g054",
+        "q": "How do I return a stream of JSON lines?",
+        "kind": "answerable",
+        "text": "Return a generator (or async generator) that yields each item one\u2011by\u2011one instead of using `return`.  \nIf the items are Pydantic models you can declare the function\u2019s return type as `AsyncIterable[Item]`; FastAPI will then validate, document, filter and serialize each yielded model as a JSON line\u202f[1].  \nYou may also omit the return\u2011type annotation; FastAPI will fall back to `jsonable_encoder` to convert each yielded value to JSON before sending it as a line\u202f[2].",
+        "refused": false,
+        "citations": [
+          1,
+          2
+        ],
+        "tokens": 975,
+        "calls": 1,
+        "latency_ms": 1031.4134000000195,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/stream-json-lines.md > Stream JSON Lines { #stream-json-lines } > Stream JSON Lines with FastAPI { #stream-json-lines-with-fastapi }",
+          "fastapi/stream-json-lines.md > Stream JSON Lines { #stream-json-lines } > Stream JSON Lines with FastAPI { #stream-json-lines-with-fastapi } > No Return Type { #no-return-type }",
+          "fastapi/stream-json-lines.md > Stream JSON Lines { #stream-json-lines }",
+          "fastapi/stream-json-lines.md > Stream JSON Lines { #stream-json-lines } > JSON Lines { #json-lines }"
+        ],
+        "judge": {
+          "total_claims": 6,
+          "supported_claims": 6,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g057",
+        "q": "How do I test my endpoints without running a server?",
+        "kind": "answerable",
+        "text": "You can test your FastAPI routes with the built\u2011in **TestClient** (which uses `httpx` under the hood) instead of starting a live server. The client sends requests directly to the application in\u2011process, so no separate server needs to be run. Just create a `TestClient(app)` instance and call its methods (`get`, `post`, etc.), passing data via the usual `json`, `params`, `headers`, `cookies`, or `data` arguments as needed\u30101\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 1375,
+        "calls": 1,
+        "latency_ms": 3343.1037000000288,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/testing.md > Testing { #testing } > Testing: extended example { #testing-extended-example } > Extended testing file { #extended-testing-file }",
+          "fastapi/debugging.md > Debugging { #debugging } > Run your code with your debugger { #run-your-code-with-your-debugger }",
+          "fastapi/first-steps.md > First Steps { #first-steps }",
+          "fastapi/testing.md > Testing { #testing } > Run it { #run-it }"
+        ],
+        "judge": {
+          "total_claims": 5,
+          "supported_claims": 5,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g060",
+        "q": "How do I update only some fields of a stored item?",
+        "kind": "answerable",
+        "text": "To update only selected fields of a stored item you should:\n\n1. **Use a partial\u2011update request** (typically `PATCH`).  \n2. Retrieve the existing record from the database.  \n3. Parse the incoming JSON into a Pydantic model.  \n4. Generate a dictionary that contains **only the fields the client sent** by calling `.dict(exclude_unset=True)` (or `model_dump(exclude_unset=True)`). This prevents default values from overwriting stored data.  \n5. Apply those fields to the stored model (e.g., `hero_db.sqlmodel_update(hero_data)` or `stored_model.copy(update=partial_dict)`).  \n6. Encode the result with `jsonable_encoder` if needed and save it back to the DB.  \n\nThis approach lets you modify just the provided attributes while leaving all other stored attributes unchanged\u30102\u2020L1-L9\u3011\u30104\u2020L1-L5\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 1235,
+        "calls": 1,
+        "latency_ms": 1138.8885000005757,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/body-updates.md > Body - Updates { #body-updates } > Update replacing with `PUT` { #update-replacing-with-put } > Warning about replacing { #warning-about-replacing }",
+          "fastapi/body-updates.md > Body - Updates { #body-updates } > Partial updates with `PATCH` { #partial-updates-with-patch } > Partial updates recap { #partial-updates-recap }",
+          "fastapi/body-updates.md > Body - Updates { #body-updates } > Update replacing with `PUT` { #update-replacing-with-put }",
+          "fastapi/sql-databases.md > SQL (Relational) Databases { #sql-relational-databases } > Update the App with Multiple Models { #update-the-app-with-multiple-models } > Update a Hero with `HeroUpdate` { #update-a-hero-with-heroupdate }"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 8,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 4,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g063",
+        "q": "How do I require a path parameter to be greater than a number?",
+        "kind": "answerable",
+        "text": "Use the `Path` function (or `Query`, etc.) and set the **`gt`** argument to the minimum value you want. For example, to require the path parameter `item_id` to be greater than\u202f0:\n\n```python\nfrom fastapi import FastAPI, Path\n\napp = FastAPI()\n\n@app.get(\"/items/{item_id}\")\ndef read_item(item_id: int = Path(..., gt=0)):\n    return {\"item_id\": item_id}\n```\n\nThe `gt` argument means \u201cgreater than\u201d and enforces that the value must be strictly larger than the specified number\u202f[1].",
+        "refused": false,
+        "citations": [
+          1
+        ],
+        "tokens": 857,
+        "calls": 1,
+        "latency_ms": 0,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/path-params-numeric-validations.md > Path Parameters and Numeric Validations { #path-parameters-and-numeric-validations } > Number validations: floats, greater than and less than { #number-validations-floats-greater-than-and-less-than }",
+          "fastapi/path-params-numeric-validations.md > Path Parameters and Numeric Validations { #path-parameters-and-numeric-validations } > Number validations: greater than and less than or equal { #number-validations-greater-than-and-less-than-or-equal }",
+          "fastapi/path-params-numeric-validations.md > Path Parameters and Numeric Validations { #path-parameters-and-numeric-validations } > Number validations: greater than or equal { #number-validations-greater-than-or-equal }",
+          "fastapi/path-params-numeric-validations.md > Path Parameters and Numeric Validations { #path-parameters-and-numeric-validations } > Declare metadata { #declare-metadata }"
+        ],
+        "judge": {
+          "total_claims": 3,
+          "supported_claims": 3,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g066",
+        "q": "How do I connect the app to a SQL database?",
+        "kind": "answerable",
+        "text": "Create a single SQLModel (SQLAlchemy)\u202fengine and use it throughout the app.  \nThe engine holds the database connections, so you instantiate one engine object (e.g., with `create_engine(\"sqlite:///database.db\", echo=True, connect_args={\\\"check_same_thread\\\": False})`) and reuse it in all parts of the code. This single engine lets FastAPI share the same SQLite database across threads and later allows a single session per request\u30101\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 936,
+        "calls": 1,
+        "latency_ms": 4201.870500000041,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/sql-databases.md > SQL (Relational) Databases { #sql-relational-databases } > Create the App with a Single Model { #create-the-app-with-a-single-model } > Create an Engine { #create-an-engine }",
+          "fastapi/sql-databases.md > SQL (Relational) Databases { #sql-relational-databases } > Create the App with a Single Model { #create-the-app-with-a-single-model } > Create Database Tables on Startup { #create-database-tables-on-startup }",
+          "fastapi/sql-databases.md > SQL (Relational) Databases { #sql-relational-databases } > Create the App with a Single Model { #create-the-app-with-a-single-model } > Read Heroes { #read-heroes }",
+          "fastapi/sql-databases.md > SQL (Relational) Databases { #sql-relational-databases } > Create the App with a Single Model { #create-the-app-with-a-single-model } > Run the App { #run-the-app }"
+        ],
+        "judge": {
+          "total_claims": 5,
+          "supported_claims": 5,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g069",
+        "q": "How do I set a maximum value on a body field?",
+        "kind": "answerable",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 1069,
+        "calls": 1,
+        "latency_ms": 912.4491999991733,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": false,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/body-multiple-params.md > Body - Multiple Parameters { #body-multiple-parameters } > Mix `Path`, `Query` and body parameters { #mix-path-query-and-body-parameters }",
+          "fastapi/query-params-str-validations.md > Query Parameters and String Validations { #query-parameters-and-string-validations } > Add `Query` to `Annotated` in the `q` parameter { #add-query-to-annotated-in-the-q-parameter }",
+          "pydantic/serialization.md > Serializing data > Serializing \"as Any\"",
+          "fastapi/body-nested-models.md > Body - Nested Models { #body-nested-models } > Recap { #recap }"
+        ]
+      },
+      {
+        "id": "g071",
+        "q": "Explain Add the background task in FastAPI",
+        "kind": "answerable",
+        "text": "In a path\u2011operation function you receive a **`BackgroundTasks`** instance (by declaring a parameter of that type).  \nTo schedule work that should run after the response is sent, call its **`.add_task()`** method:\n\n```python\ndef write_notification(email: str, message: str):\n    # \u2026do something, e.g. write to a file or send an email\u2026\n\n@app.post(\"/send\")\ndef send(email: str, background_tasks: BackgroundTasks):\n    background_tasks.add_task(write_notification, email, message=\"some notification\")\n    return {\"msg\": \"request received\"}\n```\n\n`.add_task()` takes  \n\n* the callable that will be executed in the background (`write_notification`),  \n* any positional arguments that the callable needs (`email` in the example), and  \n* optional keyword arguments (`message=\"some notification\"`).  \n\nFastAPI stores these tasks and runs them after the response is returned to the client\u30104\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 1045,
+        "calls": 1,
+        "latency_ms": 1404.9448999994638,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 0.75,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/background-tasks.md > Background Tasks { #background-tasks } > Technical Details { #technical-details }",
+          "fastapi/background-tasks.md > Background Tasks { #background-tasks } > Dependency Injection { #dependency-injection }",
+          "fastapi/background-tasks.md > Background Tasks { #background-tasks } > Create a task function { #create-a-task-function }",
+          "fastapi/background-tasks.md > Background Tasks { #background-tasks } > Add the background task { #add-the-background-task }"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 6,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 4,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g085",
+        "q": "Explain Recap, step by step in FastAPI",
+        "kind": "answerable",
+        "text": "**Recap \u2013 step by step**\n\n1. **Import `FastAPI`** \u2013 `FastAPI` is a Python class (inheriting from Starlette) that provides all the functionality for your API\u30102\u3011.  \n2. **Create a `FastAPI` instance** \u2013 Assign `app = FastAPI()`. The `app` variable is the main point of interaction for defining routes, middleware, etc.\u30101\u3011  \n3. **Create a path operation** \u2013 Use a decorator such as `@app.get(\"/\")` (or `@app.post()`, `@app.put()`, etc.) to declare a function that will handle requests to a specific path and HTTP method\u30104\u3011.  \n4. **(Additional steps not detailed in the provided excerpts)** \u2013 After defining routes you would typically run the app locally and later **deploy** it, e.g., with FastAPI Cloud using `fastapi deploy`\u30103\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 1039,
+        "calls": 1,
+        "latency_ms": 1309.4388999998046,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 0.875,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/first-steps.md > First Steps { #first-steps } > Recap, step by step { #recap-step-by-step } > Step 2: create a `FastAPI` \"instance\" { #step-2-create-a-fastapi-instance }",
+          "fastapi/first-steps.md > First Steps { #first-steps } > Recap, step by step { #recap-step-by-step } > Step 1: import `FastAPI` { #step-1-import-fastapi }",
+          "fastapi/first-steps.md > First Steps { #first-steps } > Recap, step by step { #recap-step-by-step } > Step 6: Deploy it { #step-6-deploy-it }",
+          "fastapi/first-steps.md > First Steps { #first-steps } > Recap, step by step { #recap-step-by-step } > Step 3: create a *path operation* { #step-3-create-a-path-operation } > Define a *path operation decorator* { #define-a-path-operation-decorator }"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 7,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 4,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g099",
+        "q": "Explain What is \"Form Data\" in FastAPI",
+        "kind": "answerable",
+        "text": "**Form Data** in FastAPI refers to the data that comes from an HTML `<form>` submission.  \nWhen a form is sent without files, the browser encodes the payload as **`application/x-www-form-urlencoded`**; when the form includes files, it uses **`multipart/form-data`**. FastAPI automatically reads these encoded bodies from the correct part of the request (instead of expecting JSON) and makes the values available as parameters declared with `Form` (and `File` for uploads). You can declare multiple `Form` (and `File`) parameters in a single path operation, but you cannot mix them with `Body` parameters that expect JSON because the request body will be encoded as either `application/x-www-form-urlencoded` or `multipart/form-data`\u202f\u2014\u202fa restriction of the HTTP protocol, not FastAPI itself\u30101\u2020L1-L9\u3011\u30102\u2020L1-L8\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 1180,
+        "calls": 1,
+        "latency_ms": 1474.1463000000294,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/request-files.md > Request Files { #request-files } > What is \"Form Data\" { #what-is-form-data }",
+          "fastapi/request-forms.md > Form Data { #form-data } > About \"Form Fields\" { #about-form-fields }",
+          "fastapi/request-forms.md > Form Data { #form-data } > Import `Form` { #import-form }",
+          "fastapi/request-forms-and-files.md > Request Forms and Files { #request-forms-and-files } > Define `File` and `Form` parameters { #define-file-and-form-parameters }"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 8,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g113",
+        "q": "Explain Stdlib dataclasses and Pydantic dataclasses in Pydantic",
+        "kind": "answerable",
+        "text": "Stdlib dataclasses can be used directly in Pydantic, and they can also be turned into **Pydantic dataclasses** so that their fields are validated just like a `BaseModel`.\n\n* **Inheritance** \u2013 A dataclass that inherits from another std\u2011lib dataclass is automatically validated for all inherited fields when it is declared as a Pydantic dataclass. The example shows `Z \u2192 Y \u2192 X`; creating `X` validates `z`, `y` and `x` and coerces the inputs to the declared types\u30101\u3011.  \n\n* **Applying the decorator** \u2013 The `@pydantic.dataclasses.dataclass` decorator can be used on a subclass of a std\u2011lib dataclass, or it can be called on an existing std\u2011lib dataclass to produce a new Pydantic\u2011validated subclass (`PydanticA = pydantic.dataclasses.dataclass(A)`)\u30101\u3011.\n\n* **Use inside a `BaseModel`** \u2013 A std\u2011lib dataclass (or a Pydantic dataclass) can be used as a field type of a `BaseModel`. Validation is performed on the dataclass instance when the model is created, and the same dataclass configuration applies\u30102\u3011.\n\n* **Checking the type** \u2013 Both std\u2011lib and Pydantic dataclasses satisfy `dataclasses.is_dataclass()`. To know whether a dataclass has been wrapped by Pydantic, use `pydantic.dataclasses.is_pydantic_dataclass()`\u30103\u3011.\n\n* **Custom types** \u2013 When a std\u2011lib dataclass contains fields of arbitrary/custom types, validation will fail unless the dataclass\u2019s config enables `arbitrary_types_allowed=True`\u30104\u3011.  \n\nIn summary, Pydantic treats standard library dataclasses as first\u2011class citizens: they can be inherited, wrapped, and validated, and they can be used interchangeably with Pydantic dataclasses inside models.",
+        "refused": false,
+        "citations": [],
+        "tokens": 1842,
+        "calls": 1,
+        "latency_ms": 1567.0294000001377,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "pydantic/dataclasses.md > Dataclass config > Stdlib dataclasses and Pydantic dataclasses > Inherit from stdlib dataclasses",
+          "pydantic/dataclasses.md > Dataclass config > Stdlib dataclasses and Pydantic dataclasses > Usage of stdlib dataclasses with `BaseModel`",
+          "pydantic/dataclasses.md > Dataclass config > Stdlib dataclasses and Pydantic dataclasses > Checking if a dataclass is a Pydantic dataclass",
+          "pydantic/dataclasses.md > Dataclass config > Stdlib dataclasses and Pydantic dataclasses > Using custom types"
+        ],
+        "judge": {
+          "total_claims": 13,
+          "supported_claims": 13,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 4,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g127",
+        "q": "Explain Validation info in Pydantic",
+        "kind": "answerable",
+        "text": "`ValidationInfo` is an optional argument that can be added to any field\u2011 or model\u2011validator callable.  \nIt gives the validator extra context about the validation that is currently running:\n\n* **`data`** \u2013 a dictionary of values that have already been validated for the current model (only for field validators; it is `None` for model validators)\u202f[1][2].  \n* **`context`** \u2013 a user\u2011supplied object passed to `model_validate(..., context=\u2026)` that can be read inside the validator\u202f[2][3].  \n* **`mode`** \u2013 the validation mode being used (`'python'`, `'json'` or `'strings'`)\u202f[2].  \n* **`field_name`** \u2013 the name of the field for which a field validator is running\u202f[2].\n\nThese pieces of information let validators make decisions based on previously\u2011validated fields, external configuration, or the way the data is being parsed.  \n\nExample (shows `data` and `context` usage):\n\n```python\nfrom pydantic import BaseModel, ValidationInfo, field_validator\n\nclass UserModel(BaseModel):\n    password: str\n    password_repeat: str\n\n    @field_validator('password_repeat', mode='after')\n    @classmethod\n    def check_passwords_match(cls, value: str, info: ValidationInfo) -> str:\n        # access already\u2011validated field\n        if value != info.data['password']:\n            raise ValueError('Passwords do not match')\n        return value\n\nclass Model(BaseModel):\n    text: str\n\n    @field_validator('text', mode='after')\n    @classmethod\n    def remove_stopwords(cls, v: str, info: ValidationInfo) -> str:\n        stopwords = info.context.get('stopwords', set()) if isinstance(info.context, dict) else set()\n        return ' '.join(w for w in v.split() if w.lower() not in stopwords)\n\ndata = {'text': 'This is an example document'}\nprint(Model.model_validate(data, context={'stopwords': ['this', 'is', 'an']}))\n#> text='example document'\n```",
+        "refused": false,
+        "citations": [
+          1,
+          2,
+          3
+        ],
+        "tokens": 1587,
+        "calls": 1,
+        "latency_ms": 1746.6073999994478,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "pydantic/validators.md > Field validators > Validation info > Validation data",
+          "pydantic/validators.md > Field validators > Validation info",
+          "pydantic/validators.md > Field validators > Validation info > Validation context",
+          "pydantic/models.md > "
+        ],
+        "judge": {
+          "total_claims": 13,
+          "supported_claims": 13,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "off0",
+        "q": "What is the capital of France?",
+        "kind": "off_topic",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 779,
+        "calls": 1,
+        "latency_ms": 2102.9490999999325,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/request-files.md > Request Files { #request-files } > What is \"Form Data\" { #what-is-form-data }",
+          "fastapi/header-param-models.md > Header Parameter Models { #header-parameter-models } > Check the Docs { #check-the-docs }",
+          "fastapi/first-steps.md > First Steps { #first-steps } > Check it { #check-it } > OpenAPI { #openapi } > What is OpenAPI for { #what-is-openapi-for }",
+          "fastapi/cookie-param-models.md > Cookie Parameter Models { #cookie-parameter-models } > Summary { #summary }"
+        ]
+      },
+      {
+        "id": "off1",
+        "q": "How do I train a convolutional neural network in PyTorch?",
+        "kind": "off_topic",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 1338,
+        "calls": 1,
+        "latency_ms": 832.94240000032,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "pydantic/fields.md > The annotated pattern > Discriminator",
+          "fastapi/testing.md > Testing { #testing } > Testing: extended example { #testing-extended-example } > Extended testing file { #extended-testing-file }",
+          "pydantic/unions.md > Union Modes > Discriminated unions > Discriminated Unions with callable `Discriminator`",
+          "pydantic/experimental.md > Experimental Features > Pipeline API"
+        ]
+      },
+      {
+        "id": "off2",
+        "q": "Give me a recipe for chocolate cake.",
+        "kind": "off_topic",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 1121,
+        "calls": 1,
+        "latency_ms": 668.4984000003169,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/cookie-param-models.md > Cookie Parameter Models { #cookie-parameter-models } > Forbid Extra Cookies { #forbid-extra-cookies }",
+          "fastapi/cookie-param-models.md > Cookie Parameter Models { #cookie-parameter-models } > Cookies with a Pydantic Model { #cookies-with-a-pydantic-model }",
+          "fastapi/path-params.md > Path Parameters { #path-parameters } > Order matters { #order-matters }",
+          "pydantic/experimental.md > Experimental Features > Pipeline API > Alternative patterns"
+        ]
+      },
+      {
+        "id": "off3",
+        "q": "Who won the 2018 football World Cup?",
+        "kind": "off_topic",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 636,
+        "calls": 1,
+        "latency_ms": 812.0323000002827,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/first-steps.md > First Steps { #first-steps } > Check it { #check-it }",
+          "pydantic/json.md > JSON > Json Parsing > Partial JSON Parsing",
+          "pydantic/validators.md > Field validators > Validation info > Validation context",
+          "fastapi/request-forms.md > Form Data { #form-data } > Boolean Form Fields { #boolean-form-fields }"
+        ]
+      },
+      {
+        "id": "off4",
+        "q": "How do I configure a Kubernetes ingress with TLS?",
+        "kind": "off_topic",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 1217,
+        "calls": 1,
+        "latency_ms": 800.9859000003416,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/first-steps.md > First Steps { #first-steps } > Check it { #check-it } > Configure the app `entrypoint` in `pyproject.toml` { #configure-the-app-entrypoint-in-pyproject-toml }",
+          "fastapi/bigger-applications.md > Bigger Applications - Multiple Files { #bigger-applications-multiple-files } > Configure the `entrypoint` in `pyproject.toml` { #configure-the-entrypoint-in-pyproject-toml }",
+          "fastapi/cors.md > CORS (Cross-Origin Resource Sharing) { #cors-cross-origin-resource-sharing } > Use `CORSMiddleware` { #use-corsmiddleware }",
+          "fastapi/testing.md > Testing { #testing } > Testing: extended example { #testing-extended-example } > Extended testing file { #extended-testing-file }"
+        ]
+      },
+      {
+        "id": "off5",
+        "q": "What is the best way to invest in stocks?",
+        "kind": "off_topic",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 917,
+        "calls": 1,
+        "latency_ms": 919.8223999992479,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/response-model.md > Response Model - Return Type { #response-model-return-type } > Return Type and Data Filtering { #return-type-and-data-filtering } > FastAPI Data Filtering { #fastapi-data-filtering }",
+          "fastapi/body-updates.md > Body - Updates { #body-updates } > Update replacing with `PUT` { #update-replacing-with-put } > Warning about replacing { #warning-about-replacing }",
+          "pydantic/unions.md > Union Modes > Left to Right Mode > Smart Mode",
+          "fastapi/body-updates.md > Body - Updates { #body-updates } > Update replacing with `PUT` { #update-replacing-with-put }"
+        ]
+      },
+      {
+        "id": "off6",
+        "q": "How do I write a React useEffect hook?",
+        "kind": "off_topic",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 791,
+        "calls": 1,
+        "latency_ms": 1995.0754000001325,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/frontend.md > Frontend { #frontend }",
+          "fastapi/background-tasks.md > Background Tasks { #background-tasks } > Create a task function { #create-a-task-function }",
+          "fastapi/schema-extra-example.md > Declare Request Example Data { #declare-request-example-data } > `examples` in JSON Schema - OpenAPI { #examples-in-json-schema-openapi } > Example in the docs UI { #example-in-the-docs-ui }",
+          "fastapi/background-tasks.md > Background Tasks { #background-tasks } > Dependency Injection { #dependency-injection }"
+        ]
+      },
+      {
+        "id": "off7",
+        "q": "Explain quantum entanglement in simple terms.",
+        "kind": "off_topic",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 1189,
+        "calls": 1,
+        "latency_ms": 1142.9930999993303,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/cors.md > CORS (Cross-Origin Resource Sharing) { #cors-cross-origin-resource-sharing } > Use `CORSMiddleware` { #use-corsmiddleware } > Simple requests { #simple-requests }",
+          "pydantic/experimental.md > Experimental Features > Pipeline API > Alternative patterns",
+          "pydantic/json_schema.md > Generating JSON Schema > Customizing JSON Schema > Using `json_schema_extra` > Merging `json_schema_extra`",
+          "pydantic/unions.md > Union Modes > Left to Right Mode > Smart Mode"
+        ]
+      },
+      {
+        "id": "oos0",
+        "q": "How do I protect an endpoint with OAuth2 and JWT tokens?",
+        "kind": "unanswerable",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 679,
+        "calls": 1,
+        "latency_ms": 3276.1151000004247,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/cors.md > CORS (Cross-Origin Resource Sharing) { #cors-cross-origin-resource-sharing } > Wildcards { #wildcards }",
+          "fastapi/schema-extra-example.md > Declare Request Example Data { #declare-request-example-data } > Technical Details { #technical-details } > Summary { #summary }",
+          "fastapi/first-steps.md > First Steps { #first-steps } > Check it { #check-it }",
+          "fastapi/first-steps.md > First Steps { #first-steps } > Recap, step by step { #recap-step-by-step } > Step 3: create a *path operation* { #step-3-create-a-path-operation } > Path { #path }"
+        ]
+      },
+      {
+        "id": "oos1",
+        "q": "How do I use dependencies with yield to manage a database session?",
+        "kind": "unanswerable",
+        "text": "Create a dependency that yields a **SQLModel\u202f`Session`** and use it in your path operations.  \nThe dependency is defined with `yield` so FastAPI creates a new session for each request, gives it to the endpoint, and then closes it after the response is sent.  \n\n```python\n# app/dependencies.py\nfrom sqlmodel import Session, create_engine\nfrom fastapi import Depends\n\nengine = create_engine(\"sqlite:///database.db\", echo=True)\n\ndef get_session() -> Session:\n    with Session(engine) as session:          # create a new Session\n        yield session                         # provide it to the path operation\n        # after the response FastAPI resumes here and the Session is closed\n```\n\nThen use the dependency (often wrapped in an `Annotated` alias like `SessionDep`) in your routes:\n\n```python\nfrom fastapi import APIRouter, Depends\nfrom typing import Annotated\nfrom .dependencies import get_session, SessionDep\n\nrouter = APIRouter()\n\n@router.post(\"/heroes\")\ndef create_hero(hero: Hero, session: Annotated[Session, Depends(get_session)]):\n    session.add(hero)\n    session.commit()\n    session.refresh(hero)\n    return hero\n```\n\nThe `yield`\u2011based dependency guarantees **one single session per request** and automatically handles cleanup after the request finishes\u30101\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 1171,
+        "calls": 1,
+        "latency_ms": 7107.786899999155,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": false,
+        "faithfulness": 0.75,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/sql-databases.md > SQL (Relational) Databases { #sql-relational-databases } > Create the App with a Single Model { #create-the-app-with-a-single-model } > Create a Session Dependency { #create-a-session-dependency }",
+          "fastapi/sql-databases.md > SQL (Relational) Databases { #sql-relational-databases } > Create the App with a Single Model { #create-the-app-with-a-single-model } > Create a Hero { #create-a-hero }",
+          "fastapi/sql-databases.md > SQL (Relational) Databases { #sql-relational-databases } > Create the App with a Single Model { #create-the-app-with-a-single-model } > Create an Engine { #create-an-engine }",
+          "fastapi/bigger-applications.md > Bigger Applications - Multiple Files { #bigger-applications-multiple-files } > Dependencies { #dependencies }"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 6,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "oos2",
+        "q": "How do I add a WebSocket endpoint?",
+        "kind": "unanswerable",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 1126,
+        "calls": 1,
+        "latency_ms": 787.0731000002706,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/testing.md > Testing { #testing } > Testing: extended example { #testing-extended-example } > Extended testing file { #extended-testing-file }",
+          "fastapi/testing.md > Testing { #testing } > Using `TestClient` { #using-testclient }",
+          "fastapi/first-steps.md > First Steps { #first-steps } > Check it { #check-it }",
+          "fastapi/query-params-str-validations.md > Query Parameters and String Validations { #query-parameters-and-string-validations } > Use `Annotated` in the type for the `q` parameter { #use-annotated-in-the-type-for-the-q-parameter }"
+        ]
+      },
+      {
+        "id": "oos3",
+        "q": "How do I deploy the app in a Docker container?",
+        "kind": "unanswerable",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 833,
+        "calls": 1,
+        "latency_ms": 775.8873000002495,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/first-steps.md > First Steps { #first-steps } > Check it { #check-it } > Deploy your app (optional) { #deploy-your-app-optional }",
+          "fastapi/first-steps.md > First Steps { #first-steps } > Recap { #recap }",
+          "fastapi/first-steps.md > First Steps { #first-steps } > Recap, step by step { #recap-step-by-step } > Step 6: Deploy it { #step-6-deploy-it }",
+          "fastapi/bigger-applications.md > Bigger Applications - Multiple Files { #bigger-applications-multiple-files } > Another module with `APIRouter` { #another-module-with-apirouter } > Import the dependencies { #import-the-dependencies } > How relative imports work { #how-relative-imports-work }"
+        ]
+      },
+      {
+        "id": "oos4",
+        "q": "How do I run the app with Gunicorn workers in production?",
+        "kind": "unanswerable",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 1201,
+        "calls": 1,
+        "latency_ms": 7241.620899999361,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/debugging.md > Debugging { #debugging } > Run your code with your debugger { #run-your-code-with-your-debugger }",
+          "fastapi/bigger-applications.md > Bigger Applications - Multiple Files { #bigger-applications-multiple-files } > Another module with `APIRouter` { #another-module-with-apirouter } > Import the dependencies { #import-the-dependencies } > How relative imports work { #how-relative-imports-work }",
+          "fastapi/debugging.md > Debugging { #debugging } > Call `uvicorn` { #call-uvicorn } > About `__name__ == \"__main__\"` { #about-name-main } > More details { #more-details }",
+          "fastapi/sql-databases.md > SQL (Relational) Databases { #sql-relational-databases } > Update the App with Multiple Models { #update-the-app-with-multiple-models } > Run the App Again { #run-the-app-again }"
+        ]
+      },
+      {
+        "id": "oos5",
+        "q": "How do I add GraphQL support?",
+        "kind": "unanswerable",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 1227,
+        "calls": 1,
+        "latency_ms": 9825.995799999873,
+        "retries": 0,
+        "steps": [
+          "retrieve",
+          "generate"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/body.md > Request Body { #request-body } > Editor support { #editor-support }",
+          "fastapi/testing.md > Testing { #testing } > Testing: extended example { #testing-extended-example } > Extended testing file { #extended-testing-file }",
+          "fastapi/sql-databases.md > SQL (Relational) Databases { #sql-relational-databases } > Update the App with Multiple Models { #update-the-app-with-multiple-models } > Run the App Again { #run-the-app-again }",
+          "fastapi/query-params-str-validations.md > Query Parameters and String Validations { #query-parameters-and-string-validations } > Use `Annotated` in the type for the `q` parameter { #use-annotated-in-the-type-for-the-q-parameter }"
+        ]
+      }
+    ],
+    "self_rag": [
+      {
+        "id": "g000",
+        "q": "How do I declare a path parameter?",
+        "kind": "answerable",
+        "text": "Declare it as a function argument with a type annotation and the `Path` function (or just a plain type annotation for simple cases). For example:\n\n```python\nfrom fastapi import FastAPI, Path\n\napp = FastAPI()\n\n@app.get(\"/items/{item_id}\")\ndef read_item(item_id: int = Path(...)):\n    return {\"item_id\": item_id}\n```\n\nThe `Path` call (or a plain type annotation) tells FastAPI that `item_id` is a **path parameter** that must be present in the URL\u202f[1][2].",
+        "refused": false,
+        "citations": [
+          1,
+          2
+        ],
+        "tokens": 2259,
+        "calls": 4,
+        "latency_ms": 4743.9591000011205,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=3/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 0.4,
+        "relevancy": 1.0,
+        "citation_accuracy": 0.0,
+        "sources": [
+          "fastapi/path-params-numeric-validations.md > Path Parameters and Numeric Validations { #path-parameters-and-numeric-validations } > Declare metadata { #declare-metadata }",
+          "fastapi/path-params.md > Path Parameters { #path-parameters } > Predefined values { #predefined-values } > Declare a *path parameter* { #declare-a-path-parameter }",
+          "fastapi/path-params.md > Path Parameters { #path-parameters } > Path parameters containing paths { #path-parameters-containing-paths } > Path convertor { #path-convertor }"
+        ],
+        "judge": {
+          "total_claims": 5,
+          "supported_claims": 2,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": false
+            },
+            {
+              "n": 2,
+              "supports": false
+            }
+          ]
+        }
+      },
+      {
+        "id": "g003",
+        "q": "How do I read a cookie value in an endpoint?",
+        "kind": "answerable",
+        "text": "Read the cookie by declaring a parameter with `fastapi.Cookie`. FastAPI will extract the cookie value from the request and pass it to the endpoint:\n\n```python\nfrom fastapi import FastAPI, Cookie\n\napp = FastAPI()\n\n@app.get(\"/items/\")\ndef read_cookie(session_id: str = Cookie(...)):\n    return {\"session_id\": session_id}\n```\n\nYou can also group multiple cookies in a Pydantic model and declare the whole model as a `Cookie` parameter; FastAPI will populate each field from the incoming cookies\u30101\u3011. The `Cookie` function works like `Path` and `Query` and must be used for cookie parameters\u30102\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 3434,
+        "calls": 4,
+        "latency_ms": 5564.225699999952,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=3/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/cookie-param-models.md > Cookie Parameter Models { #cookie-parameter-models } > Cookies with a Pydantic Model { #cookies-with-a-pydantic-model }",
+          "fastapi/cookie-params.md > Cookie Parameters { #cookie-parameters } > Declare `Cookie` parameters { #declare-cookie-parameters }",
+          "fastapi/testing.md > Testing { #testing } > Testing: extended example { #testing-extended-example } > Extended testing file { #extended-testing-file }"
+        ],
+        "judge": {
+          "total_claims": 6,
+          "supported_claims": 6,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g006",
+        "q": "How do I run a task after returning a response?",
+        "kind": "answerable",
+        "text": "You define a **background task** and add it to the response; FastAPI will execute the task **after the response has been sent** to the client\u30101\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 1959,
+        "calls": 4,
+        "latency_ms": 5560.071999999309,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=1/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/background-tasks.md > Background Tasks { #background-tasks }"
+        ],
+        "judge": {
+          "total_claims": 2,
+          "supported_claims": 2,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g009",
+        "q": "How do I return an HTTP error with a custom status code and detail message?",
+        "kind": "answerable",
+        "text": "Raise a `fastapi.HTTPException`, specifying the desired status code and the detail you want returned. FastAPI will convert the `detail` value to JSON automatically.\n\n```python\nfrom fastapi import HTTPException\n\nraise HTTPException(status_code=418, detail=\"I'm a teapot\")\n```\n\nThis returns the given status code (e.g.,\u202f418) and a JSON body like `{\"detail\": \"I'm a teapot\"}`.\u202f[1]",
+        "refused": false,
+        "citations": [
+          1
+        ],
+        "tokens": 2191,
+        "calls": 4,
+        "latency_ms": 4683.5510999999315,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=1/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 0.8,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/handling-errors.md > Handling Errors { #handling-errors } > Use `HTTPException` { #use-httpexception } > The resulting response { #the-resulting-response }"
+        ],
+        "judge": {
+          "total_claims": 5,
+          "supported_claims": 4,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g012",
+        "q": "How do I write automated tests for my API?",
+        "kind": "answerable",
+        "text": "I can only answer questions about the FastAPI and Pydantic documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 158,
+        "calls": 1,
+        "latency_ms": 382.76440000026923,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=False"
+        ],
+        "refusal_ok": false,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": []
+      },
+      {
+        "id": "g015",
+        "q": "How do I structure a larger application across multiple files?",
+        "kind": "answerable",
+        "text": "To organize a bigger FastAPI project you split the code into a package with several modules and sub\u2011packages, each with its own `__init__.py` so they can be imported elsewhere. A common layout is:\n\n```\n.\n\u251c\u2500\u2500 app\n\u2502   \u251c\u2500\u2500 __init__.py\n\u2502   \u251c\u2500\u2500 main.py          # creates the FastAPI instance and includes routers\n\u2502   \u251c\u2500\u2500 dependencies.py  # shared dependencies\n\u2502   \u2514\u2500\u2500 routers\n\u2502       \u251c\u2500\u2500 __init__.py\n\u2502       \u251c\u2500\u2500 items.py\n\u2502       \u2514\u2500\u2500 users.py\n\u2502   \u2514\u2500\u2500 internal\n\u2502       \u251c\u2500\u2500 __init__.py\n\u2502       \u2514\u2500\u2500 admin.py\n```\n\nThe `main.py` file imports the router modules (e.g., `from app.routers import items`) and ties everything together by creating the `FastAPI` app and including the routers\u202f[2][3]. This structure keeps the main file simple while the rest of the logic lives in dedicated modules, similar to Flask\u2019s Blueprints\u202f[1].",
+        "refused": false,
+        "citations": [
+          1,
+          2,
+          3
+        ],
+        "tokens": 2486,
+        "calls": 4,
+        "latency_ms": 4568.546099999367,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=3/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/bigger-applications.md > Bigger Applications - Multiple Files { #bigger-applications-multiple-files }",
+          "fastapi/bigger-applications.md > Bigger Applications - Multiple Files { #bigger-applications-multiple-files } > An example file structure { #an-example-file-structure }",
+          "fastapi/bigger-applications.md > Bigger Applications - Multiple Files { #bigger-applications-multiple-files } > The main `FastAPI` { #the-main-fastapi }"
+        ],
+        "judge": {
+          "total_claims": 5,
+          "supported_claims": 5,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g018",
+        "q": "How do I require a path parameter to be greater than a number?",
+        "kind": "answerable",
+        "text": "Use the `gt` (greater\u2011than) validation argument on the path parameter. For example:\n\n```python\nfrom fastapi import FastAPI, Path\n\napp = FastAPI()\n\n@app.get(\"/items/{value}\")\ndef read_item(value: float = Path(..., gt=0)):\n    return {\"value\": value}\n```\n\nThe `gt=0` ensures the path parameter must be greater than\u202f0 (values like\u202f0.5 are accepted, while\u202f0 or\u202f0.0 are rejected)\u30101\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 2029,
+        "calls": 4,
+        "latency_ms": 6547.910399998727,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=2/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/path-params-numeric-validations.md > Path Parameters and Numeric Validations { #path-parameters-and-numeric-validations } > Number validations: floats, greater than and less than { #number-validations-floats-greater-than-and-less-than }",
+          "fastapi/path-params-numeric-validations.md > Path Parameters and Numeric Validations { #path-parameters-and-numeric-validations } > Number validations: greater than and less than or equal { #number-validations-greater-than-and-less-than-or-equal }"
+        ],
+        "judge": {
+          "total_claims": 5,
+          "supported_claims": 5,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g021",
+        "q": "How do I use UUID or datetime values as parameters?",
+        "kind": "answerable",
+        "text": "You can declare the parameter\u2019s type as `UUID`, `datetime.datetime`, `datetime.date`, `datetime.time`, or `datetime.timedelta`. FastAPI (via Pydantic) will automatically parse the incoming string value into the appropriate Python object and return it as a string in the response (ISO\u20118601 for dates/times, total\u2011seconds float for `timedelta`). For example:\n\n```python\nfrom uuid import UUID\nfrom datetime import datetime\n\n@app.get(\"/items/{item_id}\")\ndef read_item(item_id: UUID, ts: datetime):\n    return {\"item_id\": item_id, \"timestamp\": ts}\n```\n\nThe `item_id` query/path value like `\"550e8400-e29b-41d4-a716-446655440000\"` will be converted to a `UUID` object, and a datetime string like `\"2024-04-01T12:30:00\"` will be parsed into a `datetime.datetime` instance.  \n\n[1]",
+        "refused": false,
+        "citations": [
+          1
+        ],
+        "tokens": 2837,
+        "calls": 4,
+        "latency_ms": 3763.1203999999343,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=2/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 0.75,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/extra-data-types.md > Extra Data Types { #extra-data-types } > Other data types { #other-data-types }",
+          "pydantic/models.md > Basic model usage > Validating data"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 6,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g024",
+        "q": "How do I run my app under a debugger?",
+        "kind": "answerable",
+        "text": "Run the FastAPI app directly from your IDE\u2019s debugger. For example:\n\n* **VS\u202fCode** \u2013 add a Python debug configuration and run **\u201cPython: Current File (Integrated Terminal)\u201d**. The debugger starts Uvicorn with your FastAPI code and stops at breakpoints\u30101\u3011.  \n* **PyCharm** \u2013 open the **Run \u2192 Debug\u2026** menu, choose your `main.py`, and the server launches under the debugger, pausing at breakpoints\u30101\u3011.  \n\nIn both cases the debugger is attached to the process that runs the FastAPI application.",
+        "refused": false,
+        "citations": [],
+        "tokens": 2068,
+        "calls": 4,
+        "latency_ms": 3011.0737999993944,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=2/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/debugging.md > Debugging { #debugging } > Run your code with your debugger { #run-your-code-with-your-debugger }",
+          "fastapi/debugging.md > Debugging { #debugging }"
+        ],
+        "judge": {
+          "total_claims": 6,
+          "supported_claims": 6,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g027",
+        "q": "How do I stream server-sent events to a client?",
+        "kind": "answerable",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 1471,
+        "calls": 3,
+        "latency_ms": 4081.222699999671,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=3/4"
+        ],
+        "refusal_ok": false,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/server-sent-events.md > Server-Sent Events (SSE) { #server-sent-events-sse } > What are Server-Sent Events? { #what-are-server-sent-events }",
+          "fastapi/server-sent-events.md > Server-Sent Events (SSE) { #server-sent-events-sse }",
+          "fastapi/server-sent-events.md > Server-Sent Events (SSE) { #server-sent-events-sse } > Resuming with `Last-Event-ID` { #resuming-with-last-event-id }"
+        ]
+      },
+      {
+        "id": "g030",
+        "q": "How do I make a field accept a different name in the input data than the attribute name?",
+        "kind": "answerable",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 1786,
+        "calls": 3,
+        "latency_ms": 2680.1347000000533,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=1/4"
+        ],
+        "refusal_ok": false,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "pydantic/fields.md > "
+        ]
+      },
+      {
+        "id": "g033",
+        "q": "How do I stop pydantic from converting the string '123' into an int?",
+        "kind": "answerable",
+        "text": "Enable Pydantic\u2019s strict mode (or use a strict type) so that only values already of the correct type are accepted. In strict mode the string `'123'` will raise a validation error instead of being coerced to `int`\u30101\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 2400,
+        "calls": 4,
+        "latency_ms": 4842.2876000013275,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=1/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "pydantic/strict_mode.md > "
+        ],
+        "judge": {
+          "total_claims": 2,
+          "supported_claims": 2,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g036",
+        "q": "How do I dump a model to a JSON string and leave some fields out?",
+        "kind": "answerable",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 2342,
+        "calls": 3,
+        "latency_ms": 2854.856199999631,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=2/4"
+        ],
+        "refusal_ok": false,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "pydantic/serialization.md > ",
+          "pydantic/serialization.md > Serializing data > Field inclusion and exclusion > As parameters to the serialization methods > Excluding and including specific fields"
+        ]
+      },
+      {
+        "id": "g039",
+        "q": "How can I add extra keys to the JSON Schema of one field?",
+        "kind": "answerable",
+        "text": "Add the extra keys with the `json_schema_extra` argument when you declare the field.\u202f`json_schema_extra` can be a dictionary (or callable) and its contents are merged into the generated JSON\u202fSchema for that field\u30101\u2020L1-L4\u3011\u30102\u2020L1-L4\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 2044,
+        "calls": 4,
+        "latency_ms": 2769.295999998576,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=2/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/body-fields.md > Body - Fields { #body-fields } > Add extra information { #add-extra-information }",
+          "pydantic/json_schema.md > Generating JSON Schema > Customizing JSON Schema > Using `json_schema_extra`"
+        ],
+        "judge": {
+          "total_claims": 3,
+          "supported_claims": 3,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g042",
+        "q": "How do I refer to a class that is only defined later in the file?",
+        "kind": "answerable",
+        "text": "You must use a forward annotation\u2014wrap the type name in quotes or enable the future import that makes all annotations lazy:\n\n```python\nfrom __future__ import annotations   # makes all annotations forward\u2011referenced\n\nfrom pydantic import BaseModel\n\nclass Model(BaseModel):\n    a: MyInt          # refers to MyInt defined later\n\nMyInt = int\n```\n\nWithout the future import you would write `a: 'MyInt'` instead. This resolves references to classes that are defined later in the file. [1]",
+        "refused": false,
+        "citations": [
+          1
+        ],
+        "tokens": 2220,
+        "calls": 4,
+        "latency_ms": 5003.340899999785,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=1/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "pydantic/forward_annotations.md > Python 3.14 and greater > Python 3.13 and lower"
+        ],
+        "judge": {
+          "total_claims": 5,
+          "supported_claims": 5,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g045",
+        "q": "How can I make validation of JSON input faster?",
+        "kind": "answerable",
+        "text": "Use the JSON\u2011specific validation method instead of parsing the payload yourself.  \n`BaseModel.model_validate_json()` validates a JSON string/bytes directly and avoids the extra Python `json.loads()` step, which is generally faster\u202f[2][1].  \n\nIf you are on Pydantic\u202fv2.7.0 or later, you can also enable the built\u2011in string\u2011caching feature (the default) to speed up parsing, or disable it only when repeated strings are rare\u202f[3].  \n\nSo, to make JSON validation faster:\n\n```python\n# Fast JSON validation\nmodel = MyModel.model_validate_json(json_bytes)   # or json string\n```\n\nOptionally adjust the cache setting in the model config if needed:\n\n```python\nclass Config:\n    cache_strings = True   # default, caches all short strings\n```",
+        "refused": false,
+        "citations": [
+          1,
+          2,
+          3
+        ],
+        "tokens": 3753,
+        "calls": 4,
+        "latency_ms": 5944.794500000171,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=3/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "pydantic/performance.md > Performance tips > In general, use `model_validate_json()` not `model_validate(json.loads(...))`",
+          "pydantic/models.md > Basic model usage > Validating data",
+          "pydantic/json.md > JSON > Json Parsing > Caching Strings"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 8,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g048",
+        "q": "How do I create a custom type with its own validation logic?",
+        "kind": "answerable",
+        "text": "Create a class (or a metadata object) and implement the special method **`__get_pydantic_core_schema__`**.  \nInside that method call the provided `handler` to get the default schema for the underlying type and wrap it with a validator from **`pydantic_core.core_schema`** (e.g., `no_info_after_validator_function`). The returned `CoreSchema` tells Pydantic how to validate the value.\n\n**Example as a class**\n\n```python\nfrom typing import Any\n\nfrom pydantic_core import CoreSchema, core_schema\nfrom pydantic import GetCoreSchemaHandler, TypeAdapter\n\nclass Username(str):\n    @classmethod\n    def __get_pydantic_core_schema__(\n        cls, source_type: Any, handler: GetCoreSchemaHandler\n    ) -> CoreSchema:\n        # run the value through the class (or any custom function) after normal validation\n        return core_schema.no_info_after_validator_function(cls, handler(str))\n\nta = TypeAdapter(Username)\nres = ta.validate_python('abc')\nassert isinstance(res, Username)      # custom type instance\nassert res == 'abc'\n```\n\nThe same pattern can be used with an `Annotated` metadata object instead of a subclass, as shown in the documentation\u202f[2][3]. This is the recommended way to give a custom type its own validation logic in Pydantic\u202fV2.",
+        "refused": false,
+        "citations": [
+          2,
+          3
+        ],
+        "tokens": 4606,
+        "calls": 4,
+        "latency_ms": 5790.7095999999,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=3/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 0.875,
+        "relevancy": 1.0,
+        "citation_accuracy": 0.875,
+        "sources": [
+          "pydantic/types.md > Utility types > Custom Types > Customizing validation with `__get_pydantic_core_schema__` <a name=\"customizing_validation_with_get_pydantic_core_schema\"></a>",
+          "pydantic/types.md > Utility types > Custom Types > Customizing validation with `__get_pydantic_core_schema__` <a name=\"customizing_validation_with_get_pydantic_core_schema\"></a> > As an annotation",
+          "pydantic/types.md > Utility types > Custom Types > Customizing validation with `__get_pydantic_core_schema__` <a name=\"customizing_validation_with_get_pydantic_core_schema\"></a> > As a method on a custom type"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 7,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": false
+            }
+          ]
+        }
+      },
+      {
+        "id": "g051",
+        "q": "What order do multiple validators on one field run in?",
+        "kind": "answerable",
+        "text": "Multiple validators on a single field are applied in a specific sequence:\n\n* **`BeforeValidator`** and **`WrapValidator`** run **from right\u2011to\u2011left** (the last\u2011declared validator runs first).  \n* **`AfterValidator`** runs **from left\u2011to\u2011right** (the first\u2011declared validator runs first)\u30101\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 2339,
+        "calls": 4,
+        "latency_ms": 4453.498999999283,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=1/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "pydantic/validators.md > Field validators > Ordering of validators"
+        ],
+        "judge": {
+          "total_claims": 3,
+          "supported_claims": 3,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g054",
+        "q": "How do I return a stream of JSON lines?",
+        "kind": "answerable",
+        "text": "Return a generator (using `yield`) from the path operation so that each item is produced one\u2011by\u2011one.  \nIf the items are Pydantic models you can annotate the function as returning `AsyncIterable[Item]`; FastAPI will then validate, document, filter and serialize each line automatically\u30101\u3011.  \nYou may also omit the return\u2011type annotation; FastAPI will fall back to `jsonable_encoder` to convert each yielded value to JSON lines\u30102\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 2679,
+        "calls": 4,
+        "latency_ms": 6312.0263000000705,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=3/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/stream-json-lines.md > Stream JSON Lines { #stream-json-lines } > Stream JSON Lines with FastAPI { #stream-json-lines-with-fastapi }",
+          "fastapi/stream-json-lines.md > Stream JSON Lines { #stream-json-lines } > Stream JSON Lines with FastAPI { #stream-json-lines-with-fastapi } > No Return Type { #no-return-type }",
+          "fastapi/stream-json-lines.md > Stream JSON Lines { #stream-json-lines } > JSON Lines { #json-lines }"
+        ],
+        "judge": {
+          "total_claims": 5,
+          "supported_claims": 5,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g057",
+        "q": "How do I test my endpoints without running a server?",
+        "kind": "answerable",
+        "text": "You can test your FastAPI endpoints directly with the built\u2011in **TestClient** instead of starting a live server. The client sends requests to the application in\u2011process, letting you call the routes just like regular HTTP calls. Use the client\u2019s parameters (`json`, `data`, `headers`, `cookies`, etc.) to pass data, and you can encode Pydantic models with `jsonable_encoder` if needed\u30101\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 3086,
+        "calls": 4,
+        "latency_ms": 7002.898000000641,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=2/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 0.8333333333333334,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/testing.md > Testing { #testing } > Testing: extended example { #testing-extended-example } > Extended testing file { #extended-testing-file }",
+          "fastapi/testing.md > Testing { #testing } > Run it { #run-it }"
+        ],
+        "judge": {
+          "total_claims": 6,
+          "supported_claims": 5,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g060",
+        "q": "How do I update only some fields of a stored item?",
+        "kind": "answerable",
+        "text": "To update only some fields of a stored item, use a **PATCH** endpoint and:\n\n1. Receive the partial data in a Pydantic model whose fields are optional.  \n2. Convert the received model to a dict with `exclude_unset=True` so only the fields actually sent by the client are included\u202f\u2014\u202fdefault values are omitted\u30101\u2020L7-L11\u3011.  \n3. Apply that dict to the stored object (e.g., with `sqlmodel_update` or the model\u2019s `update` method)\u30102\u2020L3-L6\u3011.  \n\nThis updates just the provided fields while leaving the others unchanged.",
+        "refused": false,
+        "citations": [],
+        "tokens": 2889,
+        "calls": 4,
+        "latency_ms": 3271.3812000010876,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=2/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/body-updates.md > Body - Updates { #body-updates } > Partial updates with `PATCH` { #partial-updates-with-patch } > Partial updates recap { #partial-updates-recap }",
+          "fastapi/sql-databases.md > SQL (Relational) Databases { #sql-relational-databases } > Update the App with Multiple Models { #update-the-app-with-multiple-models } > Update a Hero with `HeroUpdate` { #update-a-hero-with-heroupdate }"
+        ],
+        "judge": {
+          "total_claims": 5,
+          "supported_claims": 5,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g063",
+        "q": "How do I require a path parameter to be greater than a number?",
+        "kind": "answerable",
+        "text": "Use the `gt` (greater\u2011than) validation argument on the path parameter. For example:\n\n```python\nfrom fastapi import FastAPI, Path\n\napp = FastAPI()\n\n@app.get(\"/items/{value}\")\ndef read_item(value: float = Path(..., gt=0)):\n    return {\"value\": value}\n```\n\nThe `gt=0` ensures the path parameter must be greater than\u202f0 (values like\u202f0.5 are accepted, while\u202f0 or\u202f0.0 are rejected)\u30101\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 2029,
+        "calls": 4,
+        "latency_ms": 0,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=2/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/path-params-numeric-validations.md > Path Parameters and Numeric Validations { #path-parameters-and-numeric-validations } > Number validations: floats, greater than and less than { #number-validations-floats-greater-than-and-less-than }",
+          "fastapi/path-params-numeric-validations.md > Path Parameters and Numeric Validations { #path-parameters-and-numeric-validations } > Number validations: greater than and less than or equal { #number-validations-greater-than-and-less-than-or-equal }"
+        ],
+        "judge": {
+          "total_claims": 5,
+          "supported_claims": 5,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g066",
+        "q": "How do I connect the app to a SQL database?",
+        "kind": "answerable",
+        "text": "I can only answer questions about the FastAPI and Pydantic documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 159,
+        "calls": 1,
+        "latency_ms": 2969.7909000005893,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=False"
+        ],
+        "refusal_ok": false,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": []
+      },
+      {
+        "id": "g069",
+        "q": "How do I set a maximum value on a body field?",
+        "kind": "answerable",
+        "text": "You can apply the same validation arguments to a body parameter that you would use with `Query`.  \nAdd `Body` (or `Annotated`\u202f+\u202f`Body`) to the field and pass the desired limit, e.g.:\n\n```python\nfrom fastapi import FastAPI, Body\n\napp = FastAPI()\n\n@app.post(\"/items/\")\ndef create_item(\n    name: str = Body(..., max_length=50)   # max 50 characters\n):\n    return {\"name\": name}\n```\n\n`Body` accepts the same extra validation arguments as `Query`, `Path`, etc., so you can set `max_length`, `gt`, `lt`, `ge`, `le`, etc., on body fields\u202f[1][2].",
+        "refused": false,
+        "citations": [
+          1,
+          2
+        ],
+        "tokens": 3922,
+        "calls": 6,
+        "latency_ms": 14448.393200000282,
+        "retries": 1,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=0/4",
+          "rewrite",
+          "relevant=2/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/query-params-str-validations.md > Query Parameters and String Validations { #query-parameters-and-string-validations } > Add `Query` to `Annotated` in the `q` parameter { #add-query-to-annotated-in-the-q-parameter }",
+          "fastapi/body-multiple-params.md > Body - Multiple Parameters { #body-multiple-parameters } > Multiple body params and query { #multiple-body-params-and-query }"
+        ],
+        "judge": {
+          "total_claims": 5,
+          "supported_claims": 5,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g071",
+        "q": "Explain Add the background task in FastAPI",
+        "kind": "answerable",
+        "text": "In a FastAPI path\u2011operation you can schedule work to run after the response is sent by using the `BackgroundTasks` parameter and its **`.add_task()`** method.  \n\n```python\ndef write_notification(email: str, message: str):\n    # \u2026do something, e.g. write to a file\n    ...\n\n@app.post(\"/send\")\nasync def send(email: str, background_tasks: BackgroundTasks):\n    background_tasks.add_task(write_notification, email, message=\"some notification\")\n    return {\"msg\": \"email scheduled\"}\n```\n\n`background_tasks.add_task()` takes:\n\n1. **The callable** that should be executed in the background (e.g., `write_notification`).  \n2. **Positional arguments** that will be passed to that callable in order (`email`).  \n3. **Keyword arguments** that will be passed to the callable (`message=\"some notification\"`).  \n\nFastAPI will run the provided function after the response is returned, handling both regular `def` and `async def` functions automatically\u30103\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 2679,
+        "calls": 4,
+        "latency_ms": 6322.198699998808,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=3/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 0.875,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/background-tasks.md > Background Tasks { #background-tasks } > Technical Details { #technical-details }",
+          "fastapi/background-tasks.md > Background Tasks { #background-tasks } > Create a task function { #create-a-task-function }",
+          "fastapi/background-tasks.md > Background Tasks { #background-tasks } > Add the background task { #add-the-background-task }"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 7,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 3,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g085",
+        "q": "Explain Recap, step by step in FastAPI",
+        "kind": "answerable",
+        "text": "**Recap \u2013 step by step**\n\n1. **Import `FastAPI`** \u2013 `FastAPI` is a Python class (inheriting from Starlette) that provides all the functionality for your API\u30102\u3011.  \n2. **Create a `FastAPI` instance** \u2013 Assign `app = FastAPI()`. The `app` variable is the main point of interaction for defining routes, middleware, etc.\u30101\u3011  \n3. **Create a path operation** \u2013 Use a decorator such as `@app.get(\"/\")` (or `@app.post()`, `@app.put()`, etc.) to declare a function that will handle requests to a specific path and HTTP method\u30104\u3011.  \n4. **(Additional steps not detailed in the provided excerpts)** \u2013 After defining routes you would typically run the app locally and later **deploy** it, e.g., with FastAPI Cloud using `fastapi deploy`\u30103\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 2976,
+        "calls": 4,
+        "latency_ms": 2241.40510000052,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=4/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 0.875,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/first-steps.md > First Steps { #first-steps } > Recap, step by step { #recap-step-by-step } > Step 2: create a `FastAPI` \"instance\" { #step-2-create-a-fastapi-instance }",
+          "fastapi/first-steps.md > First Steps { #first-steps } > Recap, step by step { #recap-step-by-step } > Step 1: import `FastAPI` { #step-1-import-fastapi }",
+          "fastapi/first-steps.md > First Steps { #first-steps } > Recap, step by step { #recap-step-by-step } > Step 6: Deploy it { #step-6-deploy-it }",
+          "fastapi/first-steps.md > First Steps { #first-steps } > Recap, step by step { #recap-step-by-step } > Step 3: create a *path operation* { #step-3-create-a-path-operation } > Define a *path operation decorator* { #define-a-path-operation-decorator }"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 7,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 4,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g099",
+        "q": "Explain What is \"Form Data\" in FastAPI",
+        "kind": "answerable",
+        "text": "**Form Data** in FastAPI refers to the data that comes from an HTML `<form>` submission.  \nWhen a form is sent without files, the browser encodes the payload as **`application/x-www-form-urlencoded`**; when the form includes files, it uses **`multipart/form-data`**. FastAPI automatically reads these encoded bodies from the correct part of the request (instead of expecting JSON) and makes the values available via `Form` (and `File`) parameters in a path operation. You can declare multiple `Form` and `File` parameters, but you cannot mix them with `Body` parameters that expect JSON because the request body will be encoded as either `application/x-www-form-urlencoded` or `multipart/form-data`\u202f\u2014\u202fa restriction of the HTTP protocol, not FastAPI itself\u30101\u2020L1-L9\u3011\u30102\u2020L1-L8\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 3283,
+        "calls": 4,
+        "latency_ms": 7002.180299999054,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=3/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/request-files.md > Request Files { #request-files } > What is \"Form Data\" { #what-is-form-data }",
+          "fastapi/request-forms.md > Form Data { #form-data } > About \"Form Fields\" { #about-form-fields }",
+          "fastapi/request-forms-and-files.md > Request Forms and Files { #request-forms-and-files } > Define `File` and `Form` parameters { #define-file-and-form-parameters }"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 8,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g113",
+        "q": "Explain Stdlib dataclasses and Pydantic dataclasses in Pydantic",
+        "kind": "answerable",
+        "text": "Stdlib dataclasses can be used directly in Pydantic, and they can also be turned into **Pydantic dataclasses** so that their fields are validated just like a `BaseModel`.\n\n* **Inheritance** \u2013 A dataclass that inherits from another std\u2011lib dataclass is automatically validated for all inherited fields when it is declared as a Pydantic dataclass. The example shows `Z \u2192 Y \u2192 X`; creating `X` validates `z`, `y` and `x` and coerces the inputs to the declared types\u30101\u3011.  \n\n* **Applying the decorator** \u2013 The `@pydantic.dataclasses.dataclass` decorator can be used on a subclass of a std\u2011lib dataclass, or it can be called on an existing std\u2011lib dataclass to produce a new Pydantic\u2011validated subclass (`PydanticA = pydantic.dataclasses.dataclass(A)`)\u30101\u3011.\n\n* **Use inside a `BaseModel`** \u2013 A std\u2011lib dataclass (or a Pydantic dataclass) can be used as a field type of a `BaseModel`. Validation is performed on the dataclass instance when the model is created, and the same dataclass configuration applies\u30102\u3011.\n\n* **Checking the type** \u2013 Both std\u2011lib and Pydantic dataclasses satisfy `dataclasses.is_dataclass()`. To know whether a dataclass has been wrapped by Pydantic, use `pydantic.dataclasses.is_pydantic_dataclass()`\u30103\u3011.\n\n* **Custom types** \u2013 When a std\u2011lib dataclass contains fields of arbitrary/custom types, validation will fail unless the dataclass\u2019s config enables `arbitrary_types_allowed=True`\u30104\u3011.  \n\nIn summary, Pydantic treats standard library dataclasses as first\u2011class citizens: they can be inherited, wrapped, and validated, and they can be used interchangeably with Pydantic dataclasses inside models.",
+        "refused": false,
+        "citations": [],
+        "tokens": 5256,
+        "calls": 4,
+        "latency_ms": 3047.7377999986857,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=4/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "pydantic/dataclasses.md > Dataclass config > Stdlib dataclasses and Pydantic dataclasses > Inherit from stdlib dataclasses",
+          "pydantic/dataclasses.md > Dataclass config > Stdlib dataclasses and Pydantic dataclasses > Usage of stdlib dataclasses with `BaseModel`",
+          "pydantic/dataclasses.md > Dataclass config > Stdlib dataclasses and Pydantic dataclasses > Checking if a dataclass is a Pydantic dataclass",
+          "pydantic/dataclasses.md > Dataclass config > Stdlib dataclasses and Pydantic dataclasses > Using custom types"
+        ],
+        "judge": {
+          "total_claims": 13,
+          "supported_claims": 13,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 4,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "g127",
+        "q": "Explain Validation info in Pydantic",
+        "kind": "answerable",
+        "text": "`ValidationInfo` is an optional argument that can be added to any field\u2011 or model\u2011validator callable. It gives the validator extra runtime details:\n\n* **`data`** \u2013 a dictionary of values that have already been validated for the current model (only for field validators; it is `None` for model validators)\u30101\u2020L1-L7\u3011.  \n* **`context`** \u2013 a user\u2011provided object passed to `model_validate(..., context=\u2026)` that can be read inside the validator\u30103\u2020L1-L5\u3011.  \n* **`mode`** \u2013 the validation mode being used (`'python'`, `'json'` or `'strings'`)\u30102\u2020L5-L7\u3011.  \n* **`field_name`** \u2013 the name of the field for which a field validator is running\u30102\u2020L7-L9\u3011.\n\nThese pieces of information let validators inspect previously\u2011validated fields, react to external context, and adapt their behavior based on how the data is being validated.",
+        "refused": false,
+        "citations": [],
+        "tokens": 3413,
+        "calls": 4,
+        "latency_ms": 4233.381899999586,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=3/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": true,
+        "faithfulness": 1.0,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "pydantic/validators.md > Field validators > Validation info > Validation data",
+          "pydantic/validators.md > Field validators > Validation info",
+          "pydantic/validators.md > Field validators > Validation info > Validation context"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 8,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            },
+            {
+              "n": 3,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            },
+            {
+              "n": 2,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "off0",
+        "q": "What is the capital of France?",
+        "kind": "off_topic",
+        "text": "I can only answer questions about the FastAPI and Pydantic documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 143,
+        "calls": 1,
+        "latency_ms": 609.0561999999409,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=False"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": []
+      },
+      {
+        "id": "off1",
+        "q": "How do I train a convolutional neural network in PyTorch?",
+        "kind": "off_topic",
+        "text": "I can only answer questions about the FastAPI and Pydantic documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 153,
+        "calls": 1,
+        "latency_ms": 1313.944900000024,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=False"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": []
+      },
+      {
+        "id": "off2",
+        "q": "Give me a recipe for chocolate cake.",
+        "kind": "off_topic",
+        "text": "I can only answer questions about the FastAPI and Pydantic documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 142,
+        "calls": 1,
+        "latency_ms": 2044.8658000004798,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=False"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": []
+      },
+      {
+        "id": "off3",
+        "q": "Who won the 2018 football World Cup?",
+        "kind": "off_topic",
+        "text": "I can only answer questions about the FastAPI and Pydantic documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 151,
+        "calls": 1,
+        "latency_ms": 1495.3039000001809,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=False"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": []
+      },
+      {
+        "id": "off4",
+        "q": "How do I configure a Kubernetes ingress with TLS?",
+        "kind": "off_topic",
+        "text": "I can only answer questions about the FastAPI and Pydantic documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 148,
+        "calls": 1,
+        "latency_ms": 665.9410000002026,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=False"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": []
+      },
+      {
+        "id": "off5",
+        "q": "What is the best way to invest in stocks?",
+        "kind": "off_topic",
+        "text": "I can only answer questions about the FastAPI and Pydantic documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 148,
+        "calls": 1,
+        "latency_ms": 1661.248300000807,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=False"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": []
+      },
+      {
+        "id": "off6",
+        "q": "How do I write a React useEffect hook?",
+        "kind": "off_topic",
+        "text": "I can only answer questions about the FastAPI and Pydantic documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 147,
+        "calls": 1,
+        "latency_ms": 719.8743999997532,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=False"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": []
+      },
+      {
+        "id": "off7",
+        "q": "Explain quantum entanglement in simple terms.",
+        "kind": "off_topic",
+        "text": "I can only answer questions about the FastAPI and Pydantic documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 147,
+        "calls": 1,
+        "latency_ms": 672.725100000207,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=False"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": []
+      },
+      {
+        "id": "oos0",
+        "q": "How do I protect an endpoint with OAuth2 and JWT tokens?",
+        "kind": "unanswerable",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 2379,
+        "calls": 6,
+        "latency_ms": 7605.366399999184,
+        "retries": 2,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=0/4",
+          "rewrite",
+          "relevant=0/4",
+          "rewrite",
+          "relevant=0/4"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/schema-extra-example.md > Declare Request Example Data { #declare-request-example-data } > `examples` in JSON Schema - OpenAPI { #examples-in-json-schema-openapi } > Example in the docs UI { #example-in-the-docs-ui }",
+          "fastapi/schema-extra-example.md > Declare Request Example Data { #declare-request-example-data } > `examples` in JSON Schema - OpenAPI { #examples-in-json-schema-openapi } > Using the `openapi_examples` Parameter { #using-the-openapi-examples-parameter }",
+          "fastapi/first-steps.md > First Steps { #first-steps } > Recap, step by step { #recap-step-by-step } > Step 3: create a *path operation* { #step-3-create-a-path-operation } > Path { #path }",
+          "fastapi/schema-extra-example.md > Declare Request Example Data { #declare-request-example-data } > `examples` in JSON Schema - OpenAPI { #examples-in-json-schema-openapi } > `Body` with `examples` { #body-with-examples }"
+        ]
+      },
+      {
+        "id": "oos1",
+        "q": "How do I use dependencies with yield to manage a database session?",
+        "kind": "unanswerable",
+        "text": "Create a dependency function that **yields** a `Session` and closes it after the request finishes.  \nFastAPI will call the function at the start of each request, give the yielded `Session` to the path operation, and then run the code after the `yield` (typically `session.close()`) when the response is returned.  \n\n```python\nfrom fastapi import Depends\nfrom sqlalchemy.orm import Session\nfrom typing import Annotated\n\ndef get_session() -> Generator[Session, None, None]:\n    session = Session()          # creates a new Session bound to the engine\n    try:\n        yield session            # provide the session to the endpoint\n    finally:\n        session.close()          # clean up after the request\n\n# simplify usage with an Annotated alias\nSessionDep = Annotated[Session, Depends(get_session)]\n```\n\nNow any endpoint can receive a fresh `Session` per request by declaring a parameter of type `SessionDep`:\n\n```python\n@app.get(\"/items/\")\ndef read_items(db: SessionDep):\n    return db.query(Item).all()\n```\n\nThe `yield`\u2011based dependency guarantees a single session per request and ensures it is properly closed afterward\u30101\u3011.",
+        "refused": false,
+        "citations": [],
+        "tokens": 2239,
+        "calls": 4,
+        "latency_ms": 4925.062600000274,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=1/4",
+          "supported=True useful=True"
+        ],
+        "refusal_ok": false,
+        "faithfulness": 0.25,
+        "relevancy": 1.0,
+        "citation_accuracy": 1.0,
+        "sources": [
+          "fastapi/sql-databases.md > SQL (Relational) Databases { #sql-relational-databases } > Create the App with a Single Model { #create-the-app-with-a-single-model } > Create a Session Dependency { #create-a-session-dependency }"
+        ],
+        "judge": {
+          "total_claims": 8,
+          "supported_claims": 2,
+          "relevancy": "yes",
+          "citations": [
+            {
+              "n": 1,
+              "supports": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "oos2",
+        "q": "How do I add a WebSocket endpoint?",
+        "kind": "unanswerable",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 3120,
+        "calls": 6,
+        "latency_ms": 4764.657699999589,
+        "retries": 2,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=0/4",
+          "rewrite",
+          "relevant=0/4",
+          "rewrite",
+          "relevant=0/4"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/first-steps.md > First Steps { #first-steps } > Recap, step by step { #recap-step-by-step } > Step 3: create a *path operation* { #step-3-create-a-path-operation } > Path { #path }",
+          "fastapi/testing.md > Testing { #testing } > Testing: extended example { #testing-extended-example } > Extended testing file { #extended-testing-file }",
+          "fastapi/body-fields.md > Body - Fields { #body-fields } > Add extra information { #add-extra-information }",
+          "fastapi/query-params-str-validations.md > Query Parameters and String Validations { #query-parameters-and-string-validations } > Add more validations { #add-more-validations }"
+        ]
+      },
+      {
+        "id": "oos3",
+        "q": "How do I deploy the app in a Docker container?",
+        "kind": "unanswerable",
+        "text": "I can only answer questions about the FastAPI and Pydantic documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 150,
+        "calls": 1,
+        "latency_ms": 888.3567000002586,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=False"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": []
+      },
+      {
+        "id": "oos4",
+        "q": "How do I run the app with Gunicorn workers in production?",
+        "kind": "unanswerable",
+        "text": "I don't know based on the documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 3492,
+        "calls": 6,
+        "latency_ms": 3262.4282999995557,
+        "retries": 2,
+        "steps": [
+          "need_retrieval=True",
+          "relevant=0/4",
+          "rewrite",
+          "relevant=0/4",
+          "rewrite",
+          "relevant=0/4"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": [
+          "fastapi/debugging.md > Debugging { #debugging } > Call `uvicorn` { #call-uvicorn } > About `__name__ == \"__main__\"` { #about-name-main } > More details { #more-details }",
+          "fastapi/sql-databases.md > SQL (Relational) Databases { #sql-relational-databases } > Update the App with Multiple Models { #update-the-app-with-multiple-models } > Run the App Again { #run-the-app-again }",
+          "fastapi/sql-databases.md > SQL (Relational) Databases { #sql-relational-databases } > Create the App with a Single Model { #create-the-app-with-a-single-model } > Run the App { #run-the-app }",
+          "fastapi/frontend.md > Frontend { #frontend } > Serve a Frontend { #serve-a-frontend }"
+        ]
+      },
+      {
+        "id": "oos5",
+        "q": "How do I add GraphQL support?",
+        "kind": "unanswerable",
+        "text": "I can only answer questions about the FastAPI and Pydantic documentation.",
+        "refused": true,
+        "citations": [],
+        "tokens": 154,
+        "calls": 1,
+        "latency_ms": 1014.7043999995731,
+        "retries": 0,
+        "steps": [
+          "need_retrieval=False"
+        ],
+        "refusal_ok": true,
+        "faithfulness": null,
+        "relevancy": null,
+        "citation_accuracy": null,
+        "sources": []
+      }
+    ]
+  }
+}
