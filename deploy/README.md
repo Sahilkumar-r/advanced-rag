@@ -29,6 +29,16 @@ Generate values locally with `python scripts/init_env.py` (it prints names only;
 4. **Test and record:** on a laptop and on a real phone (sign in, ask, voice, image, memory, admin), and note the cold start time.
 5. **8.4 and 8.5:** put the measured numbers and the limits in the README (done as far as measured), and update the roadmap tracker (`deploy/portfolio.md` has a draft).
 
+## Hosting options checked on 2026-11-05 (the Hugging Face route needs a paid plan)
+Checked against each vendor's own page where possible; third party blog claims are marked unconfirmed. Re check before relying on any of this.
+| Host | What its own page says | Open questions |
+|---|---|---|
+| Render, free web service | 750 free instance hours a month; spins down after 15 minutes without inbound traffic and takes about a minute to wake; "Do not use them for production applications"; cannot send mail ports 25, 465, 587 (render.com/docs/free) | The page does not state RAM, CPU, whether a card is needed, or whether a prebuilt registry image can run on free. Blogs say 512 MB and 0.1 vCPU and a card; unconfirmed. This app measured 360 MiB idle, so 512 MB would be tight. |
+| Koyeb | The official pricing page lists Pro, Scale and Enterprise and no free plan (koyeb.com/pricing) | Blogs describe a free instance and a card hold; the vendor page does not confirm it. Not recommended. |
+| Google Cloud Run | Blogs: free allowance of 180,000 vCPU seconds, 360,000 GiB seconds and 2 million requests a month, billing account (card) required | Not checked on Google's page. Needs an Artifact Registry push and the gcloud CLI. |
+| Oracle Cloud Always Free | Blogs: a free VM with up to 4 OCPUs and 24 GB, card required, you maintain it | Not checked on Oracle's page. Full control, most setup. |
+Whichever host is used, the image must be buildable from a plain `docker build`: today it needs `data/raw` (gitignored), which is why the Space bundle includes it.
+
 ## Limits to keep in the open
 - The free Space disk is ephemeral: users are re seeded on every start, and memories and the audit log are lost on restart. A Space can also sleep when
   idle, so the first request can be slow (check the current Hugging Face rules; no figure here is measured).
