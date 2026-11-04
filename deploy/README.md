@@ -17,9 +17,10 @@ Optional: `METRICS_TOKEN` (enables `/metrics`), `RAGX_ONLINE_JUDGE_RATE` (defaul
 Generate values locally with `python scripts/init_env.py` (it prints names only; open `.env` yourself to copy a value).
 
 ## Steps, in order
-1. **Decide:** public or private GitHub repository, and the repository name.
-2. **8.2 GitHub** (needs your approval): create the repository, check `git config user.email`, push `main`. Then add the repository secrets
-   `GROQ_API_KEY` and `GEMINI_API_KEY` if you want the nightly and weekly eval workflows to run instead of skipping.
+1. **Decided (2026-11-05):** a public GitHub repository, `Sahilkumar-r/advanced-rag`.
+2. **8.2 GitHub** (done 2026-11-05): the repository was created and `main` pushed. `python scripts/set_github_secrets.py` set the repository secrets
+   `GROQ_API_KEY`, `GEMINI_API_KEY` and `OPENAI_API_KEY` from `.env` (values go to `gh` on stdin; no workflow reads the OpenAI one). Without the first two
+   the nightly and weekly eval workflows skip with a notice. To add more, for example `CEREBRAS_API_KEY`, run the script with those names.
 3. **8.3 Space** (needs your approval and your Hugging Face account): create a Space with the Docker SDK, then
    `python scripts/make_space_bundle.py <empty folder>`, commit that folder to the Space's git repo and push it. Enter the secrets above in the
    Space settings, wait for the build, and open the Space URL.

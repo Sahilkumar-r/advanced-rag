@@ -52,13 +52,13 @@ Gate: voice and image eval numbers, with failures listed.
 Gate: Lighthouse and axe results recorded; screens checklist from the design brief.
 
 ## Phase 7. Scheduled evals and CI
-- [~] 7.1 GitHub Actions: ci.yml (tests, lint, secret scan), evals-nightly.yml (sample of traces), evals-weekly.yml (full golden set), manual dispatch. (written and checked locally; never run on GitHub)
+- [~] 7.1 GitHub Actions: ci.yml (tests, lint, secret scan), evals-nightly.yml (sample of traces), evals-weekly.yml (full golden set), manual dispatch. (ci.yml and a manual run of evals-nightly.yml passed on GitHub on 2026-11-05; evals-weekly.yml and scheduled runs not yet)
 - [~] 7.2 Regression gate with tolerances from docs/EVALS.md; results stored and shown in the dashboard. (gate built and tested; no scheduled run has completed)
 Gate: at least two scheduled runs completed and visible.
 
 ## Phase 8. Deploy and publish (each step needs Sahil approval)
 - [~] 8.1 Dockerfile for the Space; secrets set in Space settings (Sahil enters them). (image built and tested locally; Space secrets still to be entered by the owner)
-- [ ] 8.2 Create the GitHub repo (public or private as Sahil decides) and push; git identity checked.
+- [x] 8.2 Create the GitHub repo (public or private as Sahil decides) and push; git identity checked. (public repo Sahilkumar-r/advanced-rag created and pushed with the owner's approval)
 - [ ] 8.3 Deploy the Space; test on phone and laptop; record cold start time.
 - [~] 8.4 README with the measured table, limitations, and a demo credentials policy (no passwords in the README). (measured tables, limits and credentials policy are in the README; the public URL does not exist yet)
 - [~] 8.5 Update the roadmap tracker (data/projects.json entry 07, run generate.mjs, redeploy tracker) and write portfolio text. (portfolio text drafted in deploy/portfolio.md; the roadmap tracker has not been touched)
