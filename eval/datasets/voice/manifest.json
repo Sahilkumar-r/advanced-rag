@@ -1,0 +1,167 @@
+{
+ "note": "SYNTHETIC: machine voices, optimistic. Replace or extend with real recordings when available.",
+ "clips": [
+  {
+   "id": "v00",
+   "text": "How do I declare a path parameter in FastAPI?",
+   "file": "v00.wav",
+   "voice": 0,
+   "rate": 175,
+   "snr_db": null,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v01",
+   "text": "What is the difference between a before validator and an after validator in Pydantic?",
+   "file": "v01.wav",
+   "voice": 1,
+   "rate": 175,
+   "snr_db": null,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v02",
+   "text": "How do I allow requests from another origin using CORS middleware?",
+   "file": "v02.wav",
+   "voice": 0,
+   "rate": 150,
+   "snr_db": null,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v03",
+   "text": "How do I run a background task after returning a response?",
+   "file": "v03.wav",
+   "voice": 1,
+   "rate": 150,
+   "snr_db": null,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v04",
+   "text": "How do I validate a list of integers using a TypeAdapter?",
+   "file": "v04.wav",
+   "voice": 0,
+   "rate": 175,
+   "snr_db": null,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v05",
+   "text": "How do I upload a file with UploadFile and form fields?",
+   "file": "v05.wav",
+   "voice": 1,
+   "rate": 175,
+   "snr_db": null,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v06",
+   "text": "What does model underscore dump do in Pydantic version two?",
+   "file": "v06.wav",
+   "voice": 0,
+   "rate": 150,
+   "snr_db": null,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v07",
+   "text": "How do I use a discriminated union with a Literal tag field?",
+   "file": "v07.wav",
+   "voice": 1,
+   "rate": 150,
+   "snr_db": null,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v08",
+   "text": "How do I return a created status code from a POST endpoint?",
+   "file": "v08.wav",
+   "voice": 0,
+   "rate": 175,
+   "snr_db": null,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v09",
+   "text": "How do I read a cookie value in an endpoint?",
+   "file": "v09.wav",
+   "voice": 1,
+   "rate": 175,
+   "snr_db": null,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v10",
+   "text": "How do I serve static files with Uvicorn and FastAPI?",
+   "file": "v10.wav",
+   "voice": 0,
+   "rate": 150,
+   "snr_db": null,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v11",
+   "text": "How do I stop Pydantic from converting a string into an integer?",
+   "file": "v11.wav",
+   "voice": 1,
+   "rate": 150,
+   "snr_db": null,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v00n",
+   "text": "How do I declare a path parameter in FastAPI?",
+   "file": "v00n.wav",
+   "voice": 0,
+   "rate": 175,
+   "snr_db": 10.0,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v02n",
+   "text": "How do I allow requests from another origin using CORS middleware?",
+   "file": "v02n.wav",
+   "voice": 0,
+   "rate": 150,
+   "snr_db": 10.0,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v04n",
+   "text": "How do I validate a list of integers using a TypeAdapter?",
+   "file": "v04n.wav",
+   "voice": 0,
+   "rate": 175,
+   "snr_db": 10.0,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v06n",
+   "text": "What does model underscore dump do in Pydantic version two?",
+   "file": "v06n.wav",
+   "voice": 0,
+   "rate": 150,
+   "snr_db": 10.0,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v08n",
+   "text": "How do I return a created status code from a POST endpoint?",
+   "file": "v08n.wav",
+   "voice": 0,
+   "rate": 175,
+   "snr_db": 10.0,
+   "origin": "synthetic_tts"
+  },
+  {
+   "id": "v10n",
+   "text": "How do I serve static files with Uvicorn and FastAPI?",
+   "file": "v10n.wav",
+   "voice": 0,
+   "rate": 150,
+   "snr_db": 10.0,
+   "origin": "synthetic_tts"
+  }
+ ]
+}

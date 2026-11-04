@@ -39,9 +39,9 @@ Gate: system table with real numbers; free route cost verified.
 Gate: security review; RBAC test matrix passes; safety eval table.
 
 ## Phase 5. Voice and image
-- [ ] 5.1 Whisper STT endpoint; transcript confirm; word error check on a small recorded set made by Sahil.
-- [ ] 5.2 Image endpoint with a vision model; test set of error screenshots and diagrams.
-- [ ] 5.3 Browser TTS option.
+- [~] 5.1 Whisper STT endpoint; transcript confirm; word error check on a small recorded set made by Sahil. (done on a synthetic set; real recordings and screenshots still needed)
+- [~] 5.2 Image endpoint with a vision model; test set of error screenshots and diagrams. (done on a synthetic set; real recordings and screenshots still needed)
+- [ ] 5.3 Browser TTS option. (moved to phase 6: it is a browser feature)
 Gate: voice and image eval numbers, with failures listed.
 
 ## Phase 6. UI and UX

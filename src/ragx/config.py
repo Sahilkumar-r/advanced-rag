@@ -26,6 +26,8 @@ TIERS = {
     "answer": [("groq", "openai/gpt-oss-120b"), ("cerebras", "gpt-oss-120b"), ("gemini", "gemini-3.5-flash-lite")],
     "fast": [("groq", "openai/gpt-oss-20b"), ("cerebras", "gpt-oss-120b")],
     "judge": [("gemini", "gemini-3.5-flash-lite"), ("gemini", "gemini-3.5-flash")],
+    # vision: the OpenRouter id came from its free model list on 2026-11-04 and is unproven until scripts/run_image_eval.py has used it
+    "vision": [("gemini", "gemini-3.5-flash-lite"), ("gemini", "gemini-3.5-flash"), ("openrouter", "nvidia/nemotron-3.5-super-vl:free")],
 }
 
 

@@ -13,10 +13,13 @@ dependencies = [
   "fastapi==0.162.0",
   "PyJWT==2.15.1",
   "argon2-cffi==25.1.0",
+  "python-multipart==0.0.33",
+  "uvicorn==0.54.0",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest==9.2.0"]
+# Pillow and pyttsx3 only build the synthetic image and voice test sets (pyttsx3 needs Windows voices).
+dev = ["pytest==9.2.0", "Pillow==11.3.0", "pyttsx3==2.99"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -115,6 +115,33 @@ v2 changed rules after seeing which cases failed, and the same cases are the tes
 
 **Security review** (the `security-auditor` agent, code only): no critical findings. Fixed after it: memory re-screened when read and wrapped in an escaped tag, per user memory cap, refresh token bound to its owner with reuse detection, per account login limit and limiter eviction, field length limits, rewritten follow ups screened and the shared cache skipped when a conversation has history, Unicode normalisation before injection matching, derived IP hash salt, no disk cache of prompts in the server path, friendly 503 when providers fail, SQLite busy timeout. Known and not fixed: homoglyph attacks, no global cap on guest traffic (one abusive address could use up the free quota), rate limiter is in process (per worker, resets on restart), client address depends on the proxy setup, no CORS or security headers yet (phase 6 and 8), spend file is not atomic under concurrent requests.
 
+### Phase 5: voice and image (synthetic test sets)
+No real recordings or screenshots exist yet, so both test sets are **synthetic and optimistic**: Windows text to speech voices and Pillow rendered images. Real speech and real screenshots will score worse.
+
+**Voice** (`POST /api/ask-voice`, Groq Whisper `whisper-large-v3`, fallback `whisper-large-v3-turbo`; the endpoint returns a transcript for the user to confirm and does not answer by itself; audio is checked by its first bytes, capped at 4 MB, and never stored). 18 clips: 12 docs questions in two voices, 6 of them again with noise at 10 dB signal to noise.
+
+| | word error rate | clips with zero errors | transcript finds the same top page as typed text |
+|---|---|---|---|
+| plain Whisper | 6.1% (clean 6.0%, noisy 6.4%) | 9 of 18 | 17 of 18 |
+| with a docs vocabulary prompt | 4.6% (clean 4.6%, noisy 4.7%) | 12 of 18 | 17 of 18 |
+
+Most errors are jargon heard as everyday words: "Pydantic" as "pedantic", "Uvicorn" as "Yovicorn" or "Yodacorn", "TypeAdapter" as "type adapter". The vocabulary prompt (one change, same clips) fixed most of them and is on in the app. An earlier run scored 7.2% before the scorer treated "2" and "two" as the same word; that was a scoring artifact and its file was replaced by the two above. Median transcription time about 0.6 to 0.9 s. Browser text to speech is a UI feature and moves to phase 6.
+
+**Image** (`POST /api/ask-image`, developers and admins only; Gemini `gemini-3.5-flash-lite` reads the image into a fixed JSON form, then the normal RAG path answers from the query built from it; image type is checked by its first bytes, capped at 4 MB, never stored; the extraction is screened for injected instructions and PII). 18 rendered images: 7 terminal tracebacks, 3 JSON error bodies, 1 browser console error, 2 code snippets, 3 diagrams, 2 with a hidden instruction.
+
+| | result |
+|---|---|
+| key terms read from the image | 0.91 (terminal 0.93, JSON 1.00, browser 1.00, diagram 1.00, **code 0.50**) |
+| query built from the image finds the right page in top 5 | 15 of 16 (MRR 0.78) |
+| answered / mean faithfulness of answers | 15 of 16 / 0.91 |
+| clean images wrongly blocked | 0 of 16 |
+| images with a hidden instruction | 2; the guard blocked 0 because the model ignored the hidden text and described the image normally; the instruction reached the pipeline 0 times |
+| vision latency, median | 15.4 s (Gemini is slow on the free tier) |
+
+The injection result is partly luck of this model: the guard on the extraction is only exercised by a unit test with a fake model, not by a real image. Code snippets score low on key terms because the model summarises code instead of copying it, though retrieval still worked. One diagram question (nested models) missed the right page. All 18 calls went to Gemini; the OpenRouter vision fallback is configured but has never been used, so it is unproven. Not tested: photos, blurry or cropped screenshots, dark and light themes from real tools, large traceback screenshots, non English text.
+
+**Full path smoke test** with the real services (login, a text question, an injection attempt, a voice clip, a screenshot) worked end to end. The answer to the text question carried no `[n]` citation, so the response flags `no_citation`: citation coverage is still the weakest part of generation.
+
 ## Docs
 1. [Product requirements](docs/01-PRD.md)
 2. [Technical requirements](docs/02-TRD.md)

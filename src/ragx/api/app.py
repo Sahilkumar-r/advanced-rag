@@ -11,11 +11,13 @@ import uuid
 from typing import Callable
 
 import jwt
-from fastapi import Depends, FastAPI, Header, HTTPException, Request
+from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Request, UploadFile
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 from ragx.generate.providers import ProviderError
+from ragx.vision import image as vimg
+from ragx.voice import stt
 
 from ragx.auth import security as sec
 from ragx.auth.store import Store
@@ -56,7 +58,8 @@ class Consent(BaseModel):
 
 def create_app(store: Store, ask_fn: Callable[[str, str, list], dict], memory: Memory, key: str | None = None,
                metrics_fn: Callable[[], dict] | None = None, propose_fn: Callable[[str, str], list] | None = None,
-               limiter: sec.RateLimiter | None = None) -> FastAPI:
+               limiter: sec.RateLimiter | None = None, transcribe_fn: Callable[[bytes, str], str] | None = None,
+               vision_fn: Callable[[bytes, str, str], dict] | None = None) -> FastAPI:
     key = key or sec.secret()
     limiter = limiter or sec.RateLimiter()
     store.salt = store.salt or hmac.new(key.encode(), b"ip-hash-salt", "sha256").hexdigest()  # a salted hash, never the bare address
@@ -170,9 +173,46 @@ def create_app(store: Store, ask_fn: Callable[[str, str, list], dict], memory: M
                 memory.add(user_id, kind, content, consent=True)  # rules in add() still apply
         return {"text": ov.text, "refused": out["refused"], "citations": out["citations"], "sources": out["sources"], "flags": v.flags + ov.flags, "cache": out.get("cache")}
 
+    @app.post("/api/ask-voice")
+    async def ask_voice(request: Request, audio: UploadFile = File(...), p: dict = Depends(need("ask"))):
+        """Returns the transcript only. The client shows it, the user confirms, and then it goes to /api/ask like typed text."""
+        if transcribe_fn is None:
+            raise HTTPException(503, "voice input is not configured")
+        throttle(p, request)
+        data = await audio.read(stt.MAX_BYTES + 1)
+        if len(data) > stt.MAX_BYTES:
+            raise HTTPException(413, "audio too large")
+        kind = stt.sniff_audio(data)
+        if kind is None:
+            raise HTTPException(415, "unsupported audio type")
+        return {"transcript": transcribe_fn(data, kind), "confirm": True}  # bytes are dropped here, never stored
+
     @app.post("/api/ask-image")
-    def ask_image(p: dict = Depends(need("ask_image"))):
-        raise HTTPException(501, "image questions arrive in phase 5")
+    async def ask_image(request: Request, image: UploadFile = File(...), question: str = Form(default="", max_length=500), p: dict = Depends(need("ask_image"))):
+        if vision_fn is None:
+            raise HTTPException(503, "image input is not configured")
+        throttle(p, request)
+        data = await image.read(vimg.MAX_BYTES + 1)
+        if len(data) > vimg.MAX_BYTES:
+            raise HTTPException(413, "image too large")
+        mime = vimg.sniff_image(data)
+        if mime is None:
+            raise HTTPException(415, "unsupported image type")
+        qv = check_input(question, p["role"]) if question else None
+        if qv and qv.blocked:
+            store.audit(p["sub"], "guardrail_block", qv.reason, False, ip(request))
+            return {"text": REFUSE_TEXT, "refused": True, "reason": qv.reason, "citations": [], "sources": [], "flags": qv.flags}
+        d = vision_fn(data, mime, qv.text if qv else "")
+        if d.get("blocked"):  # instructions hidden inside the picture
+            store.audit(p["sub"], "guardrail_block", f"image:{d['blocked']}", False, ip(request))
+            return {"text": REFUSE_TEXT, "refused": True, "reason": "image_" + d["blocked"], "citations": [], "sources": [], "flags": ["image_injection"]}
+        query = vimg.make_query(qv.text if qv else "", d)
+        if not query:
+            return {"text": "I could not read anything useful in that image.", "refused": True, "reason": "unreadable", "citations": [], "sources": [], "flags": []}
+        out = ask_fn(query, "", [])
+        ov = check_output(out["text"], len(out["sources"]), out["refused"])
+        return {"text": ov.text, "refused": out["refused"], "citations": out["citations"], "sources": out["sources"], "flags": ov.flags,
+                "read_from_image": {"kind": d.get("kind"), "summary": d.get("summary"), "error_text": d.get("error_text")}}
 
     @app.get("/api/history")
     def history(session_id: str, p: dict = Depends(need("view_history"))):
