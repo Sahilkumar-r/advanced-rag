@@ -39,6 +39,16 @@ Checked against each vendor's own page where possible; third party blog claims a
 | Oracle Cloud Always Free | Blogs: a free VM with up to 4 OCPUs and 24 GB, card required, you maintain it | Not checked on Oracle's page. Full control, most setup. |
 Whichever host is used, the image must be buildable from a plain `docker build`: today it needs `data/raw` (gitignored), which is why the Space bundle includes it.
 
+## Deploying on Render (prepared, not used yet)
+The repo builds from a plain checkout (the pinned docs are committed) and `render.yaml` describes a free Docker web service. Steps for you:
+1. Create a Render account (check on the signup page whether it asks for a card; Render's own docs page does not say) and connect the GitHub repo.
+2. New, Blueprint, pick `Sahilkumar-r/advanced-rag`. Render asks for the secrets marked `sync: false`: `GROQ_API_KEY`, `GEMINI_API_KEY`, `CEREBRAS_API_KEY`,
+   `OPENROUTER_API_KEY` and the three `DEMO_*_PASSWORD` values (12+ characters). `JWT_SECRET` is generated. Copy the values from your local `.env`.
+3. Wait for the build (about 25 minutes on a slow network, less on Render's), open the `onrender.com` URL, and tell me. I will smoke test it through the
+   public URL (health, UI, login, a cited answer) and record the cold start time and memory in the README.
+Unverified until it runs: whether the free instance has enough RAM (this app measured 360 MiB idle), the blueprint syntax, and the wake time after a sleep.
+Behind Render's proxy every visitor shares one address for the rate limits unless `RAGX_TRUST_PROXY=1` is set (only safe if nothing can reach the container directly).
+
 ## Limits to keep in the open
 - The free Space disk is ephemeral: users are re seeded on every start, and memories and the audit log are lost on restart. A Space can also sleep when
   idle, so the first request can be slow (check the current Hugging Face rules; no figure here is measured).
