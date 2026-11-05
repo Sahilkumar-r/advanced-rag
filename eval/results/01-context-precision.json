@@ -1,0 +1,3362 @@
+{
+  "judge": "tier judge (Gemini); different family than the answer model; not hand calibrated for this task",
+  "k_sources": 4,
+  "retrieval": "hybrid k=8, parent expansion, as in production",
+  "questions": 128,
+  "judged": 128,
+  "errors": 0,
+  "context_precision": 0.8123,
+  "useful_source_share": 0.5039,
+  "questions_with_a_useful_source": 0.9531,
+  "by_type": {
+    "concept": 0.8958,
+    "howto": 0.7626,
+    "lookup": 0.8333,
+    "synthetic_heading": 0.8635
+  },
+  "by_origin": {
+    "baseline": 0.8185,
+    "claude_written": 0.7365,
+    "synthetic": 0.8635
+  },
+  "by_split": {
+    "dev": 0.8127,
+    "held_out": 0.8114
+  },
+  "judge_vs_page_label": {
+    "agreement": 0.7383,
+    "judge_useful_page_wrong": 46,
+    "judge_not_useful_page_right": 88,
+    "n_sources": 512
+  },
+  "rows": [
+    {
+      "id": "g000",
+      "q": "How do I declare a path parameter?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "held_out",
+      "docs": [
+        "fastapi/path-params-numeric-validations.md",
+        "fastapi/path-params.md",
+        "fastapi/path-params.md",
+        "fastapi/path-params.md"
+      ],
+      "useful": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 0.4167
+    },
+    {
+      "id": "g001",
+      "q": "How can I set a maximum length for a query parameter string?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/query-params-str-validations.md",
+        "fastapi/query-params-str-validations.md",
+        "fastapi/query-params-str-validations.md",
+        "fastapi/query-params-str-validations.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 0.9167
+    },
+    {
+      "id": "g002",
+      "q": "How do I receive a JSON request body using a Pydantic model?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "held_out",
+      "docs": [
+        "fastapi/body-multiple-params.md",
+        "fastapi/request-files.md",
+        "pydantic/serialization.md",
+        "fastapi/testing.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g003",
+      "q": "How do I read a cookie value in an endpoint?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/cookie-param-models.md",
+        "fastapi/cookie-param-models.md",
+        "fastapi/cookie-params.md",
+        "fastapi/testing.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 0.8333
+    },
+    {
+      "id": "g004",
+      "q": "How do I read a custom request header?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/header-param-models.md",
+        "fastapi/bigger-applications.md",
+        "fastapi/header-params.md",
+        "fastapi/body.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g005",
+      "q": "How do I allow requests from another origin in the browser?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/cors.md",
+        "fastapi/cors.md",
+        "fastapi/cors.md",
+        "fastapi/cors.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g006",
+      "q": "How do I run a task after returning a response?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/background-tasks.md",
+        "fastapi/middleware.md",
+        "fastapi/response-model.md",
+        "fastapi/response-model.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g007",
+      "q": "How do I upload a file?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/request-files.md",
+        "fastapi/request-files.md",
+        "fastapi/request-files.md",
+        "fastapi/request-files.md"
+      ],
+      "useful": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 0.25
+    },
+    {
+      "id": "g008",
+      "q": "How do I handle form data sent from an HTML form?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/request-forms.md",
+        "fastapi/request-files.md",
+        "fastapi/request-forms.md",
+        "fastapi/request-form-models.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g009",
+      "q": "How do I return an HTTP error with a custom status code and detail message?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "held_out",
+      "docs": [
+        "fastapi/handling-errors.md",
+        "fastapi/handling-errors.md",
+        "fastapi/response-status-code.md",
+        "fastapi/response-status-code.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g010",
+      "q": "How do I filter out fields from the response, like a password?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "held_out",
+      "docs": [
+        "fastapi/response-model.md",
+        "fastapi/response-model.md",
+        "fastapi/response-model.md",
+        "fastapi/extra-models.md"
+      ],
+      "useful": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 0.5
+    },
+    {
+      "id": "g011",
+      "q": "How do I set the default HTTP status code of a path operation?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/path-operation-configuration.md",
+        "fastapi/response-status-code.md",
+        "fastapi/first-steps.md",
+        "fastapi/response-status-code.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g012",
+      "q": "How do I write automated tests for my API?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "held_out",
+      "docs": [
+        "fastapi/testing.md",
+        "fastapi/metadata.md",
+        "fastapi/testing.md",
+        "fastapi/testing.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "context_precision": 0.8056
+    },
+    {
+      "id": "g013",
+      "q": "How do I serve static files such as images or CSS?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "held_out",
+      "docs": [
+        "fastapi/static-files.md",
+        "fastapi/frontend.md",
+        "fastapi/static-files.md",
+        "fastapi/frontend.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 0.8333
+    },
+    {
+      "id": "g014",
+      "q": "How do I connect my app to a SQL database?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/sql-databases.md",
+        "fastapi/sql-databases.md",
+        "fastapi/sql-databases.md",
+        "fastapi/sql-databases.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g015",
+      "q": "How do I structure a larger application across multiple files?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/bigger-applications.md",
+        "fastapi/bigger-applications.md",
+        "fastapi/bigger-applications.md",
+        "fastapi/bigger-applications.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 0.9167
+    },
+    {
+      "id": "g016",
+      "q": "How do I set the title and description shown in the OpenAPI docs?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/metadata.md",
+        "fastapi/schema-extra-example.md",
+        "fastapi/metadata.md",
+        "fastapi/body.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g017",
+      "q": "How do I add an example to the request body schema?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/schema-extra-example.md",
+        "fastapi/schema-extra-example.md",
+        "fastapi/schema-extra-example.md",
+        "fastapi/schema-extra-example.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g018",
+      "q": "How do I require a path parameter to be greater than a number?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/path-params-numeric-validations.md",
+        "fastapi/path-params-numeric-validations.md",
+        "fastapi/path-params-numeric-validations.md",
+        "fastapi/path-params-numeric-validations.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g019",
+      "q": "How do I convert a Pydantic model to JSON-compatible data before storing it?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "pydantic/serialization.md",
+        "fastapi/encoder.md",
+        "fastapi/encoder.md",
+        "pydantic/serialization.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g020",
+      "q": "How do I do a partial update of an item?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/body-updates.md",
+        "fastapi/body-updates.md",
+        "fastapi/body-updates.md",
+        "fastapi/sql-databases.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g021",
+      "q": "How do I use UUID or datetime values as parameters?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/extra-data-types.md",
+        "pydantic/models.md",
+        "pydantic/dataclasses.md",
+        "pydantic/fields.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 0.8333
+    },
+    {
+      "id": "g022",
+      "q": "How do I nest one Pydantic model inside another?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/extra-models.md",
+        "pydantic/models.md",
+        "pydantic/config.md",
+        "fastapi/path-params.md"
+      ],
+      "useful": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 0.0
+    },
+    {
+      "id": "g023",
+      "q": "How do I declare multiple body parameters in one endpoint?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/body-multiple-params.md",
+        "fastapi/body-multiple-params.md",
+        "fastapi/body-multiple-params.md",
+        "fastapi/body-multiple-params.md"
+      ],
+      "useful": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 0.5833
+    },
+    {
+      "id": "g024",
+      "q": "How do I run my app under a debugger?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "held_out",
+      "docs": [
+        "fastapi/debugging.md",
+        "fastapi/debugging.md",
+        "fastapi/first-steps.md",
+        "fastapi/frontend.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g025",
+      "q": "How do I add custom middleware to every request?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/middleware.md",
+        "fastapi/middleware.md",
+        "fastapi/middleware.md",
+        "fastapi/middleware.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g026",
+      "q": "How do I add tags, a summary and a description to a path operation?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/path-operation-configuration.md",
+        "fastapi/metadata.md",
+        "fastapi/path-operation-configuration.md",
+        "fastapi/bigger-applications.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 0.8333
+    },
+    {
+      "id": "g027",
+      "q": "How do I stream server-sent events to a client?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/server-sent-events.md",
+        "fastapi/server-sent-events.md",
+        "fastapi/stream-json-lines.md",
+        "fastapi/server-sent-events.md"
+      ],
+      "useful": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "context_precision": 0.5
+    },
+    {
+      "id": "g028",
+      "q": "How do I create my first FastAPI application?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/first-steps.md",
+        "fastapi/index.md",
+        "fastapi/first-steps.md",
+        "fastapi/first-steps.md"
+      ],
+      "useful": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "context_precision": 0.5833
+    },
+    {
+      "id": "g029",
+      "q": "How do I validate query parameters using a Pydantic model?",
+      "type": "howto",
+      "origin": "baseline",
+      "split": "dev",
+      "docs": [
+        "fastapi/query-param-models.md",
+        "fastapi/query-param-models.md",
+        "fastapi/query-params-str-validations.md",
+        "fastapi/query-param-models.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "context_precision": 0.75
+    },
+    {
+      "id": "g030",
+      "q": "How do I make a field accept a different name in the input data than the attribute name?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "held_out",
+      "docs": [
+        "pydantic/fields.md",
+        "pydantic/fields.md",
+        "pydantic/fields.md",
+        "pydantic/experimental.md"
+      ],
+      "useful": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "context_precision": 0.0
+    },
+    {
+      "id": "g031",
+      "q": "What is the difference between a before and an after field validator?",
+      "type": "concept",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "pydantic/validators.md",
+        "pydantic/validators.md",
+        "pydantic/validators.md",
+        "pydantic/validators.md"
+      ],
+      "useful": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 0.5833
+    },
+    {
+      "id": "g032",
+      "q": "How do I validate one field using the value of another field?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "pydantic/validators.md",
+        "pydantic/validators.md",
+        "pydantic/validators.md",
+        "pydantic/unions.md"
+      ],
+      "useful": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "context_precision": 0.0
+    },
+    {
+      "id": "g033",
+      "q": "How do I stop pydantic from converting the string '123' into an int?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "held_out",
+      "docs": [
+        "pydantic/types.md",
+        "pydantic/serialization.md",
+        "pydantic/strict_mode.md",
+        "fastapi/path-params.md"
+      ],
+      "useful": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 0.3333
+    },
+    {
+      "id": "g034",
+      "q": "Which input types are converted to which python types in lax mode?",
+      "type": "lookup",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "pydantic/strict_mode.md",
+        "pydantic/unions.md",
+        "pydantic/conversion_table.md",
+        "pydantic/validation_decorator.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 0.8333
+    },
+    {
+      "id": "g035",
+      "q": "How do I validate a plain list of ints without defining a model?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "pydantic/type_adapter.md",
+        "pydantic/validators.md",
+        "pydantic/models.md",
+        "fastapi/query-params-str-validations.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g036",
+      "q": "How do I dump a model to a JSON string and leave some fields out?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "pydantic/serialization.md",
+        "pydantic/json_schema.md",
+        "fastapi/sql-databases.md",
+        "pydantic/serialization.md"
+      ],
+      "useful": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "context_precision": 0.25
+    },
+    {
+      "id": "g037",
+      "q": "How do I customize how a single field is written out by model_dump?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "pydantic/models.md",
+        "pydantic/fields.md",
+        "fastapi/background-tasks.md",
+        "fastapi/body-fields.md"
+      ],
+      "useful": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 0.0
+    },
+    {
+      "id": "g038",
+      "q": "How do I generate the JSON Schema of a model?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "pydantic/json_schema.md",
+        "pydantic/json_schema.md",
+        "pydantic/json_schema.md",
+        "pydantic/json_schema.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 0.8056
+    },
+    {
+      "id": "g039",
+      "q": "How can I add extra keys to the JSON Schema of one field?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "fastapi/body-fields.md",
+        "pydantic/json_schema.md",
+        "fastapi/schema-extra-example.md",
+        "pydantic/json_schema.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "context_precision": 0.9167
+    },
+    {
+      "id": "g040",
+      "q": "How do I pick the right model class from a union using a tag field?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "pydantic/unions.md",
+        "pydantic/unions.md",
+        "pydantic/unions.md",
+        "pydantic/unions.md"
+      ],
+      "useful": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 0.5
+    },
+    {
+      "id": "g041",
+      "q": "What is smart mode for unions and how does it choose a member?",
+      "type": "concept",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "pydantic/unions.md",
+        "pydantic/unions.md",
+        "pydantic/unions.md",
+        "pydantic/unions.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g042",
+      "q": "How do I refer to a class that is only defined later in the file?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "pydantic/forward_annotations.md",
+        "fastapi/testing.md",
+        "pydantic/performance.md",
+        "fastapi/bigger-applications.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g043",
+      "q": "How do I reject extra fields passed to a model?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "fastapi/request-form-models.md",
+        "fastapi/request-form-models.md",
+        "fastapi/query-param-models.md",
+        "fastapi/cookie-param-models.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 0.8056
+    },
+    {
+      "id": "g044",
+      "q": "How do I validate the arguments of a regular function?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "pydantic/validation_decorator.md",
+        "pydantic/experimental.md",
+        "pydantic/validation_decorator.md",
+        "fastapi/query-params-str-validations.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 0.8333
+    },
+    {
+      "id": "g045",
+      "q": "How can I make validation of JSON input faster?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "pydantic/performance.md",
+        "pydantic/models.md",
+        "pydantic/experimental.md",
+        "pydantic/json.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "context_precision": 0.9167
+    },
+    {
+      "id": "g046",
+      "q": "Can I use standard library dataclasses with pydantic validation?",
+      "type": "concept",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "pydantic/dataclasses.md",
+        "pydantic/dataclasses.md",
+        "pydantic/dataclasses.md",
+        "pydantic/dataclasses.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g047",
+      "q": "How do I make a model immutable after it is created?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "held_out",
+      "docs": [
+        "pydantic/models.md",
+        "pydantic/fields.md",
+        "pydantic/validators.md",
+        "fastapi/frontend.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g048",
+      "q": "How do I create a custom type with its own validation logic?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "pydantic/types.md",
+        "pydantic/types.md",
+        "pydantic/types.md",
+        "pydantic/types.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g049",
+      "q": "How do I build a model from an arbitrary object that has matching attributes?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "held_out",
+      "docs": [
+        "fastapi/body.md",
+        "pydantic/models.md",
+        "pydantic/models.md",
+        "pydantic/models.md"
+      ],
+      "useful": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 0.5
+    },
+    {
+      "id": "g050",
+      "q": "How can I parse a partially complete JSON string?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "pydantic/experimental.md",
+        "pydantic/models.md",
+        "pydantic/json.md",
+        "fastapi/body-updates.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 0.8333
+    },
+    {
+      "id": "g051",
+      "q": "What order do multiple validators on one field run in?",
+      "type": "concept",
+      "origin": "claude_written",
+      "split": "held_out",
+      "docs": [
+        "pydantic/validators.md",
+        "pydantic/models.md",
+        "pydantic/validators.md",
+        "pydantic/validators.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g052",
+      "q": "How do I show example values in the API docs for a request body?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "fastapi/schema-extra-example.md",
+        "fastapi/body.md",
+        "fastapi/schema-extra-example.md",
+        "fastapi/schema-extra-example.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "context_precision": 0.8056
+    },
+    {
+      "id": "g053",
+      "q": "How do I stream server sent events from an endpoint?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "held_out",
+      "docs": [
+        "fastapi/server-sent-events.md",
+        "fastapi/stream-json-lines.md",
+        "fastapi/server-sent-events.md",
+        "fastapi/server-sent-events.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "context_precision": 0.8056
+    },
+    {
+      "id": "g054",
+      "q": "How do I return a stream of JSON lines?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "fastapi/stream-json-lines.md",
+        "fastapi/stream-json-lines.md",
+        "fastapi/stream-json-lines.md",
+        "fastapi/stream-json-lines.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g055",
+      "q": "How do I change the title and description shown in the generated API docs?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "fastapi/metadata.md",
+        "pydantic/json_schema.md",
+        "pydantic/fields.md",
+        "fastapi/schema-extra-example.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g056",
+      "q": "How do I split my app into several files using routers?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "held_out",
+      "docs": [
+        "fastapi/bigger-applications.md",
+        "fastapi/bigger-applications.md",
+        "fastapi/bigger-applications.md",
+        "fastapi/bigger-applications.md"
+      ],
+      "useful": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 0.5
+    },
+    {
+      "id": "g057",
+      "q": "How do I test my endpoints without running a server?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "fastapi/testing.md",
+        "fastapi/debugging.md",
+        "fastapi/first-steps.md",
+        "fastapi/testing.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "context_precision": 0.75
+    },
+    {
+      "id": "g058",
+      "q": "How do I serve css and images from a folder?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "held_out",
+      "docs": [
+        "fastapi/frontend.md",
+        "fastapi/frontend.md",
+        "fastapi/static-files.md",
+        "fastapi/frontend.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        0,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g059",
+      "q": "How do I run my own code for every request before and after the endpoint?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "held_out",
+      "docs": [
+        "fastapi/middleware.md",
+        "fastapi/testing.md",
+        "fastapi/middleware.md",
+        "fastapi/schema-extra-example.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 0.8333
+    },
+    {
+      "id": "g060",
+      "q": "How do I update only some fields of a stored item?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "fastapi/body-updates.md",
+        "fastapi/body-updates.md",
+        "fastapi/body-updates.md",
+        "fastapi/sql-databases.md"
+      ],
+      "useful": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "context_precision": 0.5
+    },
+    {
+      "id": "g061",
+      "q": "How do I return a different shape than the input model, for example hiding a password?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "fastapi/response-model.md",
+        "fastapi/extra-models.md",
+        "fastapi/extra-models.md",
+        "fastapi/response-model.md"
+      ],
+      "useful": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 0.25
+    },
+    {
+      "id": "g062",
+      "q": "How do I declare a list of nested models in the request body?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "fastapi/body-nested-models.md",
+        "fastapi/body-nested-models.md",
+        "fastapi/body-nested-models.md",
+        "fastapi/body-nested-models.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g063",
+      "q": "How do I require a path parameter to be greater than a number?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "held_out",
+      "docs": [
+        "fastapi/path-params-numeric-validations.md",
+        "fastapi/path-params-numeric-validations.md",
+        "fastapi/path-params-numeric-validations.md",
+        "fastapi/path-params-numeric-validations.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g064",
+      "q": "How do I group several query parameters into one pydantic model?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "held_out",
+      "docs": [
+        "fastapi/query-param-models.md",
+        "fastapi/query-param-models.md",
+        "fastapi/cookie-param-models.md",
+        "fastapi/query-param-models.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g065",
+      "q": "How do I accept a file and form fields in the same request?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "fastapi/request-forms-and-files.md",
+        "fastapi/request-forms-and-files.md",
+        "fastapi/request-forms-and-files.md",
+        "fastapi/request-files.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g066",
+      "q": "How do I connect the app to a SQL database?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "fastapi/sql-databases.md",
+        "fastapi/sql-databases.md",
+        "fastapi/sql-databases.md",
+        "fastapi/sql-databases.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g067",
+      "q": "How do I turn a datetime into something JSON can hold?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "dev",
+      "docs": [
+        "fastapi/encoder.md",
+        "pydantic/serialization.md",
+        "pydantic/dataclasses.md",
+        "fastapi/body-nested-models.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g068",
+      "q": "How do I add tags, a summary and a description to one endpoint?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "held_out",
+      "docs": [
+        "fastapi/metadata.md",
+        "fastapi/path-operation-configuration.md",
+        "fastapi/bigger-applications.md",
+        "fastapi/path-operation-configuration.md"
+      ],
+      "useful": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "context_precision": 0.6389
+    },
+    {
+      "id": "g069",
+      "q": "How do I set a maximum value on a body field?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "held_out",
+      "docs": [
+        "fastapi/body-multiple-params.md",
+        "fastapi/query-params-str-validations.md",
+        "pydantic/serialization.md",
+        "fastapi/body-nested-models.md"
+      ],
+      "useful": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 0.5
+    },
+    {
+      "id": "g070",
+      "q": "How do I give a list field a default without sharing it between instances?",
+      "type": "howto",
+      "origin": "claude_written",
+      "split": "held_out",
+      "docs": [
+        "pydantic/models.md",
+        "pydantic/fields.md",
+        "fastapi/extra-models.md",
+        "pydantic/fields.md"
+      ],
+      "useful": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "context_precision": 0.5
+    },
+    {
+      "id": "g071",
+      "q": "Explain Add the background task in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/background-tasks.md",
+        "fastapi/background-tasks.md",
+        "fastapi/background-tasks.md",
+        "fastapi/background-tasks.md"
+      ],
+      "useful": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 0.25
+    },
+    {
+      "id": "g072",
+      "q": "Explain Configure the entrypoint in pyproject.toml in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/first-steps.md",
+        "fastapi/bigger-applications.md",
+        "fastapi/first-steps.md",
+        "fastapi/index.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g073",
+      "q": "Explain Declare model attributes in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/body-fields.md",
+        "fastapi/extra-models.md",
+        "fastapi/query-param-models.md",
+        "fastapi/request-form-models.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g074",
+      "q": "Explain Singular values in body in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/body-multiple-params.md",
+        "fastapi/body-multiple-params.md",
+        "fastapi/body.md",
+        "fastapi/body.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g075",
+      "q": "Explain Attributes with lists of submodels in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/response-model.md",
+        "fastapi/body-nested-models.md",
+        "fastapi/body-fields.md",
+        "fastapi/body.md"
+      ],
+      "useful": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "context_precision": 0.5
+    },
+    {
+      "id": "g076",
+      "q": "Explain Partial updates with PATCH in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "fastapi/body-updates.md",
+        "fastapi/body-updates.md",
+        "fastapi/body-updates.md",
+        "fastapi/body-updates.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g077",
+      "q": "Explain Editor support in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/path-params.md",
+        "fastapi/body.md",
+        "fastapi/first-steps.md",
+        "fastapi/body.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "context_precision": 0.9167
+    },
+    {
+      "id": "g078",
+      "q": "Explain Forbid Extra Cookies in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/cookie-param-models.md",
+        "fastapi/request-form-models.md",
+        "fastapi/cookie-param-models.md",
+        "fastapi/cookie-params.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g079",
+      "q": "Explain Declare Cookie parameters in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "fastapi/cookie-params.md",
+        "fastapi/cookie-param-models.md",
+        "fastapi/cookie-param-models.md",
+        "fastapi/cookie-params.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "context_precision": 0.75
+    },
+    {
+      "id": "g080",
+      "q": "Explain Use CORSMiddleware in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/cors.md",
+        "fastapi/cors.md",
+        "fastapi/cors.md",
+        "fastapi/middleware.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g081",
+      "q": "Explain Run your code with your debugger in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "fastapi/debugging.md",
+        "fastapi/debugging.md",
+        "fastapi/index.md",
+        "fastapi/debugging.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "context_precision": 0.75
+    },
+    {
+      "id": "g082",
+      "q": "Explain Using the jsonable_encoder in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/encoder.md",
+        "fastapi/stream-json-lines.md",
+        "fastapi/server-sent-events.md",
+        "fastapi/encoder.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "context_precision": 0.75
+    },
+    {
+      "id": "g083",
+      "q": "Explain Other data types in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/schema-extra-example.md",
+        "fastapi/body-multiple-params.md",
+        "fastapi/response-model.md",
+        "fastapi/extra-data-types.md"
+      ],
+      "useful": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "context_precision": 0.25
+    },
+    {
+      "id": "g084",
+      "q": "Explain Union or anyOf in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "fastapi/extra-models.md",
+        "fastapi/extra-models.md",
+        "fastapi/response-model.md",
+        "pydantic/performance.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g085",
+      "q": "Explain Recap, step by step in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/first-steps.md",
+        "fastapi/first-steps.md",
+        "fastapi/first-steps.md",
+        "fastapi/first-steps.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g086",
+      "q": "Explain Disable Fallback in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/frontend.md",
+        "fastapi/frontend.md",
+        "fastapi/response-model.md",
+        "fastapi/frontend.md"
+      ],
+      "useful": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "context_precision": 0.25
+    },
+    {
+      "id": "g087",
+      "q": "Explain Install custom exception handlers in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "fastapi/handling-errors.md",
+        "fastapi/handling-errors.md",
+        "fastapi/handling-errors.md",
+        "fastapi/handling-errors.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g088",
+      "q": "Explain Disable Convert Underscores in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/header-param-models.md",
+        "fastapi/response-model.md",
+        "fastapi/body-multiple-params.md",
+        "fastapi/response-model.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g089",
+      "q": "Explain Automatic conversion in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "fastapi/body-multiple-params.md",
+        "fastapi/path-params.md",
+        "fastapi/body-nested-models.md",
+        "fastapi/response-model.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g090",
+      "q": "Explain AI Agent Skills in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/index.md",
+        "fastapi/index.md",
+        "fastapi/schema-extra-example.md",
+        "fastapi/stream-json-lines.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g091",
+      "q": "Explain Metadata for tags in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/metadata.md",
+        "fastapi/metadata.md",
+        "fastapi/path-operation-configuration.md",
+        "fastapi/metadata.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "context_precision": 0.9167
+    },
+    {
+      "id": "g092",
+      "q": "Explain Multiple middleware execution order in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/middleware.md",
+        "fastapi/middleware.md",
+        "fastapi/query-params.md",
+        "fastapi/frontend.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g093",
+      "q": "Explain Description from docstring in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/path-operation-configuration.md",
+        "fastapi/schema-extra-example.md",
+        "fastapi/path-operation-configuration.md",
+        "fastapi/metadata.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g094",
+      "q": "Explain Order the parameters as you need, tricks in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/path-params-numeric-validations.md",
+        "fastapi/query-params.md",
+        "fastapi/query-params-str-validations.md",
+        "fastapi/query-param-models.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g095",
+      "q": "Explain Order matters in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "fastapi/query-params.md",
+        "fastapi/path-params-numeric-validations.md",
+        "pydantic/models.md",
+        "fastapi/path-params.md"
+      ],
+      "useful": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "context_precision": 0.25
+    },
+    {
+      "id": "g096",
+      "q": "Explain Forbid Extra Query Parameters in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "fastapi/query-param-models.md",
+        "fastapi/query-params-str-validations.md",
+        "fastapi/query-params.md",
+        "fastapi/request-form-models.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g097",
+      "q": "Explain Required parameters in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/body.md",
+        "fastapi/query-params-str-validations.md",
+        "fastapi/body-multiple-params.md",
+        "fastapi/query-params.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g098",
+      "q": "Explain Multiple path and query parameters in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/query-params.md",
+        "fastapi/body-multiple-params.md",
+        "fastapi/query-params.md",
+        "fastapi/body-multiple-params.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 0.8333
+    },
+    {
+      "id": "g099",
+      "q": "Explain What is \"Form Data\" in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/request-files.md",
+        "fastapi/request-forms.md",
+        "fastapi/request-forms.md",
+        "fastapi/request-forms-and-files.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g100",
+      "q": "Explain Optional Form Models in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/request-form-models.md",
+        "fastapi/request-form-models.md",
+        "fastapi/request-form-models.md",
+        "fastapi/request-form-models.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g101",
+      "q": "Explain Define File and Form parameters in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "fastapi/request-forms-and-files.md",
+        "fastapi/request-files.md",
+        "fastapi/request-files.md",
+        "fastapi/request-forms.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g102",
+      "q": "Explain Boolean Form Fields in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "fastapi/request-forms.md",
+        "fastapi/request-form-models.md",
+        "fastapi/request-forms.md",
+        "fastapi/request-form-models.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g103",
+      "q": "Explain Return Type and Data Filtering in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/response-model.md",
+        "fastapi/response-model.md",
+        "fastapi/response-model.md",
+        "fastapi/response-model.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g104",
+      "q": "Explain Shortcut to remember the names in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/response-status-code.md",
+        "fastapi/bigger-applications.md",
+        "fastapi/path-operation-configuration.md",
+        "fastapi/schema-extra-example.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 0.8333
+    },
+    {
+      "id": "g105",
+      "q": "Explain Field additional arguments in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/schema-extra-example.md",
+        "fastapi/body.md",
+        "fastapi/query-params-str-validations.md",
+        "fastapi/body-fields.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g106",
+      "q": "Explain Raw Data in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/path-params.md",
+        "fastapi/first-steps.md",
+        "fastapi/schema-extra-example.md",
+        "fastapi/schema-extra-example.md"
+      ],
+      "useful": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 0.0
+    },
+    {
+      "id": "g107",
+      "q": "Explain Create the App with a Single Model in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/sql-databases.md",
+        "fastapi/sql-databases.md",
+        "fastapi/first-steps.md",
+        "fastapi/sql-databases.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "context_precision": 0.9167
+    },
+    {
+      "id": "g108",
+      "q": "Explain Use StaticFiles in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "fastapi/static-files.md",
+        "fastapi/static-files.md",
+        "fastapi/static-files.md",
+        "fastapi/bigger-applications.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g109",
+      "q": "Explain Use Cases in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/query-params-str-validations.md",
+        "fastapi/index.md",
+        "fastapi/path-operation-configuration.md",
+        "fastapi/index.md"
+      ],
+      "useful": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 0.0
+    },
+    {
+      "id": "g110",
+      "q": "Explain Testing: extended example in FastAPI",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "fastapi/testing.md",
+        "fastapi/testing.md",
+        "fastapi/testing.md",
+        "fastapi/schema-extra-example.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "context_precision": 0.8333
+    },
+    {
+      "id": "g111",
+      "q": "Explain Alias Precedence in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "pydantic/alias.md",
+        "pydantic/fields.md",
+        "pydantic/alias.md",
+        "pydantic/models.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        1,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g112",
+      "q": "Explain Configuration on the @validate_call decorator in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "pydantic/validation_decorator.md",
+        "pydantic/config.md",
+        "pydantic/experimental.md",
+        "pydantic/validation_decorator.md"
+      ],
+      "useful": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "context_precision": 0.5
+    },
+    {
+      "id": "g113",
+      "q": "Explain Stdlib dataclasses and Pydantic dataclasses in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "pydantic/dataclasses.md",
+        "pydantic/dataclasses.md",
+        "pydantic/dataclasses.md",
+        "pydantic/dataclasses.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g114",
+      "q": "Explain Partial Validation in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "pydantic/experimental.md",
+        "pydantic/experimental.md",
+        "pydantic/experimental.md",
+        "pydantic/experimental.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g115",
+      "q": "Explain Strict fields in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "pydantic/fields.md",
+        "pydantic/conversion_table.md",
+        "pydantic/strict_mode.md",
+        "pydantic/strict_mode.md"
+      ],
+      "useful": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 0.8056
+    },
+    {
+      "id": "g116",
+      "q": "Explain Self-referencing (or \"Recursive\") Models in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "pydantic/forward_annotations.md",
+        "pydantic/models.md",
+        "pydantic/models.md",
+        "pydantic/types.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 0.9167
+    },
+    {
+      "id": "g117",
+      "q": "Explain JSON Serialization in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "pydantic/json.md",
+        "pydantic/serialization.md",
+        "pydantic/serialization.md",
+        "pydantic/json_schema.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g118",
+      "q": "Explain Customizing the JSON Schema Generation Process in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "pydantic/json_schema.md",
+        "pydantic/json_schema.md",
+        "pydantic/json_schema.md",
+        "pydantic/json_schema.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g119",
+      "q": "Explain Dynamic model creation in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "pydantic/models.md",
+        "pydantic/models.md",
+        "pydantic/json_schema.md",
+        "pydantic/models.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g120",
+      "q": "Explain Avoid extra information via subclasses of primitives in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "pydantic/performance.md",
+        "pydantic/fields.md",
+        "fastapi/body-fields.md",
+        "pydantic/serialization.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g121",
+      "q": "Explain Serialization info in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "pydantic/serialization.md",
+        "pydantic/serialization.md",
+        "pydantic/serialization.md",
+        "pydantic/serialization.md"
+      ],
+      "useful": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g122",
+      "q": "Explain At the field level in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "pydantic/serialization.md",
+        "pydantic/strict_mode.md",
+        "pydantic/validation_decorator.md",
+        "pydantic/json_schema.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g123",
+      "q": "Explain Rebuilding a TypeAdapter's schema in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "pydantic/type_adapter.md",
+        "pydantic/type_adapter.md",
+        "pydantic/models.md",
+        "pydantic/performance.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g124",
+      "q": "Explain Custom Types in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "pydantic/types.md",
+        "pydantic/types.md",
+        "pydantic/types.md",
+        "pydantic/validation_decorator.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g125",
+      "q": "Explain Discriminated unions in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "pydantic/unions.md",
+        "pydantic/unions.md",
+        "pydantic/unions.md",
+        "pydantic/unions.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g126",
+      "q": "Explain Async functions in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "held_out",
+      "docs": [
+        "pydantic/validation_decorator.md",
+        "fastapi/server-sent-events.md",
+        "fastapi/first-steps.md",
+        "fastapi/request-files.md"
+      ],
+      "useful": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "context_precision": 1.0
+    },
+    {
+      "id": "g127",
+      "q": "Explain Validation info in Pydantic",
+      "type": "synthetic_heading",
+      "origin": "synthetic",
+      "split": "dev",
+      "docs": [
+        "pydantic/validators.md",
+        "pydantic/validators.md",
+        "pydantic/validators.md",
+        "pydantic/models.md"
+      ],
+      "useful": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "on_expected_page": [
+        1,
+        1,
+        1,
+        0
+      ],
+      "context_precision": 1.0
+    }
+  ]
+}
