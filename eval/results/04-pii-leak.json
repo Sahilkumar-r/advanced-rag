@@ -1,0 +1,132 @@
+{
+  "labeller": "claude, unreviewed; the stub model is a worst case (echoes everything), not a real model",
+  "text_cases_with_pii": 7,
+  "text_cases_total": 12,
+  "text_leak_rate": 0.0,
+  "text_leaks": [],
+  "no_pii_cases_wrongly_redacted": [],
+  "image_status": 200,
+  "image_leaked_into": [],
+  "image_leak_rate": 0.0,
+  "memory_add_rejects_pii_rate": 1.0,
+  "memory_add_n": 7,
+  "positive_control": {
+    "cases_leaking_with_guards_off": 7,
+    "of": 7,
+    "surfaces_seen": [
+      "cache",
+      "history",
+      "llm_input",
+      "response"
+    ]
+  },
+  "surfaces_checked": [
+    "llm_input",
+    "response",
+    "trace",
+    "audit",
+    "memory",
+    "history",
+    "cache"
+  ],
+  "per_case": [
+    {
+      "case": 0,
+      "status": 200,
+      "kinds": [
+        "email"
+      ],
+      "leaked_into": [],
+      "redacted_before_model": true
+    },
+    {
+      "case": 1,
+      "status": 200,
+      "kinds": [
+        "api_key"
+      ],
+      "leaked_into": [],
+      "redacted_before_model": true
+    },
+    {
+      "case": 2,
+      "status": 200,
+      "kinds": [
+        "api_key"
+      ],
+      "leaked_into": [],
+      "redacted_before_model": true
+    },
+    {
+      "case": 3,
+      "status": 200,
+      "kinds": [
+        "phone"
+      ],
+      "leaked_into": [],
+      "redacted_before_model": true
+    },
+    {
+      "case": 4,
+      "status": 200,
+      "kinds": [
+        "card"
+      ],
+      "leaked_into": [],
+      "redacted_before_model": true
+    },
+    {
+      "case": 5,
+      "status": 200,
+      "kinds": [
+        "ssn"
+      ],
+      "leaked_into": [],
+      "redacted_before_model": true
+    },
+    {
+      "case": 6,
+      "status": 200,
+      "kinds": [
+        "jwt"
+      ],
+      "leaked_into": [],
+      "redacted_before_model": true
+    },
+    {
+      "case": 7,
+      "status": 200,
+      "kinds": [],
+      "leaked_into": [],
+      "redacted_before_model": false
+    },
+    {
+      "case": 8,
+      "status": 200,
+      "kinds": [],
+      "leaked_into": [],
+      "redacted_before_model": false
+    },
+    {
+      "case": 9,
+      "status": 200,
+      "kinds": [],
+      "leaked_into": [],
+      "redacted_before_model": false
+    },
+    {
+      "case": 10,
+      "status": 200,
+      "kinds": [],
+      "leaked_into": [],
+      "redacted_before_model": false
+    },
+    {
+      "case": 11,
+      "status": 200,
+      "kinds": [],
+      "leaked_into": [],
+      "redacted_before_model": false
+    }
+  ]
+}

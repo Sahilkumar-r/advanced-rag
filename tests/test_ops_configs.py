@@ -51,8 +51,10 @@ def test_compose_is_pinned_local_only_and_keeps_secrets_out_of_the_file():
     pw = c["services"]["grafana"]["environment"]["GF_SECURITY_ADMIN_PASSWORD"]
     assert pw.startswith("${GRAFANA_ADMIN_PASSWORD:?"), "the Grafana password must come from the environment and have no default"
     p = yaml.safe_load((MON / "prometheus.yml").read_text(encoding="utf-8"))
-    auth = p["scrape_configs"][0]["authorization"]
-    assert "credentials_file" in auth and "credentials" not in auth
+    assert {j["job_name"] for j in p["scrape_configs"]} == {"ragx", "ragx-render"}
+    for job in p["scrape_configs"]:
+        assert "credentials_file" in job["authorization"] and "credentials" not in job["authorization"], job["job_name"]
+    assert p["scrape_configs"][1]["scheme"] == "https"
 
 
 def test_every_alert_threshold_is_labelled_a_placeholder():

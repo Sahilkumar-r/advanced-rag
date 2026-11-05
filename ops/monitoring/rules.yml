@@ -4,7 +4,7 @@ groups:
   - name: ragx-online
     rules:
       - alert: RagxDown
-        expr: up{job="ragx"} == 0
+        expr: up{job=~"ragx|ragx-render"} == 0
         for: 5m
         annotations: {summary: "The ragx app is not being scraped"}
       - alert: FallbackRateHigh

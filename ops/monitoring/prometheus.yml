@@ -10,3 +10,15 @@ scrape_configs:
       credentials_file: /etc/prometheus/metrics_token
     static_configs:
       - targets: ["host.docker.internal:8000"]
+  # The live Render service. Scraping keeps the free instance awake (it would otherwise sleep after 15 idle minutes), so this uses a slow interval.
+  # Same token file: METRICS_TOKEN must have the same value locally and in the Render environment.
+  - job_name: ragx-render
+    scheme: https
+    scrape_interval: 60s
+    scrape_timeout: 45s   # a cold start can take a while
+    metrics_path: /metrics
+    authorization:
+      type: Bearer
+      credentials_file: /etc/prometheus/metrics_token
+    static_configs:
+      - targets: ["advanced-rag-ef76.onrender.com"]
