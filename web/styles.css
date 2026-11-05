@@ -110,6 +110,7 @@ dialog pre { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--b
 
 @media (min-width: 900px) {
   .shell { display: grid; grid-template-columns: 88px 1fr; }
+  .shell:has(> nav[hidden]) { grid-template-columns: 1fr; } /* signed out: no nav, so main must not fall into the 88px nav column */
   nav.tabs { position: static; flex-direction: column; justify-content: flex-start; padding-top: 1rem; height: auto; border-top: 0; border-right: 1px solid var(--border); gap: .5rem; }
   nav.tabs a { flex: none; min-height: 64px; }
   main { padding-bottom: 2rem; }
