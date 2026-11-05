@@ -28,6 +28,8 @@ def fake_root(tmp_path: Path) -> Path:
     (root / "deploy").mkdir()
     (root / "deploy" / "hf-space-README.md").write_text("---\ntitle: t\n---\n")
     (root / ".env").write_text("GROQ_API_KEY=should-never-be-copied")
+    (root / "data" / "raw" / "baseline-fastapi").mkdir(parents=True, exist_ok=True)
+    (root / "data" / "raw" / "baseline-fastapi" / "old.md").write_text("phase 0 copy, not part of the app")
     (root / "data" / "state").mkdir(parents=True, exist_ok=True)
     (root / "data" / "state" / "ragx.db").write_text("users")
     (root / "tests").mkdir()
@@ -40,7 +42,7 @@ def test_a_stray_env_file_or_state_in_the_repo_never_reaches_the_bundle(tmp_path
     files = msb.bundle(tmp_path / "space", root)
     got = {str(p.relative_to(tmp_path / "space")).replace("\\", "/") for p in (tmp_path / "space").rglob("*") if p.is_file()}
     assert got == set(files)
-    assert not any(f.startswith((".env", "tests/", "data/state")) or "__pycache__" in f or f.endswith((".db", ".pyc")) for f in files)
+    assert not any(f.startswith((".env", "tests/", "data/state")) or "__pycache__" in f or "baseline-fastapi" in f or f.endswith((".db", ".pyc")) for f in files)
     assert "should-never-be-copied" not in "".join(p.read_text(errors="ignore") for p in (tmp_path / "space").rglob("*") if p.is_file())
     assert (tmp_path / "space" / "README.md").read_text().startswith("---\ntitle: t")
 

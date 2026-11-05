@@ -1,0 +1,356 @@
+{
+  "fastapi/background-tasks.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/background-tasks/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/bigger-applications.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/bigger-applications/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/body-fields.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/body-fields/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/body-multiple-params.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/body-multiple-params/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/body-nested-models.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/body-nested-models/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/body-updates.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/body-updates/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/body.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/body/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/cookie-param-models.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/cookie-param-models/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/cookie-params.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/cookie-params/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/cors.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/cors/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/debugging.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/debugging/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/encoder.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/encoder/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/extra-data-types.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/extra-data-types/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/extra-models.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/extra-models/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/first-steps.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/first-steps/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/frontend.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/frontend/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/handling-errors.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/handling-errors/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/header-param-models.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/header-param-models/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/header-params.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/header-params/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/index.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/index/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/metadata.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/metadata/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/middleware.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/middleware/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/path-operation-configuration.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/path-operation-configuration/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/path-params-numeric-validations.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/path-params-numeric-validations/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/path-params.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/path-params/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/query-param-models.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/query-param-models/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/query-params-str-validations.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/query-params-str-validations/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/query-params.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/query-params/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/request-files.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/request-files/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/request-form-models.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/request-form-models/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/request-forms-and-files.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/request-forms-and-files/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/request-forms.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/request-forms/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/response-model.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/response-model/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/response-status-code.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/response-status-code/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/schema-extra-example.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/schema-extra-example/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/server-sent-events.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/server-sent-events/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/sql-databases.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/sql-databases/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/static-files.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/static-files/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/stream-json-lines.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/stream-json-lines/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "fastapi/testing.md": {
+    "url": "https://fastapi.tiangolo.com/tutorial/testing/",
+    "repo": "https://github.com/fastapi/fastapi.git",
+    "commit": "5cb6272ed7e3e07eaf6978e1e65b94aca76fa8e0",
+    "license": "MIT"
+  },
+  "pydantic/alias.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/alias/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/config.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/config/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/conversion_table.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/conversion_table/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/dataclasses.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/dataclasses/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/experimental.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/experimental/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/fields.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/fields/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/forward_annotations.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/forward_annotations/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/json.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/json/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/json_schema.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/json_schema/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/models.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/models/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/performance.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/performance/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/pydantic_settings.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/pydantic_settings/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/serialization.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/serialization/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/strict_mode.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/strict_mode/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/type_adapter.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/type_adapter/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/types.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/types/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/unions.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/unions/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/validation_decorator.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/validation_decorator/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  },
+  "pydantic/validators.md": {
+    "url": "https://docs.pydantic.dev/latest/concepts/validators/",
+    "repo": "https://github.com/pydantic/pydantic.git",
+    "commit": "5740091dcd08e4a92940ceae841434a83331cb09",
+    "license": "MIT"
+  }
+}

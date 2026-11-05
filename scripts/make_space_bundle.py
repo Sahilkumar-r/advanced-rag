@@ -22,7 +22,7 @@ def bundle(dest: Path, root: Path = ROOT) -> list[str]:
     for pattern in allowed_paths(root):
         base = pattern[:-3] if pattern.endswith("/**") else pattern
         src = root / base
-        files = [p for p in src.rglob("*") if p.is_file() and "__pycache__" not in p.parts] if pattern.endswith("/**") else [src]
+        files = [p for p in src.rglob("*") if p.is_file() and not {"__pycache__", "baseline-fastapi"} & set(p.parts)] if pattern.endswith("/**") else [src]
         for f in files:
             if not f.is_file():
                 raise SystemExit(f"allow listed path is missing: {f.relative_to(root)}")

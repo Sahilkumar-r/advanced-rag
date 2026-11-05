@@ -15,3 +15,5 @@
 !LICENSE
 **/__pycache__
 **/*.pyc
+# the Phase 0 baseline copy of the docs is not part of the app
+data/raw/baseline-fastapi

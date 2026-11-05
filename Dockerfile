@@ -1,6 +1,6 @@
 # Hugging Face Space (Docker SDK, port 7860) or any container host. Secrets are never baked in: they are supplied at run time.
-# The docs come from the build context (data/raw, fetched at the commits pinned in eval/datasets/docs.lock.json by scripts/fetch_docs.py),
-# so building needs PyPI and the embedding model download, and nothing else. Run `python scripts/fetch_docs.py` before `docker build`.
+# The docs come from the build context (data/raw, committed, fetched at the commits pinned in eval/datasets/docs.lock.json by scripts/fetch_docs.py),
+# so building needs PyPI and the embedding model download, and nothing else, and works from a plain checkout of the repository.
 FROM python:3.12-slim
 # Spaces run the container as user 1000.
 RUN useradd -m -u 1000 user
